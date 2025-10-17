@@ -57,6 +57,7 @@ const Catalog = () => {
 
   const [selectedEvent, setSelectedEvent] = useState('all');
   const [selectedRecipient, setSelectedRecipient] = useState('all');
+  const [sortBy, setSortBy] = useState('default');
 
   if (!catalogItem) {
     return (
@@ -125,12 +126,39 @@ const Catalog = () => {
               </div>
             </div>
 
+            <div className="flex justify-end mb-6">
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">Сортировка:</span>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="px-4 py-2 rounded-full text-sm font-medium bg-muted text-foreground border-0 focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
+                >
+                  <option value="default">По умолчанию</option>
+                  <option value="price-asc">Цена: по возрастанию</option>
+                  <option value="price-desc">Цена: по убыванию</option>
+                </select>
+              </div>
+            </div>
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
               {products.filter(p => {
                 const categoryMatch = p.category === category;
                 const eventMatch = selectedEvent === 'all' || p.event === selectedEvent;
                 const recipientMatch = selectedRecipient === 'all' || p.recipient === selectedRecipient;
                 return categoryMatch && eventMatch && recipientMatch;
+              }).sort((a, b) => {
+                if (sortBy === 'price-asc') {
+                  const priceA = parseInt(a.price.replace(/\D/g, ''));
+                  const priceB = parseInt(b.price.replace(/\D/g, ''));
+                  return priceA - priceB;
+                }
+                if (sortBy === 'price-desc') {
+                  const priceA = parseInt(a.price.replace(/\D/g, ''));
+                  const priceB = parseInt(b.price.replace(/\D/g, ''));
+                  return priceB - priceA;
+                }
+                return 0;
               }).map((product) => (
                 <Card key={product.id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300">
                   <div className="relative h-80 overflow-hidden">

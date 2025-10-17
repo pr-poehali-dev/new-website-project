@@ -10,12 +10,27 @@ const Catalog = () => {
   const [selectedMaterial, setSelectedMaterial] = useState('all');
   const [selectedEvent, setSelectedEvent] = useState('all');
   const [selectedRecipient, setSelectedRecipient] = useState('all');
+  const [sortBy, setSortBy] = useState('default');
 
   const filteredProducts = products.filter((product) => {
     const materialMatch = selectedMaterial === 'all' || product.material === selectedMaterial;
     const eventMatch = selectedEvent === 'all' || product.event === selectedEvent;
     const recipientMatch = selectedRecipient === 'all' || product.recipient === selectedRecipient;
     return materialMatch && eventMatch && recipientMatch;
+  });
+
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    if (sortBy === 'price-asc') {
+      const priceA = parseInt(a.price.replace(/\D/g, ''));
+      const priceB = parseInt(b.price.replace(/\D/g, ''));
+      return priceA - priceB;
+    }
+    if (sortBy === 'price-desc') {
+      const priceA = parseInt(a.price.replace(/\D/g, ''));
+      const priceB = parseInt(b.price.replace(/\D/g, ''));
+      return priceB - priceA;
+    }
+    return 0;
   });
 
   return (
@@ -84,8 +99,23 @@ const Catalog = () => {
           </div>
         </div>
 
+        <div className="flex justify-end mb-6">
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-muted-foreground">Сортировка:</span>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="px-4 py-2 rounded-full text-sm font-medium bg-muted text-foreground border-0 focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
+            >
+              <option value="default">По умолчанию</option>
+              <option value="price-asc">Цена: по возрастанию</option>
+              <option value="price-desc">Цена: по убыванию</option>
+            </select>
+          </div>
+        </div>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product) => (
+          {sortedProducts.map((product) => (
             <Card key={product.id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300">
               <div className="relative h-80 overflow-hidden">
                 <img
@@ -122,7 +152,7 @@ const Catalog = () => {
           ))}
         </div>
 
-        {filteredProducts.length === 0 && (
+        {sortedProducts.length === 0 && (
           <div className="text-center py-12">
             <Icon name="Search" size={48} className="mx-auto text-muted-foreground mb-4" />
             <p className="text-lg text-muted-foreground">
