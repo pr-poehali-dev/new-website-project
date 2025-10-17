@@ -1,8 +1,11 @@
-import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
+import { products, materials, events, recipients } from '@/data/products';
 
 const catalogData = {
   'kamennaya-istoriya': {
@@ -49,7 +52,12 @@ const catalogData = {
 
 const Catalog = () => {
   const { category } = useParams();
+  const navigate = useNavigate();
   const catalogItem = category ? catalogData[category as keyof typeof catalogData] : null;
+
+  const [selectedMaterial, setSelectedMaterial] = useState('all');
+  const [selectedEvent, setSelectedEvent] = useState('all');
+  const [selectedRecipient, setSelectedRecipient] = useState('all');
 
   if (!catalogItem) {
     return (
@@ -84,33 +92,114 @@ const Catalog = () => {
               </p>
             </div>
 
+            <div className="mb-8 md:mb-12">
+              <div className="hidden md:flex flex-wrap gap-3 justify-center mb-6">
+                {materials.map((material) => (
+                  <button
+                    key={material.value}
+                    onClick={() => setSelectedMaterial(material.value)}
+                    className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                      selectedMaterial === material.value
+                        ? 'bg-foreground text-background shadow-lg scale-105'
+                        : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105'
+                    }`}
+                  >
+                    {material.label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="hidden md:flex flex-wrap gap-3 justify-center mb-6">
+                {events.map((event) => (
+                  <button
+                    key={event.value}
+                    onClick={() => setSelectedEvent(event.value)}
+                    className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                      selectedEvent === event.value
+                        ? 'bg-foreground text-background shadow-lg scale-105'
+                        : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105'
+                    }`}
+                  >
+                    {event.label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="hidden md:flex flex-wrap gap-3 justify-center">
+                {recipients.map((recipient) => (
+                  <button
+                    key={recipient.value}
+                    onClick={() => setSelectedRecipient(recipient.value)}
+                    className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                      selectedRecipient === recipient.value
+                        ? 'bg-foreground text-background shadow-lg scale-105'
+                        : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105'
+                    }`}
+                  >
+                    {recipient.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-              {[1, 2, 3, 4, 5, 6].map((item) => (
-                <div
-                  key={item}
-                  className="group bg-card rounded-2xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300"
-                >
-                  <div className="aspect-square bg-muted relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/20 group-hover:scale-110 transition-transform duration-500" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <Icon name={catalogItem.icon} size={64} className="text-primary/20" />
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2">Образец {item}</h3>
-                    <p className="text-muted-foreground mb-4">
-                      Описание изделия и его характеристики
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-lg font-bold">от 5 000 ₽</span>
-                      <Button size="sm">
-                        Подробнее
+              {products.filter(p => {
+                const categoryMatch = p.category === category;
+                const materialMatch = selectedMaterial === 'all' || p.material === selectedMaterial;
+                const eventMatch = selectedEvent === 'all' || p.event === selectedEvent;
+                const recipientMatch = selectedRecipient === 'all' || p.recipient === selectedRecipient;
+                return categoryMatch && materialMatch && eventMatch && recipientMatch;
+              }).map((product) => (
+                <Card key={product.id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300">
+                  <div className="relative h-80 overflow-hidden">
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute top-4 right-4">
+                      <Button size="icon" variant="secondary" className="rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Icon name="Heart" size={20} />
                       </Button>
                     </div>
                   </div>
-                </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold mb-2">{product.title}</h3>
+                    <div className="text-2xl font-bold text-primary mb-4">{product.price}</div>
+                    <div className="flex gap-2">
+                      <Button 
+                        variant="outline" 
+                        className="flex-1"
+                        onClick={() => navigate(`/constructor?product=${product.id}`)}
+                      >
+                        <Icon name="Sparkles" size={18} className="mr-2" />
+                        AI Макет
+                      </Button>
+                      <Button className="flex-1">
+                        <Icon name="ShoppingCart" size={18} className="mr-2" />
+                        Заказать
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
+
+            {products.filter(p => {
+              const categoryMatch = p.category === category;
+              const materialMatch = selectedMaterial === 'all' || p.material === selectedMaterial;
+              const eventMatch = selectedEvent === 'all' || p.event === selectedEvent;
+              const recipientMatch = selectedRecipient === 'all' || p.recipient === selectedRecipient;
+              return categoryMatch && materialMatch && eventMatch && recipientMatch;
+            }).length === 0 && (
+              <div className="text-center py-12">
+                <Icon name="Search" size={48} className="mx-auto text-muted-foreground mb-4" />
+                <p className="text-lg text-muted-foreground">
+                  По выбранным фильтрам ничего не найдено
+                </p>
+              </div>
+            )}
 
             <div className="text-center bg-primary/5 rounded-3xl p-12">
               <h2 className="text-3xl font-bold mb-4">Нужна консультация?</h2>

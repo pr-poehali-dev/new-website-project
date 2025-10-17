@@ -3,93 +3,13 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { useNavigate } from 'react-router-dom';
+import { products, materials, events, recipients } from '@/data/products';
 
 const Catalog = () => {
   const navigate = useNavigate();
   const [selectedMaterial, setSelectedMaterial] = useState('all');
   const [selectedEvent, setSelectedEvent] = useState('all');
   const [selectedRecipient, setSelectedRecipient] = useState('all');
-
-  const materials = [
-    { value: 'all', label: 'Все материалы' },
-    { value: 'crystal', label: 'Хрусталь' },
-    { value: 'glass', label: 'Стекло' },
-    { value: 'metal', label: 'Металл' },
-    { value: 'combined', label: 'Комбинированные' },
-  ];
-
-  const events = [
-    { value: 'all', label: 'Все мероприятия' },
-    { value: 'corporate', label: 'Корпоративные' },
-    { value: 'sports', label: 'Спортивные' },
-    { value: 'government', label: 'Государственные' },
-    { value: 'cultural', label: 'Культурные' },
-  ];
-
-  const recipients = [
-    { value: 'all', label: 'Все получатели' },
-    { value: 'executives', label: 'Руководителям' },
-    { value: 'partners', label: 'Партнёрам' },
-    { value: 'employees', label: 'Сотрудникам' },
-    { value: 'vip', label: 'VIP персонам' },
-  ];
-
-  const products = [
-    {
-      id: 1,
-      title: 'Кубок "Триумф"',
-      material: 'crystal',
-      event: 'corporate',
-      recipient: 'executives',
-      price: 'от 15 000 ₽',
-      image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg',
-    },
-    {
-      id: 2,
-      title: 'Награда "Вершина"',
-      material: 'glass',
-      event: 'sports',
-      recipient: 'vip',
-      price: 'от 25 000 ₽',
-      image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg',
-    },
-    {
-      id: 3,
-      title: 'Статуэтка "Лидер"',
-      material: 'combined',
-      event: 'government',
-      recipient: 'executives',
-      price: 'от 35 000 ₽',
-      image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg',
-    },
-    {
-      id: 4,
-      title: 'Подарок "Престиж"',
-      material: 'crystal',
-      event: 'corporate',
-      recipient: 'partners',
-      price: 'от 20 000 ₽',
-      image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg',
-    },
-    {
-      id: 5,
-      title: 'Награда "Признание"',
-      material: 'metal',
-      event: 'cultural',
-      recipient: 'employees',
-      price: 'от 12 000 ₽',
-      image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg',
-    },
-    {
-      id: 6,
-      title: 'Кубок "Победа"',
-      material: 'glass',
-      event: 'sports',
-      recipient: 'vip',
-      price: 'от 30 000 ₽',
-      image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg',
-    },
-  ];
 
   const filteredProducts = products.filter((product) => {
     const materialMatch = selectedMaterial === 'all' || product.material === selectedMaterial;
