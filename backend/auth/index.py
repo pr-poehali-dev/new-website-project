@@ -74,9 +74,9 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 
                 cursor.execute(
                     """
-                    INSERT INTO users (email, password_hash, name, phone)
-                    VALUES (%s, %s, %s, %s)
-                    RETURNING id, email, name, phone, created_at
+                    INSERT INTO users (email, password_hash, name, phone, profile_completed)
+                    VALUES (%s, %s, %s, %s, false)
+                    RETURNING id, email, name, phone, created_at, company_name, company_inn, profile_completed
                     """,
                     (email, password_hash, name, phone if phone else None)
                 )
@@ -108,7 +108,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 
                 cursor.execute(
                     """
-                    SELECT id, email, name, phone, created_at
+                    SELECT id, email, name, phone, created_at, company_name, company_inn, profile_completed
                     FROM users
                     WHERE email = %s AND password_hash = %s
                     """,
@@ -132,6 +132,53 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                         'success': True,
                         'user': dict(user),
                         'token': token
+                    }, default=str)
+                }
+            
+            elif action == 'update_profile':
+                user_id = body_data.get('user_id')
+                company_name = body_data.get('company_name', '').strip()
+                company_inn = body_data.get('company_inn', '').strip()
+                
+                if not user_id or not company_name or not company_inn:
+                    return {
+                        'statusCode': 400,
+                        'headers': headers,
+                        'body': json.dumps({'error': 'user_id, company_name and company_inn are required'})
+                    }
+                
+                if len(company_inn) not in [10, 12]:
+                    return {
+                        'statusCode': 400,
+                        'headers': headers,
+                        'body': json.dumps({'error': 'INN must be 10 or 12 digits'})
+                    }
+                
+                cursor.execute(
+                    """
+                    UPDATE users
+                    SET company_name = %s, company_inn = %s, profile_completed = true, updated_at = CURRENT_TIMESTAMP
+                    WHERE id = %s
+                    RETURNING id, email, name, phone, company_name, company_inn, profile_completed, created_at
+                    """,
+                    (company_name, company_inn, user_id)
+                )
+                user = cursor.fetchone()
+                conn.commit()
+                
+                if not user:
+                    return {
+                        'statusCode': 404,
+                        'headers': headers,
+                        'body': json.dumps({'error': 'User not found'})
+                    }
+                
+                return {
+                    'statusCode': 200,
+                    'headers': headers,
+                    'body': json.dumps({
+                        'success': True,
+                        'user': dict(user)
                     }, default=str)
                 }
         

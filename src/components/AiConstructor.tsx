@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import AuthModal from './AuthModal';
+import CompanyProfileModal from './CompanyProfileModal';
 
 const AiConstructor = () => {
   const [searchParams] = useSearchParams();
@@ -14,6 +15,8 @@ const AiConstructor = () => {
   const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
   const [user, setUser] = useState<any>(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [userMockupsCount, setUserMockupsCount] = useState(0);
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string>('');
   const [customText, setCustomText] = useState('');
@@ -51,9 +54,24 @@ const AiConstructor = () => {
     
     const userData = localStorage.getItem('user');
     if (userData) {
-      setUser(JSON.parse(userData));
+      const parsedUser = JSON.parse(userData);
+      setUser(parsedUser);
+      
+      if (parsedUser.id) {
+        checkUserMockupsCount(parsedUser.id);
+      }
     }
   }, [searchParams]);
+
+  const checkUserMockupsCount = async (userId: number) => {
+    try {
+      const response = await fetch(`https://functions.poehali.dev/74c0a2b5-7337-4424-9131-1b5e377dfec0?user_id=${userId}`);
+      const data = await response.json();
+      setUserMockupsCount(data.count || 0);
+    } catch (error) {
+      console.error('Error checking mockups count:', error);
+    }
+  };
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -70,6 +88,12 @@ const AiConstructor = () => {
   const handleGenerate = async () => {
     if (!user) {
       setShowAuthModal(true);
+      return;
+    }
+
+    const isProfileComplete = user.profile_completed === true;
+    if (!isProfileComplete && userMockupsCount >= 3) {
+      setShowProfileModal(true);
       return;
     }
 
@@ -109,6 +133,8 @@ const AiConstructor = () => {
           mockup_url: data.url,
         }),
       });
+      
+      setUserMockupsCount(prev => prev + 1);
     } catch (error) {
       console.error('Error generating mockup:', error);
       alert('Ошибка генерации. Попробуйте снова.');
@@ -119,6 +145,21 @@ const AiConstructor = () => {
 
   const handleAuthSuccess = (userData: any, token: string) => {
     setUser(userData);
+    if (userData.id) {
+      checkUserMockupsCount(userData.id);
+    }
+  };
+
+  const handleProfileSuccess = (profileData: any) => {
+    const updatedUser = { ...user, ...profileData.user };
+    setUser(updatedUser);
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+  };
+
+  const getRemainingMockups = () => {
+    const isProfileComplete = user?.profile_completed === true;
+    if (isProfileComplete) return null;
+    return Math.max(0, 3 - userMockupsCount);
   };
 
   return (
@@ -236,24 +277,44 @@ const AiConstructor = () => {
               </CardContent>
             </Card>
 
-            <Button
-              onClick={handleGenerate}
-              disabled={!selectedProduct || !logoPreview || isGenerating}
-              size="lg"
-              className="w-full"
-            >
-              {isGenerating ? (
-                <>
-                  <Icon name="Loader2" size={20} className="mr-2 animate-spin" />
-                  Генерируем макет...
-                </>
-              ) : (
-                <>
-                  <Icon name="Sparkles" size={20} className="mr-2" />
-                  Создать макет с AI
-                </>
+            <div className="space-y-4">
+              {user && getRemainingMockups() !== null && (
+                <div className="bg-muted/50 px-4 py-3 rounded-lg text-sm flex items-start gap-2">
+                  <Icon name="Info" size={18} className="mt-0.5 flex-shrink-0 text-primary" />
+                  <div>
+                    <p className="font-medium">
+                      {getRemainingMockups() > 0 
+                        ? `Осталось ${getRemainingMockups()} макет${getRemainingMockups() === 1 ? '' : getRemainingMockups() === 2 || getRemainingMockups() === 3 || getRemainingMockups() === 4 ? 'а' : 'ов'}`
+                        : 'Достигнут лимит макетов'}
+                    </p>
+                    <p className="text-muted-foreground">
+                      {getRemainingMockups() > 0 
+                        ? 'Заполните профиль компании для снятия ограничений'
+                        : 'Заполните профиль компании, чтобы продолжить'}
+                    </p>
+                  </div>
+                </div>
               )}
-            </Button>
+
+              <Button
+                onClick={handleGenerate}
+                disabled={!selectedProduct || !logoPreview || isGenerating}
+                size="lg"
+                className="w-full"
+              >
+                {isGenerating ? (
+                  <>
+                    <Icon name="Loader2" size={20} className="mr-2 animate-spin" />
+                    Генерируем макет...
+                  </>
+                ) : (
+                  <>
+                    <Icon name="Sparkles" size={20} className="mr-2" />
+                    Создать макет с AI
+                  </>
+                )}
+              </Button>
+            </div>
           </div>
 
           <div className="lg:sticky lg:top-24 h-fit">
@@ -316,6 +377,17 @@ const AiConstructor = () => {
       </div>
     </section>
       <AuthModal open={showAuthModal} onOpenChange={setShowAuthModal} onSuccess={handleAuthSuccess} />
+      <CompanyProfileModal 
+        open={showProfileModal} 
+        onOpenChange={setShowProfileModal} 
+        onSuccess={handleProfileSuccess}
+        userId={user?.id}
+        token={localStorage.getItem('token') || ''}
+        initialData={{
+          company_name: user?.company_name,
+          company_inn: user?.company_inn
+        }}
+      />
     </>
   );
 };

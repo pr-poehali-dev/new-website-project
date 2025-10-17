@@ -92,6 +92,17 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             
             cursor.execute(
                 """
+                SELECT COUNT(*) as count
+                FROM concepts
+                WHERE user_id = %s
+                """,
+                (user_id,)
+            )
+            count_result = cursor.fetchone()
+            mockups_count = count_result['count'] if count_result else 0
+            
+            cursor.execute(
+                """
                 SELECT id, user_id, product_id, product_title, custom_text, logo_url, mockup_url, created_at
                 FROM concepts
                 WHERE user_id = %s
@@ -106,6 +117,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'headers': headers,
                 'body': json.dumps({
                     'success': True,
+                    'count': mockups_count,
                     'concepts': [dict(c) for c in concepts]
                 }, default=str)
             }

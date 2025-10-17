@@ -17,7 +17,12 @@
         "success": true,
         "concept": {
           "id": "number",
-          "user_id": "number"
+          "user_id": "number",
+          "product_id": "number",
+          "product_title": "string",
+          "custom_text": "string",
+          "logo_url": "string",
+          "mockup_url": "string"
         }
       },
       "bodyMatcher": "partial"
@@ -29,6 +34,7 @@
       "expectedStatus": 200,
       "expectedBody": {
         "success": true,
+        "count": "number",
         "concepts": "array"
       },
       "bodyMatcher": "partial"
