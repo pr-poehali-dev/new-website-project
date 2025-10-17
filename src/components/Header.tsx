@@ -28,10 +28,14 @@ const Header = () => {
     {
       title: 'По материалам',
       items: [
-        { name: 'Хрустальные награды', icon: 'Gem' },
-        { name: 'Стеклянные изделия', icon: 'GlassWater' },
-        { name: 'Металлические награды', icon: 'Medal' },
-        { name: 'Комбинированные', icon: 'Layers' },
+        { name: 'Каменная история', icon: 'Mountain' },
+        { name: 'Стеклянные награды', icon: 'GlassWater' },
+        { name: 'Акриловые изделия', icon: 'Box' },
+        { name: 'Предметы в смоле', icon: 'Droplet' },
+        { name: 'Изделия из древесины', icon: 'Trees' },
+        { name: 'Изделия из металла', icon: 'Medal' },
+        { name: 'Дипломы и плакетки', icon: 'Award' },
+        { name: 'Изделия с 3Д объектами', icon: 'Box' },
       ],
     },
     {
