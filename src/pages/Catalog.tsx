@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
-import { products, materials, events, recipients } from '@/data/products';
+import { products, events, recipients } from '@/data/products';
 
 const catalogData = {
   'kamennaya-istoriya': {
@@ -55,7 +55,6 @@ const Catalog = () => {
   const navigate = useNavigate();
   const catalogItem = category ? catalogData[category as keyof typeof catalogData] : null;
 
-  const [selectedMaterial, setSelectedMaterial] = useState('all');
   const [selectedEvent, setSelectedEvent] = useState('all');
   const [selectedRecipient, setSelectedRecipient] = useState('all');
 
@@ -94,22 +93,6 @@ const Catalog = () => {
 
             <div className="mb-8 md:mb-12">
               <div className="hidden md:flex flex-wrap gap-3 justify-center mb-6">
-                {materials.map((material) => (
-                  <button
-                    key={material.value}
-                    onClick={() => setSelectedMaterial(material.value)}
-                    className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
-                      selectedMaterial === material.value
-                        ? 'bg-foreground text-background shadow-lg scale-105'
-                        : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105'
-                    }`}
-                  >
-                    {material.label}
-                  </button>
-                ))}
-              </div>
-
-              <div className="hidden md:flex flex-wrap gap-3 justify-center mb-6">
                 {events.map((event) => (
                   <button
                     key={event.value}
@@ -145,10 +128,9 @@ const Catalog = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
               {products.filter(p => {
                 const categoryMatch = p.category === category;
-                const materialMatch = selectedMaterial === 'all' || p.material === selectedMaterial;
                 const eventMatch = selectedEvent === 'all' || p.event === selectedEvent;
                 const recipientMatch = selectedRecipient === 'all' || p.recipient === selectedRecipient;
-                return categoryMatch && materialMatch && eventMatch && recipientMatch;
+                return categoryMatch && eventMatch && recipientMatch;
               }).map((product) => (
                 <Card key={product.id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300">
                   <div className="relative h-80 overflow-hidden">
@@ -188,10 +170,9 @@ const Catalog = () => {
 
             {products.filter(p => {
               const categoryMatch = p.category === category;
-              const materialMatch = selectedMaterial === 'all' || p.material === selectedMaterial;
               const eventMatch = selectedEvent === 'all' || p.event === selectedEvent;
               const recipientMatch = selectedRecipient === 'all' || p.recipient === selectedRecipient;
-              return categoryMatch && materialMatch && eventMatch && recipientMatch;
+              return categoryMatch && eventMatch && recipientMatch;
             }).length === 0 && (
               <div className="text-center py-12">
                 <Icon name="Search" size={48} className="mx-auto text-muted-foreground mb-4" />
