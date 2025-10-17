@@ -64,14 +64,20 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
+    <header className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b transition-colors duration-300 ${
+      catalogOpen ? 'bg-primary border-primary' : 'bg-white/95 border-border'
+    }`}>
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <Icon name="Award" className="text-primary-foreground" size={24} />
+            <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
+              catalogOpen ? 'bg-white/20' : 'bg-primary'
+            }`}>
+              <Icon name="Award" className={catalogOpen ? 'text-white' : 'text-primary-foreground'} size={24} />
             </div>
-            <span className="text-xl font-bold">Арт Стеклов</span>
+            <span className={`text-xl font-bold transition-colors ${catalogOpen ? 'text-white' : 'text-foreground'}`}>
+              Арт Стеклов
+            </span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">
@@ -79,7 +85,9 @@ const Header = () => {
               <div key={item.name} className="relative">
                 {item.hasMega ? (
                   <button
-                    className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors flex items-center gap-1 py-2"
+                    className={`text-sm font-medium transition-colors flex items-center gap-1 py-2 ${
+                      catalogOpen ? 'text-white hover:text-white/80' : 'text-foreground/80 hover:text-foreground'
+                    }`}
                     onMouseEnter={handleMouseEnter}
                   >
                     {item.name}
@@ -88,7 +96,9 @@ const Header = () => {
                 ) : (
                   <a
                     href={item.href}
-                    className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                    className={`text-sm font-medium transition-colors ${
+                      catalogOpen ? 'text-white/80 hover:text-white' : 'text-foreground/80 hover:text-foreground'
+                    }`}
                   >
                     {item.name}
                   </a>
@@ -98,14 +108,18 @@ const Header = () => {
           </nav>
 
           <div className="hidden lg:flex items-center gap-4">
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" className={catalogOpen ? 'text-white hover:text-white hover:bg-white/10' : ''}>
               <Icon name="Search" size={18} />
             </Button>
-            <Button variant="outline" size="sm">
+            <Button 
+              variant={catalogOpen ? "ghost" : "outline"} 
+              size="sm"
+              className={catalogOpen ? 'text-white border-white/20 hover:bg-white/10' : ''}
+            >
               <Icon name="Phone" size={16} className="mr-2" />
               Позвонить
             </Button>
-            <Button size="sm">
+            <Button size="sm" className={catalogOpen ? 'bg-white text-primary hover:bg-white/90' : ''}>
               Оставить заявку
             </Button>
           </div>
@@ -114,7 +128,7 @@ const Header = () => {
             className="lg:hidden p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} />
+            <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} className={catalogOpen ? 'text-white' : ''} />
           </button>
         </div>
 
