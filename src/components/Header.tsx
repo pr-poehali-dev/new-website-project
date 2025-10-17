@@ -28,14 +28,14 @@ const Header = () => {
     {
       title: 'По материалам',
       items: [
-        { name: 'Каменная история', icon: 'Mountain' },
-        { name: 'Стеклянные награды', icon: 'GlassWater' },
-        { name: 'Акриловые изделия', icon: 'Box' },
-        { name: 'Предметы в смоле', icon: 'Droplet' },
-        { name: 'Изделия из древесины', icon: 'Trees' },
-        { name: 'Изделия из металла', icon: 'Medal' },
-        { name: 'Дипломы и плакетки', icon: 'Award' },
-        { name: 'Изделия с 3Д объектами', icon: 'Box' },
+        { name: 'Каменная история', icon: 'Mountain', href: '/catalog/kamennaya-istoriya' },
+        { name: 'Стеклянные награды', icon: 'GlassWater', href: '/catalog/steklyannye-nagrady' },
+        { name: 'Акриловые изделия', icon: 'Box', href: '/catalog/akrilovye-izdeliya' },
+        { name: 'Предметы в смоле', icon: 'Droplet', href: '/catalog/predmety-v-smole' },
+        { name: 'Изделия из древесины', icon: 'Trees', href: '/catalog/izdeliya-iz-drevesiny' },
+        { name: 'Изделия из металла', icon: 'Medal', href: '/catalog/izdeliya-iz-metalla' },
+        { name: 'Дипломы и плакетки', icon: 'Award', href: '/catalog/diplomy-i-plaketki' },
+        { name: 'Изделия с 3Д объектами', icon: 'Box', href: '/catalog/izdeliya-s-3d-obektami' },
       ],
     },
     {
@@ -228,15 +228,16 @@ const Header = () => {
                 <ul className="space-y-3">
                   {category.items.map((item, idx) => (
                     <li key={idx}>
-                      <a
-                        href="#catalog"
+                      <Link
+                        to={item.href || '#catalog'}
                         className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors group"
+                        onClick={() => handleMouseLeave()}
                       >
                         <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
                           <Icon name={item.icon} size={16} className="text-white/80 group-hover:text-white transition-colors" />
                         </div>
                         <span>{item.name}</span>
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
