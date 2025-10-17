@@ -109,14 +109,14 @@ const Header = () => {
 
           <div className="hidden lg:flex items-center gap-4">
             <Button variant="ghost" size="sm" className={catalogOpen ? 'text-white hover:text-white hover:bg-white/10' : ''}>
-              <Icon name="Search" size={18} />
+              <Icon name="Search" fallback="CircleHelp" size={18} />
             </Button>
             <Button 
               variant={catalogOpen ? "ghost" : "outline"} 
               size="sm"
               className={catalogOpen ? 'text-white border-white/20 hover:bg-white/10' : ''}
             >
-              <Icon name="Phone" size={16} className="mr-2" />
+              <Icon name="Phone" fallback="PhoneCall" size={16} className="mr-2" />
               Позвонить
             </Button>
             <Button size="sm" className={catalogOpen ? 'bg-white text-primary hover:bg-white/90' : ''}>
