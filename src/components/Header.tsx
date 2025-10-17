@@ -9,6 +9,7 @@ const Header = () => {
 
   const navigation = [
     { name: 'Каталог', href: '#catalog', hasMega: true },
+    { name: 'AI Конструктор', href: '/constructor', isRoute: true },
     { name: 'Услуги', href: '#services' },
     { name: 'Производство', href: '#production' },
     { name: 'О компании', href: '#about' },
@@ -93,6 +94,15 @@ const Header = () => {
                     {item.name}
                     <Icon name="ChevronDown" size={16} className={`transition-transform duration-300 ${catalogOpen ? 'rotate-180' : ''}`} />
                   </button>
+                ) : item.isRoute ? (
+                  <Link
+                    to={item.href}
+                    className={`text-sm font-medium transition-colors ${
+                      catalogOpen ? 'text-white/80 hover:text-white' : 'text-foreground/80 hover:text-foreground'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
                 ) : (
                   <a
                     href={item.href}
