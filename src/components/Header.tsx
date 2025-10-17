@@ -94,11 +94,11 @@ const Header = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
-              catalogOpen || aboutOpen ? 'bg-white/20' : 'bg-primary'
-            }`}>
-              <Icon name="Award" className={catalogOpen || aboutOpen ? 'text-white' : 'text-primary-foreground'} size={24} />
-            </div>
+            <img 
+              src="https://cdn.poehali.dev/files/b4dc30a3-6e48-474d-9b15-3f861c33f937.png" 
+              alt="Арт Стеклов" 
+              className="w-10 h-10 object-contain"
+            />
             <span className={`text-xl font-bold transition-colors ${catalogOpen || aboutOpen ? 'text-white' : 'text-foreground'}`}>
               Арт Стеклов
             </span>
