@@ -7,6 +7,7 @@ import AuthModal from './AuthModal';
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [catalogOpen, setCatalogOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
 
@@ -18,13 +19,9 @@ const Header = () => {
   }, []);
 
   const navigation = [
-    { name: 'Каталог', href: '#catalog', hasMega: true },
+    { name: 'Каталог', href: '#catalog', hasMega: true, megaType: 'catalog' },
     { name: 'AI Конструктор', href: '/constructor', isRoute: true },
-    { name: 'Услуги', href: '#services' },
-    { name: 'Производство', href: '#production' },
-    { name: 'О компании', href: '#about' },
-    { name: 'Блог', href: '#blog' },
-    { name: 'Контакты', href: '#contact' },
+    { name: 'О компании', href: '#about', hasMega: true, megaType: 'about' },
   ];
 
   const catalogCategories = [
@@ -66,28 +63,43 @@ const Header = () => {
     },
   ];
 
-  const handleMouseEnter = () => {
-    setCatalogOpen(true);
+  const aboutLinks = [
+    { name: 'О компании', href: '#about', icon: 'Building2' },
+    { name: 'Услуги', href: '#services', icon: 'Briefcase' },
+    { name: 'Производство', href: '#production', icon: 'Factory' },
+    { name: 'Блог', href: '#blog', icon: 'FileText' },
+    { name: 'Контакты', href: '#contact', icon: 'MapPin' },
+  ];
+
+  const handleMouseEnter = (type: string) => {
+    if (type === 'catalog') {
+      setCatalogOpen(true);
+      setAboutOpen(false);
+    } else if (type === 'about') {
+      setAboutOpen(true);
+      setCatalogOpen(false);
+    }
   };
 
   const handleMouseLeave = () => {
     setCatalogOpen(false);
+    setAboutOpen(false);
   };
 
   return (
     <>
     <header className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b transition-colors duration-300 ${
-      catalogOpen ? 'bg-primary border-primary' : 'bg-white/95 border-border'
+      catalogOpen || aboutOpen ? 'bg-primary border-primary' : 'bg-white/95 border-border'
     }`}>
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
-              catalogOpen ? 'bg-white/20' : 'bg-primary'
+              catalogOpen || aboutOpen ? 'bg-white/20' : 'bg-primary'
             }`}>
-              <Icon name="Award" className={catalogOpen ? 'text-white' : 'text-primary-foreground'} size={24} />
+              <Icon name="Award" className={catalogOpen || aboutOpen ? 'text-white' : 'text-primary-foreground'} size={24} />
             </div>
-            <span className={`text-xl font-bold transition-colors ${catalogOpen ? 'text-white' : 'text-foreground'}`}>
+            <span className={`text-xl font-bold transition-colors ${catalogOpen || aboutOpen ? 'text-white' : 'text-foreground'}`}>
               Арт Стеклов
             </span>
           </Link>
@@ -98,18 +110,20 @@ const Header = () => {
                 {item.hasMega ? (
                   <button
                     className={`text-sm font-medium transition-colors flex items-center gap-1 py-2 ${
-                      catalogOpen ? 'text-white hover:text-white/80' : 'text-foreground/80 hover:text-foreground'
+                      catalogOpen || aboutOpen ? 'text-white hover:text-white/80' : 'text-foreground/80 hover:text-foreground'
                     }`}
-                    onMouseEnter={handleMouseEnter}
+                    onMouseEnter={() => handleMouseEnter(item.megaType || '')}
                   >
                     {item.name}
-                    <Icon name="ChevronDown" size={16} className={`transition-transform duration-300 ${catalogOpen ? 'rotate-180' : ''}`} />
+                    <Icon name="ChevronDown" size={16} className={`transition-transform duration-300 ${
+                      (item.megaType === 'catalog' && catalogOpen) || (item.megaType === 'about' && aboutOpen) ? 'rotate-180' : ''
+                    }`} />
                   </button>
                 ) : item.isRoute ? (
                   <Link
                     to={item.href}
                     className={`text-sm font-medium transition-colors ${
-                      catalogOpen ? 'text-white/80 hover:text-white' : 'text-foreground/80 hover:text-foreground'
+                      catalogOpen || aboutOpen ? 'text-white/80 hover:text-white' : 'text-foreground/80 hover:text-foreground'
                     }`}
                   >
                     {item.name}
@@ -118,7 +132,7 @@ const Header = () => {
                   <a
                     href={item.href}
                     className={`text-sm font-medium transition-colors ${
-                      catalogOpen ? 'text-white/80 hover:text-white' : 'text-foreground/80 hover:text-foreground'
+                      catalogOpen || aboutOpen ? 'text-white/80 hover:text-white' : 'text-foreground/80 hover:text-foreground'
                     }`}
                   >
                     {item.name}
@@ -129,20 +143,20 @@ const Header = () => {
           </nav>
 
           <div className="hidden lg:flex items-center gap-4">
-            <Button variant="ghost" size="sm" className={catalogOpen ? 'text-white hover:text-white hover:bg-white/10' : ''}>
+            <Button variant="ghost" size="sm" className={catalogOpen || aboutOpen ? 'text-white hover:text-white hover:bg-white/10' : ''}>
               <Icon name="Search" fallback="CircleHelp" size={18} />
             </Button>
             <Button 
-              variant={catalogOpen ? "ghost" : "outline"} 
+              variant={catalogOpen || aboutOpen ? "ghost" : "outline"} 
               size="sm"
-              className={catalogOpen ? 'text-white border-white/20 hover:bg-white/10' : ''}
+              className={catalogOpen || aboutOpen ? 'text-white border-white/20 hover:bg-white/10' : ''}
             >
               <Icon name="Phone" fallback="PhoneCall" size={16} className="mr-2" />
               Позвонить
             </Button>
             {user ? (
               <Link to="/dashboard">
-                <Button size="sm" className={catalogOpen ? 'bg-white text-primary hover:bg-white/90' : ''}>
+                <Button size="sm" className={catalogOpen || aboutOpen ? 'bg-white text-primary hover:bg-white/90' : ''}>
                   <Icon name="User" size={16} className="mr-2" />
                   Кабинет
                 </Button>
@@ -150,7 +164,7 @@ const Header = () => {
             ) : (
               <Button 
                 size="sm" 
-                className={catalogOpen ? 'bg-white text-primary hover:bg-white/90' : ''}
+                className={catalogOpen || aboutOpen ? 'bg-white text-primary hover:bg-white/90' : ''}
                 onClick={() => setShowAuthModal(true)}
               >
                 Войти
@@ -162,7 +176,7 @@ const Header = () => {
             className="lg:hidden p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} className={catalogOpen ? 'text-white' : ''} />
+            <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} className={catalogOpen || aboutOpen ? 'text-white' : ''} />
           </button>
         </div>
 
@@ -197,7 +211,7 @@ const Header = () => {
         className={`hidden lg:block absolute left-0 right-0 top-full bg-primary shadow-2xl transition-all duration-300 overflow-hidden ${
           catalogOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
         }`}
-        onMouseEnter={handleMouseEnter}
+        onMouseEnter={() => handleMouseEnter('catalog')}
         onMouseLeave={handleMouseLeave}
       >
         <div className="container mx-auto px-6 py-8">
@@ -223,6 +237,34 @@ const Header = () => {
                   ))}
                 </ul>
               </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div
+        className={`hidden lg:block absolute left-0 right-0 top-full bg-primary shadow-2xl transition-all duration-300 overflow-hidden ${
+          aboutOpen ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+        onMouseEnter={() => handleMouseEnter('about')}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="container mx-auto px-6 py-8">
+          <div className="grid grid-cols-5 gap-6">
+            {aboutLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.href}
+                className="flex flex-col items-center gap-3 p-4 rounded-lg hover:bg-white/10 transition-colors group"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                  <Icon name={link.icon} size={24} className="text-white/80 group-hover:text-white transition-colors" />
+                </div>
+                <span className="text-sm text-white/80 group-hover:text-white transition-colors font-medium">
+                  {link.name}
+                </span>
+              </a>
             ))}
           </div>
         </div>
