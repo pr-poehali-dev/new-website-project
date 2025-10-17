@@ -55,6 +55,14 @@ const Header = () => {
     },
   ];
 
+  const handleMouseEnter = () => {
+    setCatalogOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setCatalogOpen(false);
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-6 py-4">
@@ -71,12 +79,11 @@ const Header = () => {
               <div key={item.name} className="relative">
                 {item.hasMega ? (
                   <button
-                    className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors flex items-center gap-1"
-                    onMouseEnter={() => setCatalogOpen(true)}
-                    onMouseLeave={() => setCatalogOpen(false)}
+                    className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors flex items-center gap-1 py-2"
+                    onMouseEnter={handleMouseEnter}
                   >
                     {item.name}
-                    <Icon name="ChevronDown" size={16} className={`transition-transform ${catalogOpen ? 'rotate-180' : ''}`} />
+                    <Icon name="ChevronDown" size={16} className={`transition-transform duration-300 ${catalogOpen ? 'rotate-180' : ''}`} />
                   </button>
                 ) : (
                   <a
@@ -138,40 +145,40 @@ const Header = () => {
         )}
       </div>
 
-      {catalogOpen && (
-        <div
-          className="hidden lg:block absolute left-0 right-0 top-full bg-white border-b border-border shadow-2xl"
-          onMouseEnter={() => setCatalogOpen(true)}
-          onMouseLeave={() => setCatalogOpen(false)}
-        >
-          <div className="container mx-auto px-6 py-8">
-            <div className="grid grid-cols-4 gap-8">
-              {catalogCategories.map((category, index) => (
-                <div key={index}>
-                  <h3 className="font-bold text-sm mb-4 text-muted-foreground uppercase tracking-wide">
-                    {category.title}
-                  </h3>
-                  <ul className="space-y-3">
-                    {category.items.map((item, idx) => (
-                      <li key={idx}>
-                        <a
-                          href="#catalog"
-                          className="flex items-center gap-3 text-sm text-foreground/80 hover:text-primary transition-colors group"
-                        >
-                          <div className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center group-hover:bg-primary/10 transition-colors">
-                            <Icon name={item.icon} size={16} className="group-hover:text-primary transition-colors" />
-                          </div>
-                          <span>{item.name}</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
+      <div
+        className={`hidden lg:block absolute left-0 right-0 top-full bg-white border-b border-border shadow-2xl transition-all duration-300 overflow-hidden ${
+          catalogOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="container mx-auto px-6 py-8">
+          <div className="grid grid-cols-4 gap-8">
+            {catalogCategories.map((category, index) => (
+              <div key={index} className="animate-in fade-in slide-in-from-top-4 duration-300" style={{ animationDelay: `${index * 50}ms` }}>
+                <h3 className="font-bold text-sm mb-4 text-muted-foreground uppercase tracking-wide">
+                  {category.title}
+                </h3>
+                <ul className="space-y-3">
+                  {category.items.map((item, idx) => (
+                    <li key={idx}>
+                      <a
+                        href="#catalog"
+                        className="flex items-center gap-3 text-sm text-foreground/80 hover:text-primary transition-colors group"
+                      >
+                        <div className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                          <Icon name={item.icon} size={16} className="group-hover:text-primary transition-colors" />
+                        </div>
+                        <span>{item.name}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 };
