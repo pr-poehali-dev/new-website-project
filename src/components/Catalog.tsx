@@ -99,23 +99,23 @@ const Catalog = () => {
   });
 
   return (
-    <section id="catalog" className="py-24 bg-background">
+    <section id="catalog" className="py-12 md:py-24 bg-background">
       <div className="container mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 bg-muted rounded-full px-4 py-2 mb-6">
+        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+          <div className="inline-flex items-center gap-2 bg-muted rounded-full px-4 py-2 mb-4 md:mb-6">
             <Icon name="Grid3x3" size={18} />
             <span className="text-sm font-medium">Портфолио</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
             Каталог наших работ
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base md:text-lg text-muted-foreground">
             Используйте фильтры для поиска идеального решения
           </p>
         </div>
 
-        <div className="mb-12">
-          <div className="flex flex-wrap gap-3 justify-center mb-6">
+        <div className="mb-8 md:mb-12">
+          <div className="hidden md:flex flex-wrap gap-3 justify-center mb-6">
             {materials.map((material) => (
               <button
                 key={material.value}
@@ -131,7 +131,7 @@ const Catalog = () => {
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-3 justify-center mb-6">
+          <div className="hidden md:flex flex-wrap gap-3 justify-center mb-6">
             {events.map((event) => (
               <button
                 key={event.value}
@@ -147,7 +147,7 @@ const Catalog = () => {
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-3 justify-center">
+          <div className="hidden md:flex flex-wrap gap-3 justify-center">
             {recipients.map((recipient) => (
               <button
                 key={recipient.value}

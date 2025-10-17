@@ -25,28 +25,28 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-24 bg-background">
+    <section id="about" className="py-12 md:py-24 bg-background">
       <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 bg-muted rounded-full px-4 py-2 mb-6">
+            <div className="inline-flex items-center gap-2 bg-muted rounded-full px-4 py-2 mb-4 md:mb-6">
               <Icon name="Building2" size={18} />
               <span className="text-sm font-medium">О нашей компании</span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
               Компания <span className="text-primary">Элитных наград</span> с 2003 года
             </h2>
 
-            <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+            <p className="text-base md:text-lg text-muted-foreground mb-4 md:mb-6 leading-relaxed">
               Компания «Элитных наград» — это ведущий производитель эксклюзивных наград, подарков и корпоративной продукции из хрусталя и стекла в России.
             </p>
 
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 leading-relaxed">
               Наши изделия отличаются непревзойденным качеством исполнения, элегантным дизайном и индивидуальным подходом. Каждый проект создается командой профессионалов с многолетним опытом работы в сфере премиальной продукции.
             </p>
 
-            <div className="space-y-4">
+            <div className="hidden md:block space-y-4">
               {features.map((feature, index) => (
                 <div key={index} className="flex gap-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
@@ -59,9 +59,21 @@ const About = () => {
                 </div>
               ))}
             </div>
+
+            <div className="md:hidden flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide -mx-6 px-6">
+              {features.map((feature, index) => (
+                <div key={index} className="flex-shrink-0 w-[260px] snap-center bg-muted/30 rounded-2xl p-4">
+                  <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-3">
+                    <Icon name={feature.icon} size={20} className="text-primary" />
+                  </div>
+                  <h3 className="font-semibold mb-2 text-sm">{feature.title}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{feature.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="relative">
+          <div className="relative hidden md:block">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
               <img
                 src="https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg"
