@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { useSearchParams } from 'react-router-dom';
 
 const AiConstructor = () => {
+  const [searchParams] = useSearchParams();
   const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string>('');
@@ -36,6 +38,13 @@ const AiConstructor = () => {
       image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg',
     },
   ];
+
+  useEffect(() => {
+    const productId = searchParams.get('product');
+    if (productId) {
+      setSelectedProduct(Number(productId));
+    }
+  }, [searchParams]);
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

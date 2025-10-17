@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import { useNavigate } from 'react-router-dom';
 
 const Catalog = () => {
+  const navigate = useNavigate();
   const [selectedMaterial, setSelectedMaterial] = useState('all');
   const [selectedEvent, setSelectedEvent] = useState('all');
   const [selectedRecipient, setSelectedRecipient] = useState('all');
@@ -181,10 +183,20 @@ const Catalog = () => {
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-2">{product.title}</h3>
                 <div className="text-2xl font-bold text-primary mb-4">{product.price}</div>
-                <Button className="w-full">
-                  <Icon name="ShoppingCart" size={18} className="mr-2" />
-                  Заказать
-                </Button>
+                <div className="flex gap-2">
+                  <Button 
+                    variant="outline" 
+                    className="flex-1"
+                    onClick={() => navigate(`/constructor?product=${product.id}`)}
+                  >
+                    <Icon name="Sparkles" size={18} className="mr-2" />
+                    AI Макет
+                  </Button>
+                  <Button className="flex-1">
+                    <Icon name="ShoppingCart" size={18} className="mr-2" />
+                    Заказать
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ))}
