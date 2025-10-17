@@ -146,36 +146,38 @@ const Header = () => {
       </div>
 
       <div
-        className={`hidden lg:block absolute left-0 right-0 top-full bg-white border-b border-border shadow-2xl transition-all duration-300 overflow-hidden ${
-          catalogOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+        className={`hidden lg:block absolute left-6 right-6 top-full transition-all duration-300 overflow-hidden ${
+          catalogOpen ? 'max-h-[500px] opacity-100 translate-y-2' : 'max-h-0 opacity-0 translate-y-0'
         }`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="container mx-auto px-6 py-8">
-          <div className="grid grid-cols-4 gap-8">
-            {catalogCategories.map((category, index) => (
-              <div key={index} className="animate-in fade-in slide-in-from-top-4 duration-300" style={{ animationDelay: `${index * 50}ms` }}>
-                <h3 className="font-bold text-sm mb-4 text-muted-foreground uppercase tracking-wide">
-                  {category.title}
-                </h3>
-                <ul className="space-y-3">
-                  {category.items.map((item, idx) => (
-                    <li key={idx}>
-                      <a
-                        href="#catalog"
-                        className="flex items-center gap-3 text-sm text-foreground/80 hover:text-primary transition-colors group"
-                      >
-                        <div className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center group-hover:bg-primary/10 transition-colors">
-                          <Icon name={item.icon} size={16} className="group-hover:text-primary transition-colors" />
-                        </div>
-                        <span>{item.name}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+        <div className="bg-primary rounded-3xl shadow-2xl">
+          <div className="container mx-auto px-8 py-8">
+            <div className="grid grid-cols-4 gap-8">
+              {catalogCategories.map((category, index) => (
+                <div key={index} className="animate-in fade-in slide-in-from-top-4 duration-300" style={{ animationDelay: `${index * 50}ms` }}>
+                  <h3 className="font-bold text-sm mb-4 text-white/60 uppercase tracking-wide">
+                    {category.title}
+                  </h3>
+                  <ul className="space-y-3">
+                    {category.items.map((item, idx) => (
+                      <li key={idx}>
+                        <a
+                          href="#catalog"
+                          className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors group"
+                        >
+                          <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                            <Icon name={item.icon} size={16} className="text-white/80 group-hover:text-white transition-colors" />
+                          </div>
+                          <span>{item.name}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
