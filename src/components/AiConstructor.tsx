@@ -5,11 +5,15 @@ import Icon from '@/components/ui/icon';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import AuthModal from './AuthModal';
 
 const AiConstructor = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
+  const [user, setUser] = useState<any>(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string>('');
   const [customText, setCustomText] = useState('');
@@ -44,6 +48,11 @@ const AiConstructor = () => {
     if (productId) {
       setSelectedProduct(Number(productId));
     }
+    
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
   }, [searchParams]);
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,6 +68,11 @@ const AiConstructor = () => {
   };
 
   const handleGenerate = async () => {
+    if (!user) {
+      setShowAuthModal(true);
+      return;
+    }
+
     if (!selectedProduct || !logoPreview) {
       alert('Выберите изделие и загрузите логотип');
       return;
@@ -80,6 +94,21 @@ const AiConstructor = () => {
 
       const data = await response.json();
       setGeneratedMockup(data.url);
+
+      await fetch('https://functions.poehali.dev/74c0a2b5-7337-4424-9131-1b5e377dfec0', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user_id: user.id,
+          product_id: selectedProduct,
+          product_title: selectedProductData?.title,
+          custom_text: customText,
+          logo_url: logoPreview,
+          mockup_url: data.url,
+        }),
+      });
     } catch (error) {
       console.error('Error generating mockup:', error);
       alert('Ошибка генерации. Попробуйте снова.');
@@ -88,8 +117,13 @@ const AiConstructor = () => {
     }
   };
 
+  const handleAuthSuccess = (userData: any, token: string) => {
+    setUser(userData);
+  };
+
   return (
-    <section className="py-24 bg-gradient-to-b from-background to-muted/20">
+    <>
+      <section className="py-24 bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary rounded-full px-4 py-2 mb-6">
@@ -265,9 +299,9 @@ const AiConstructor = () => {
                 </div>
                 {generatedMockup && (
                   <div className="p-6 bg-muted/50 space-y-3">
-                    <Button variant="outline" className="w-full">
-                      <Icon name="Mail" size={16} className="mr-2" />
-                      Отправить на email
+                    <Button variant="outline" className="w-full" onClick={() => navigate('/dashboard')}>
+                      <Icon name="FolderOpen" size={16} className="mr-2" />
+                      Открыть в кабинете
                     </Button>
                     <Button className="w-full">
                       <Icon name="ShoppingCart" size={16} className="mr-2" />
@@ -281,6 +315,8 @@ const AiConstructor = () => {
         </div>
       </div>
     </section>
+      <AuthModal open={showAuthModal} onOpenChange={setShowAuthModal} onSuccess={handleAuthSuccess} />
+    </>
   );
 };
 

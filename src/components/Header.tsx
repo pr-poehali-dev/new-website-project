@@ -1,11 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
+import AuthModal from './AuthModal';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [catalogOpen, setCatalogOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  useEffect(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
 
   const navigation = [
     { name: 'Каталог', href: '#catalog', hasMega: true },
@@ -65,6 +75,7 @@ const Header = () => {
   };
 
   return (
+    <>
     <header className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b transition-colors duration-300 ${
       catalogOpen ? 'bg-primary border-primary' : 'bg-white/95 border-border'
     }`}>
@@ -129,9 +140,22 @@ const Header = () => {
               <Icon name="Phone" fallback="PhoneCall" size={16} className="mr-2" />
               Позвонить
             </Button>
-            <Button size="sm" className={catalogOpen ? 'bg-white text-primary hover:bg-white/90' : ''}>
-              Оставить заявку
-            </Button>
+            {user ? (
+              <Link to="/dashboard">
+                <Button size="sm" className={catalogOpen ? 'bg-white text-primary hover:bg-white/90' : ''}>
+                  <Icon name="User" size={16} className="mr-2" />
+                  Кабинет
+                </Button>
+              </Link>
+            ) : (
+              <Button 
+                size="sm" 
+                className={catalogOpen ? 'bg-white text-primary hover:bg-white/90' : ''}
+                onClick={() => setShowAuthModal(true)}
+              >
+                Войти
+              </Button>
+            )}
           </div>
 
           <button
@@ -204,6 +228,12 @@ const Header = () => {
         </div>
       </div>
     </header>
+      <AuthModal 
+        open={showAuthModal} 
+        onOpenChange={setShowAuthModal} 
+        onSuccess={(userData) => setUser(userData)} 
+      />
+    </>
   );
 };
 

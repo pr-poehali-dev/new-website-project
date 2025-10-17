@@ -1,0 +1,37 @@
+{
+  "tests": [
+    {
+      "name": "Save new concept",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "user_id": 1,
+        "product_id": 1,
+        "product_title": "Кубок Триумф",
+        "custom_text": "За выдающиеся достижения",
+        "logo_url": "https://example.com/logo.png",
+        "mockup_url": "https://example.com/mockup.jpg"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "concept": {
+          "id": "number",
+          "user_id": "number"
+        }
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Get user concepts",
+      "method": "GET",
+      "path": "/?user_id=1",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "concepts": "array"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
