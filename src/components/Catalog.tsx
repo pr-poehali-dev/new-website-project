@@ -2,13 +2,6 @@ import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 
 const Catalog = () => {
   const [selectedMaterial, setSelectedMaterial] = useState('all');
@@ -119,45 +112,54 @@ const Catalog = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-4 mb-12 max-w-4xl mx-auto">
-          <Select value={selectedMaterial} onValueChange={setSelectedMaterial}>
-            <SelectTrigger>
-              <SelectValue placeholder="Материал" />
-            </SelectTrigger>
-            <SelectContent>
-              {materials.map((material) => (
-                <SelectItem key={material.value} value={material.value}>
-                  {material.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+        <div className="mb-12">
+          <div className="flex flex-wrap gap-3 justify-center mb-6">
+            {materials.map((material) => (
+              <button
+                key={material.value}
+                onClick={() => setSelectedMaterial(material.value)}
+                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                  selectedMaterial === material.value
+                    ? 'bg-foreground text-background shadow-lg scale-105'
+                    : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105'
+                }`}
+              >
+                {material.label}
+              </button>
+            ))}
+          </div>
 
-          <Select value={selectedEvent} onValueChange={setSelectedEvent}>
-            <SelectTrigger>
-              <SelectValue placeholder="Мероприятие" />
-            </SelectTrigger>
-            <SelectContent>
-              {events.map((event) => (
-                <SelectItem key={event.value} value={event.value}>
-                  {event.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className="flex flex-wrap gap-3 justify-center mb-6">
+            {events.map((event) => (
+              <button
+                key={event.value}
+                onClick={() => setSelectedEvent(event.value)}
+                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                  selectedEvent === event.value
+                    ? 'bg-foreground text-background shadow-lg scale-105'
+                    : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105'
+                }`}
+              >
+                {event.label}
+              </button>
+            ))}
+          </div>
 
-          <Select value={selectedRecipient} onValueChange={setSelectedRecipient}>
-            <SelectTrigger>
-              <SelectValue placeholder="Получатель" />
-            </SelectTrigger>
-            <SelectContent>
-              {recipients.map((recipient) => (
-                <SelectItem key={recipient.value} value={recipient.value}>
-                  {recipient.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {recipients.map((recipient) => (
+              <button
+                key={recipient.value}
+                onClick={() => setSelectedRecipient(recipient.value)}
+                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                  selectedRecipient === recipient.value
+                    ? 'bg-foreground text-background shadow-lg scale-105'
+                    : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105'
+                }`}
+              >
+                {recipient.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
