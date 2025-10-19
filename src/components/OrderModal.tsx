@@ -44,10 +44,10 @@ const OrderModal = ({ isOpen, onClose }: OrderModalProps) => {
 
         <div className="mb-6">
           <h2 className="text-2xl md:text-3xl font-bold mb-2">
-            Заказать награду
+            Индивидуальный проект проще, чем кажется
           </h2>
           <p className="text-muted-foreground">
-            Оставьте контакты и мы свяжемся с вами в течение 15 минут
+            Оставьте контакты — обсудим вашу идею и рассчитаем стоимость за 15 минут
           </p>
         </div>
 
