@@ -16,12 +16,12 @@ const Hero = () => {
           <div className="relative z-10 h-full flex flex-col justify-between p-6 md:p-8 lg:p-12">
             <div className="max-w-2xl">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-                Создаём награды для первых лиц <span className="text-white/90">вместе с нами</span>
+                Награды с гравировкой <span className="text-white/90">за 3 дня</span>
               </h1>
 
               <p className="text-base md:text-lg lg:text-xl text-white/90 mb-6 md:mb-8 leading-relaxed max-w-xl">
-                Эксклюзивные награды и подарки из стекла и хрусталя. 
-                Работаем с ведущими компаниями и государственными организациями
+                Производим эксклюзивные награды из стекла и хрусталя. 
+                Бесплатная доставка по России при заказе от 50 000 ₽
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-8 md:mb-12">
