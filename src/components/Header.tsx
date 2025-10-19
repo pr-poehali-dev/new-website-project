@@ -147,13 +147,14 @@ const Header = () => {
           </nav>
 
           <div className="hidden lg:flex items-center gap-4">
-            <Button variant="ghost" size="sm" className={catalogOpen || aboutOpen ? 'text-white hover:text-white hover:bg-white/10' : ''}>
+            <Button variant="ghost" size="sm" className={catalogOpen || aboutOpen ? 'text-white hover:text-white hover:bg-white/10' : ''} onClick={() => alert('Поиск в разработке')}>
               <Icon name="Search" fallback="CircleHelp" size={18} />
             </Button>
             <Button 
               variant={catalogOpen || aboutOpen ? "ghost" : "outline"} 
               size="sm"
               className={catalogOpen || aboutOpen ? 'text-white border-white/20 hover:bg-white/10' : ''}
+              onClick={() => window.location.href = 'tel:+78005553535'}
             >
               <Icon name="Phone" fallback="PhoneCall" size={16} className="mr-2" />
               Позвонить
@@ -199,13 +200,22 @@ const Header = () => {
               ))}
             </nav>
             <div className="mt-4 flex flex-col gap-2">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" onClick={() => window.location.href = 'tel:+78005553535'}>
                 <Icon name="Phone" size={16} className="mr-2" />
                 Позвонить
               </Button>
-              <Button size="sm">
-                Оставить заявку
-              </Button>
+              {user ? (
+                <Link to="/dashboard">
+                  <Button size="sm" className="w-full">
+                    <Icon name="User" size={16} className="mr-2" />
+                    Кабинет
+                  </Button>
+                </Link>
+              ) : (
+                <Button size="sm" onClick={() => setShowAuthModal(true)}>
+                  Войти
+                </Button>
+              )}
             </div>
           </div>
         )}

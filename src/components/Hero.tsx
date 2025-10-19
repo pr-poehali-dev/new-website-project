@@ -1,7 +1,17 @@
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  const scrollToCatalog = () => {
+    const catalogSection = document.getElementById('catalog');
+    if (catalogSection) {
+      catalogSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative pt-20 pb-12">
       <div className="container mx-auto px-6">
@@ -25,11 +35,11 @@ const Hero = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-8 md:mb-12">
-                <Button size="lg" className="text-sm md:text-base">
+                <Button size="lg" className="text-sm md:text-base" onClick={() => navigate('/constructor')}>
                   <Icon name="Sparkles" size={18} className="mr-2" />
                   Заказать награду
                 </Button>
-                <Button size="lg" variant="outline" className="text-sm md:text-base bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-foreground">
+                <Button size="lg" variant="outline" className="text-sm md:text-base bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-foreground" onClick={scrollToCatalog}>
                   <Icon name="BookOpen" size={18} className="mr-2" />
                   Смотреть каталог
                 </Button>
