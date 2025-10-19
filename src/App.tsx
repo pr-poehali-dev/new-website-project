@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Constructor from "./pages/Constructor";
 import Dashboard from "./pages/Dashboard";
 import Catalog from "./pages/Catalog";
+import ServicePage from "./pages/ServicePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/constructor" element={<Constructor />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/catalog/:category" element={<Catalog />} />
+          <Route path="/service/:serviceId" element={<ServicePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

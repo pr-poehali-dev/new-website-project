@@ -1,15 +1,18 @@
 import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
 
 const Services = () => {
+  const navigate = useNavigate();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
   const services = [
     {
+      id: 'individualnaya-razrabotka',
       icon: 'Sparkles',
       title: 'Индивидуальная разработка подарочных решений',
       description: 'Создаём уникальные подарки, которые отражают ценности вашей компании и запоминаются надолго',
@@ -17,6 +20,7 @@ const Services = () => {
       image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg'
     },
     {
+      id: 'nagrady-dlya-ceremoniy',
       icon: 'Award',
       title: 'Награды для особых церемоний',
       description: 'Престижные награды для важных мероприятий и торжественных церемоний',
@@ -24,6 +28,7 @@ const Services = () => {
       image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/1a8fc33a-c8f9-4cfb-a621-77668cdf7095.jpg'
     },
     {
+      id: 'korporativnye-nagrady',
       icon: 'Trophy',
       title: 'Корпоративные награды',
       description: 'Награды для признания достижений сотрудников и партнёров компании',
@@ -31,6 +36,7 @@ const Services = () => {
       image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg'
     },
     {
+      id: 'korporativnye-suveniry',
       icon: 'Gift',
       title: 'Корпоративные сувениры',
       description: 'Премиальные сувениры для партнёров, клиентов и сотрудников',
@@ -38,6 +44,7 @@ const Services = () => {
       image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/1a8fc33a-c8f9-4cfb-a621-77668cdf7095.jpg'
     },
     {
+      id: 'avtorskie-izdeliya',
       icon: 'Palette',
       title: 'Авторские изделия',
       description: 'Уникальные произведения искусства из стекла, созданные по индивидуальному проекту',
@@ -45,6 +52,7 @@ const Services = () => {
       image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg'
     },
     {
+      id: 'korporativnyy-dekor',
       icon: 'Building2',
       title: 'Корпоративный декор и арт-объекты',
       description: 'Оформление офисов и общественных пространств премиальными арт-объектами',
@@ -148,7 +156,12 @@ const Services = () => {
                     ))}
                   </div>
 
-                  <Button variant="ghost" size="sm" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+                    onClick={() => navigate(`/service/${service.id}`)}
+                  >
                     Подробнее
                     <Icon name="ArrowRight" size={16} className="ml-2" />
                   </Button>
