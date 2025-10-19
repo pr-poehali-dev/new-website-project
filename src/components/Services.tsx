@@ -9,24 +9,28 @@ const Services = () => {
       title: 'Награды',
       description: 'Эксклюзивные награды для мероприятий, конкурсов и церемоний',
       categories: ['Кубки', 'Медали', 'Дипломы', 'Статуэтки'],
+      image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg'
     },
     {
       icon: 'Gift',
       title: 'Корпоративные подарки',
       description: 'Премиальные подарки для партнеров и сотрудников компании',
       categories: ['VIP подарки', 'Сувениры', 'Наборы', 'Аксессуары'],
+      image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/1a8fc33a-c8f9-4cfb-a621-77668cdf7095.jpg'
     },
     {
       icon: 'Sparkles',
       title: 'Авторские изделия',
-      description: 'Уникальные произведения искусства из хрусталя и стекла',
+      description: 'Уникальные произведения искусства из стекла',
       categories: ['Скульптуры', 'Панно', 'Декор', 'Инсталляции'],
+      image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg'
     },
     {
       icon: 'Building',
       title: 'Корпоративный декор',
       description: 'Оформление офисов и общественных пространств',
       categories: ['Вывески', 'Таблички', 'Стелы', 'Логотипы'],
+      image: 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/1a8fc33a-c8f9-4cfb-a621-77668cdf7095.jpg'
     },
   ];
 
@@ -48,18 +52,28 @@ const Services = () => {
 
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
-            <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/20">
-              <CardContent className="p-6">
-                <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                  <Icon name={service.icon} size={32} className="text-primary group-hover:text-primary-foreground transition-colors" />
+            <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/20 overflow-hidden flex flex-col">
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={service.image} 
+                  alt={service.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-4 left-4">
+                  <div className="w-12 h-12 bg-white/95 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                    <Icon name={service.icon} size={24} className="text-primary" />
+                  </div>
                 </div>
-                
+              </div>
+              
+              <CardContent className="p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-bold mb-3">{service.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                   {service.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-4 mt-auto">
                   {service.categories.map((category, idx) => (
                     <span
                       key={idx}
@@ -81,18 +95,28 @@ const Services = () => {
 
         <div className="md:hidden flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide -mx-6 px-6">
           {services.map((service, index) => (
-            <Card key={index} className="flex-shrink-0 w-[280px] snap-center">
-              <CardContent className="p-5">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-                  <Icon name={service.icon} size={24} className="text-primary" />
+            <Card key={index} className="flex-shrink-0 w-[280px] snap-center overflow-hidden flex flex-col">
+              <div className="relative h-40 overflow-hidden">
+                <img 
+                  src={service.image} 
+                  alt={service.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-3 left-3">
+                  <div className="w-10 h-10 bg-white/95 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                    <Icon name={service.icon} size={20} className="text-primary" />
+                  </div>
                 </div>
-                
+              </div>
+              
+              <CardContent className="p-5 flex flex-col flex-grow">
                 <h3 className="text-lg font-bold mb-2">{service.title}</h3>
                 <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
                   {service.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-4 mt-auto">
                   {service.categories.slice(0, 3).map((category, idx) => (
                     <span
                       key={idx}
