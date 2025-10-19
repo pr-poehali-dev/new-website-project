@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
-import { useNavigate } from 'react-router-dom';
+import OrderModal from './OrderModal';
 
 const Hero = () => {
-  const navigate = useNavigate();
+  const [showOrderModal, setShowOrderModal] = useState(false);
 
   const scrollToCatalog = () => {
     const catalogSection = document.getElementById('catalog');
@@ -35,7 +36,7 @@ const Hero = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-8 md:mb-12">
-                <Button size="lg" className="text-sm md:text-base" onClick={() => navigate('/constructor')}>
+                <Button size="lg" className="text-sm md:text-base" onClick={() => setShowOrderModal(true)}>
                   <Icon name="Sparkles" size={18} className="mr-2" />
                   Заказать награду
                 </Button>
@@ -101,6 +102,8 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      
+      <OrderModal isOpen={showOrderModal} onClose={() => setShowOrderModal(false)} />
     </section>
   );
 };
