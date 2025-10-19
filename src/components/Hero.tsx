@@ -20,7 +20,7 @@ const Hero = () => {
               </h1>
 
               <p className="text-base md:text-lg lg:text-xl text-white/90 mb-6 md:mb-8 leading-relaxed max-w-xl">
-                Производим эксклюзивные награды из стекла и хрусталя. 
+                Производим эксклюзивные награды из стекла. 
                 Бесплатная доставка по России при заказе от 50 000 ₽
               </p>
 
@@ -49,7 +49,7 @@ const Hero = () => {
                   <div className="flex-1">
                     <div className="font-bold text-sm mb-1">Награда "Триумф"</div>
                     <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-                      Эксклюзивная награда из хрусталя для корпоративных мероприятий
+                      Эксклюзивная награда из стекла для корпоративных мероприятий
                     </p>
                     <Button size="sm" className="h-8 text-xs w-full">
                       Узнать стоимость
