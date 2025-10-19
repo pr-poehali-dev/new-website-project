@@ -16,7 +16,7 @@ const Hero = () => {
           <div className="relative z-10 h-full flex flex-col justify-between p-6 md:p-8 lg:p-12">
             <div className="max-w-2xl">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-                Награды с гравировкой <span className="text-white/90">за 3 дня</span>
+                Награды и подарки <span className="text-white/90">для первых</span>
               </h1>
 
               <p className="text-base md:text-lg lg:text-xl text-white/90 mb-6 md:mb-8 leading-relaxed max-w-xl">
