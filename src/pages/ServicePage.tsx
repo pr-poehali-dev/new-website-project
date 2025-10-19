@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,42 @@ const ServicePage = () => {
   const { serviceId } = useParams();
   const navigate = useNavigate();
   const [showOrderModal, setShowOrderModal] = useState(false);
+  const [isVisible1, setIsVisible1] = useState(false);
+  const [isVisible2, setIsVisible2] = useState(false);
+  const [isVisible3, setIsVisible3] = useState(false);
+  const [isVisible4, setIsVisible4] = useState(false);
+  
+  const section1Ref = useRef<HTMLDivElement>(null);
+  const section2Ref = useRef<HTMLDivElement>(null);
+  const section3Ref = useRef<HTMLDivElement>(null);
+  const section4Ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [serviceId]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (entry.target === section1Ref.current) setIsVisible1(true);
+            if (entry.target === section2Ref.current) setIsVisible2(true);
+            if (entry.target === section3Ref.current) setIsVisible3(true);
+            if (entry.target === section4Ref.current) setIsVisible4(true);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (section1Ref.current) observer.observe(section1Ref.current);
+    if (section2Ref.current) observer.observe(section2Ref.current);
+    if (section3Ref.current) observer.observe(section3Ref.current);
+    if (section4Ref.current) observer.observe(section4Ref.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   const services: Record<string, {
     title: string;
@@ -373,7 +409,10 @@ const ServicePage = () => {
             <span>Вернуться к услугам</span>
           </button>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
+          <div 
+            ref={section1Ref}
+            className={`grid lg:grid-cols-2 gap-12 items-start mb-16 transition-all duration-700 ${isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
             <div>
               <div className="inline-flex items-center gap-2 bg-muted rounded-full px-4 py-2 mb-6">
                 <Icon name={service.icon} size={18} />
@@ -398,7 +437,7 @@ const ServicePage = () => {
               </Button>
             </div>
 
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[400px] md:h-[600px]">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[400px] md:h-[600px] hover:scale-[1.02] transition-transform duration-500">
               <img
                 src={service.image}
                 alt={service.title}
@@ -407,7 +446,10 @@ const ServicePage = () => {
             </div>
           </div>
 
-          <div className="mb-16">
+          <div 
+            ref={section2Ref}
+            className={`mb-16 transition-all duration-700 ${isVisible2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
             <h2 className="text-3xl font-bold mb-8">Что мы предлагаем</h2>
             <div className="grid md:grid-cols-2 gap-4">
               {service.details.map((detail, index) => (
@@ -421,11 +463,14 @@ const ServicePage = () => {
             </div>
           </div>
 
-          <div className="mb-16">
+          <div 
+            ref={section3Ref}
+            className={`mb-16 transition-all duration-700 ${isVisible3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
             <h2 className="text-3xl font-bold mb-8">Преимущества</h2>
             <div className="grid md:grid-cols-3 gap-6">
               {service.benefits.map((benefit, index) => (
-                <div key={index} className="bg-muted/30 rounded-2xl p-6">
+                <div key={index} className="bg-muted/30 rounded-2xl p-6 hover:bg-muted/50 transition-all duration-300 hover:scale-105">
                   <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
                     <Icon name={benefit.icon} size={24} className="text-primary" />
                   </div>
@@ -436,7 +481,10 @@ const ServicePage = () => {
             </div>
           </div>
 
-          <div className="mb-16">
+          <div 
+            ref={section4Ref}
+            className={`mb-16 transition-all duration-700 ${isVisible4 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
             <h2 className="text-3xl font-bold mb-8">Как мы работаем</h2>
             <div className="grid md:grid-cols-4 gap-6">
               {service.process.map((step, index) => (
@@ -455,7 +503,7 @@ const ServicePage = () => {
             </div>
           </div>
 
-          <div className="bg-primary text-primary-foreground rounded-3xl p-8 md:p-12 text-center">
+          <div className="bg-primary text-primary-foreground rounded-3xl p-8 md:p-12 text-center opacity-0 animate-[fadeIn_0.8s_ease-out_0.3s_forwards]">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Готовы обсудить проект?
             </h2>
