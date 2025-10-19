@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
 import AuthModal from './AuthModal';
+import CallModal from './CallModal';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -10,6 +11,7 @@ const Header = () => {
   const [aboutOpen, setAboutOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showCallModal, setShowCallModal] = useState(false);
 
   useEffect(() => {
     const userData = localStorage.getItem('user');
@@ -154,7 +156,7 @@ const Header = () => {
               variant={catalogOpen || aboutOpen ? "ghost" : "outline"} 
               size="sm"
               className={catalogOpen || aboutOpen ? 'text-white border-white/20 hover:bg-white/10' : ''}
-              onClick={() => window.location.href = 'tel:+78005553535'}
+              onClick={() => setShowCallModal(true)}
             >
               <Icon name="Phone" fallback="PhoneCall" size={16} className="mr-2" />
               Позвонить
@@ -200,7 +202,7 @@ const Header = () => {
               ))}
             </nav>
             <div className="mt-4 flex flex-col gap-2">
-              <Button variant="outline" size="sm" onClick={() => window.location.href = 'tel:+78005553535'}>
+              <Button variant="outline" size="sm" onClick={() => setShowCallModal(true)}>
                 <Icon name="Phone" size={16} className="mr-2" />
                 Позвонить
               </Button>
@@ -290,6 +292,10 @@ const Header = () => {
         onOpenChange={setShowAuthModal} 
         onSuccess={(userData) => setUser(userData)} 
       />
+      
+      {showCallModal && (
+        <CallModal onClose={() => setShowCallModal(false)} />
+      )}
     </>
   );
 };
