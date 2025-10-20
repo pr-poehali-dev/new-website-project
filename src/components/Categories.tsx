@@ -31,7 +31,7 @@ const Categories = () => {
 
   return (
     <section className="bg-background">
-      <div className="container mx-auto px-6 pb-8 md:pb-12">
+      <div className="container mx-auto px-6 pb-6 md:pb-8">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category, idx) => (
             <Card 
