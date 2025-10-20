@@ -52,9 +52,36 @@ const CatalogImport = () => {
     }
   };
 
-  const handleImport = () => {
-    console.log('Импортируем товары:', items);
-    alert(`Готово! Импортировано ${items.length} товаров.\n\nДанные сохранены в консоли браузера (F12).`);
+  const handleImport = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/1df99542-a754-4d23-8930-05b014c081d6', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert(`Готово! Импортировано ${data.imported_count} товаров в базу данных.`);
+        setItems([]);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
+      } else {
+        setError(data.error || 'Ошибка при импорте');
+      }
+    } catch (err) {
+      setError('Ошибка при сохранении данных. Проверьте подключение к интернету.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const downloadTemplate = () => {

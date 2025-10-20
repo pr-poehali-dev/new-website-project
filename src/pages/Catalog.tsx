@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -58,6 +58,31 @@ const Catalog = () => {
   const [selectedEvent, setSelectedEvent] = useState('all');
   const [selectedRecipient, setSelectedRecipient] = useState('all');
   const [sortBy, setSortBy] = useState('default');
+  const [catalogItems, setCatalogItems] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadCatalogItems = async () => {
+      try {
+        const url = category 
+          ? `https://functions.poehali.dev/1df99542-a754-4d23-8930-05b014c081d6?category=${category}`
+          : 'https://functions.poehali.dev/1df99542-a754-4d23-8930-05b014c081d6';
+        
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data.success) {
+          setCatalogItems(data.items);
+        }
+      } catch (error) {
+        console.error('Failed to load catalog items:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadCatalogItems();
+  }, [category]);
 
   if (!catalogItem) {
     return (
@@ -141,72 +166,62 @@ const Catalog = () => {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-              {products.filter(p => {
-                const categoryMatch = p.category === category;
-                const eventMatch = selectedEvent === 'all' || p.event === selectedEvent;
-                const recipientMatch = selectedRecipient === 'all' || p.recipient === selectedRecipient;
-                return categoryMatch && eventMatch && recipientMatch;
-              }).sort((a, b) => {
-                if (sortBy === 'price-asc') {
-                  const priceA = parseInt(a.price.replace(/\D/g, ''));
-                  const priceB = parseInt(b.price.replace(/\D/g, ''));
-                  return priceA - priceB;
-                }
-                if (sortBy === 'price-desc') {
-                  const priceA = parseInt(a.price.replace(/\D/g, ''));
-                  const priceB = parseInt(b.price.replace(/\D/g, ''));
-                  return priceB - priceA;
-                }
-                return 0;
-              }).map((product) => (
-                <Card key={product.id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300">
-                  <div className="relative h-80 overflow-hidden">
-                    <img
-                      src={product.image}
-                      alt={product.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute top-4 right-4">
-                      <Button size="icon" variant="secondary" className="rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Icon name="Heart" size={20} />
-                      </Button>
-                    </div>
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold mb-2">{product.title}</h3>
-                    <div className="text-2xl font-bold text-primary mb-4">{product.price}</div>
-                    <div className="flex gap-2">
-                      <Button 
-                        variant="outline" 
-                        className="flex-1"
-                        onClick={() => navigate(`/constructor?product=${product.id}`)}
-                      >
-                        <Icon name="Sparkles" size={18} className="mr-2" />
-                        AI Макет
-                      </Button>
-                      <Button className="flex-1">
-                        <Icon name="ShoppingCart" size={18} className="mr-2" />
-                        Заказать
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            {products.filter(p => {
-              const categoryMatch = p.category === category;
-              const eventMatch = selectedEvent === 'all' || p.event === selectedEvent;
-              const recipientMatch = selectedRecipient === 'all' || p.recipient === selectedRecipient;
-              return categoryMatch && eventMatch && recipientMatch;
-            }).length === 0 && (
+            {loading ? (
+              <div className="flex items-center justify-center py-12">
+                <Icon name="Loader2" size={48} className="animate-spin text-primary" />
+              </div>
+            ) : catalogItems.length === 0 ? (
               <div className="text-center py-12">
-                <Icon name="Search" size={48} className="mx-auto text-muted-foreground mb-4" />
-                <p className="text-lg text-muted-foreground">
-                  По выбранным фильтрам ничего не найдено
-                </p>
+                <Icon name="Package" size={64} className="mx-auto text-muted-foreground/50 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Товары не найдены</h3>
+                <p className="text-muted-foreground">В этой категории пока нет товаров</p>
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                {catalogItems.sort((a, b) => {
+                  if (sortBy === 'price-asc') return a.price - b.price;
+                  if (sortBy === 'price-desc') return b.price - a.price;
+                  return 0;
+                }).map((item) => (
+                  <Card key={item.id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300">
+                    <div className="relative h-80 overflow-hidden">
+                      <img
+                        src={item.image_url}
+                        alt={item.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute top-4 right-4">
+                        <Button size="icon" variant="secondary" className="rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Icon name="Heart" size={20} />
+                        </Button>
+                      </div>
+                    </div>
+                    <CardContent className="p-6">
+                      <h3 className="text-xl font-bold mb-2">{item.name}</h3>
+                      <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{item.description}</p>
+                      <div className="text-2xl font-bold text-primary mb-4">{item.price.toLocaleString('ru-RU')} ₽</div>
+                      <div className="flex gap-2">
+                        <Button 
+                          variant="outline" 
+                          className="flex-1"
+                          onClick={() => navigate('/constructor')}
+                        >
+                          <Icon name="Sparkles" size={18} className="mr-2" />
+                          AI Макет
+                        </Button>
+                        <Button className="flex-1">
+                          <Icon name="ShoppingCart" size={18} className="mr-2" />
+                          Заказать
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
+
+
               </div>
             )}
 

@@ -1,0 +1,47 @@
+{
+  "tests": [
+    {
+      "name": "Import catalog items",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "items": [
+          {
+            "название": "Тестовая награда",
+            "описание": "Описание тестовой награды",
+            "цена": "10000",
+            "категория": "steklyannye-nagrady",
+            "изображение_url": "https://example.com/test.jpg"
+          }
+        ]
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "imported_count": 1
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Get all catalog items",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "items": "array"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Get items by category",
+      "method": "GET",
+      "path": "/?category=steklyannye-nagrady",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
