@@ -221,10 +221,6 @@ const Catalog = () => {
               </div>
             )}
 
-
-              </div>
-            )}
-
             <div className="text-center bg-primary/5 rounded-3xl p-12">
               <h2 className="text-3xl font-bold mb-4">Нужна консультация?</h2>
               <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
