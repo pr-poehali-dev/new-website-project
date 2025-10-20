@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { useNavigate } from 'react-router-dom';
+import ProductModal from '@/components/ProductModal';
 
 interface CatalogItem {
   id: number;
@@ -20,6 +21,13 @@ const Catalog = () => {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('default');
+  const [selectedProduct, setSelectedProduct] = useState<CatalogItem | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleProductClick = (product: CatalogItem) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
 
   const categories = [
     { value: 'all', label: 'Все категории' },
@@ -130,7 +138,11 @@ const Catalog = () => {
           <>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {sortedProducts.map((product) => (
-                <Card key={product.id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300">
+                <Card 
+                  key={product.id} 
+                  className="group overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                  onClick={() => handleProductClick(product)}
+                >
                   <div className="relative aspect-square overflow-hidden">
                     <img
                       src={product.image_url}
@@ -152,14 +164,20 @@ const Catalog = () => {
                       <Button 
                         variant="outline" 
                         className="flex-1"
-                        onClick={() => navigate('/constructor')}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate('/constructor');
+                        }}
                       >
                         <Icon name="Sparkles" size={18} className="mr-2" />
                         AI Макет
                       </Button>
-                      <Button className="flex-1">
-                        <Icon name="ShoppingCart" size={18} className="mr-2" />
-                        Заказать
+                      <Button 
+                        className="flex-1"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <Icon name="Eye" size={18} className="mr-2" />
+                        Подробнее
                       </Button>
                     </div>
                   </CardContent>
@@ -175,6 +193,11 @@ const Catalog = () => {
           </>
         )}
       </div>
+      <ProductModal 
+        product={selectedProduct}
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 };
