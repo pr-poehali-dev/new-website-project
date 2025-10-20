@@ -5,7 +5,6 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
-import { products, events, recipients } from '@/data/products';
 
 const catalogData = {
   'kamennaya-istoriya': {
@@ -55,8 +54,6 @@ const Catalog = () => {
   const navigate = useNavigate();
   const catalogItem = category ? catalogData[category as keyof typeof catalogData] : null;
 
-  const [selectedEvent, setSelectedEvent] = useState('all');
-  const [selectedRecipient, setSelectedRecipient] = useState('all');
   const [sortBy, setSortBy] = useState('default');
   const [catalogItems, setCatalogItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -117,41 +114,7 @@ const Catalog = () => {
               </p>
             </div>
 
-            <div className="mb-8 md:mb-12">
-              <div className="hidden md:flex flex-wrap gap-3 justify-center mb-6">
-                {events.map((event) => (
-                  <button
-                    key={event.value}
-                    onClick={() => setSelectedEvent(event.value)}
-                    className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
-                      selectedEvent === event.value
-                        ? 'bg-foreground text-background shadow-lg scale-105'
-                        : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105'
-                    }`}
-                  >
-                    {event.label}
-                  </button>
-                ))}
-              </div>
-
-              <div className="hidden md:flex flex-wrap gap-3 justify-center">
-                {recipients.map((recipient) => (
-                  <button
-                    key={recipient.value}
-                    onClick={() => setSelectedRecipient(recipient.value)}
-                    className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
-                      selectedRecipient === recipient.value
-                        ? 'bg-foreground text-background shadow-lg scale-105'
-                        : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105'
-                    }`}
-                  >
-                    {recipient.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex justify-end mb-6">
+            <div className="flex justify-end mb-8">
               <div className="flex items-center gap-2">
                 <span className="text-sm text-muted-foreground">Сортировка:</span>
                 <select
