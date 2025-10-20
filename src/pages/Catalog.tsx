@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
+import ProductModal from '@/components/ProductModal';
 
 const catalogData = {
   'kamennaya-istoriya': {
@@ -57,6 +58,14 @@ const Catalog = () => {
   const [sortBy, setSortBy] = useState('default');
   const [catalogItems, setCatalogItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleProductClick = (item: any) => {
+    setSelectedProduct(item);
+    setIsModalOpen(true);
+  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const loadCatalogItems = async () => {
@@ -149,7 +158,11 @@ const Catalog = () => {
                   if (sortBy === 'price-desc') return b.price - a.price;
                   return 0;
                 }).map((item) => (
-                  <Card key={item.id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300">
+                  <Card 
+                    key={item.id} 
+                    className="group overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                    onClick={() => handleProductClick(item)}
+                  >
                     <div className="relative aspect-square overflow-hidden">
                       <img
                         src={item.image_url}
@@ -171,14 +184,20 @@ const Catalog = () => {
                         <Button 
                           variant="outline" 
                           className="flex-1"
-                          onClick={() => navigate('/constructor')}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate('/constructor');
+                          }}
                         >
                           <Icon name="Sparkles" size={18} className="mr-2" />
                           AI Макет
                         </Button>
-                        <Button className="flex-1">
-                          <Icon name="ShoppingCart" size={18} className="mr-2" />
-                          Заказать
+                        <Button 
+                          className="flex-1"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <Icon name="Eye" size={18} className="mr-2" />
+                          Подробнее
                         </Button>
                       </div>
                     </CardContent>
@@ -207,6 +226,11 @@ const Catalog = () => {
         </div>
       </main>
       <Footer />
+      <ProductModal 
+        product={selectedProduct}
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };
