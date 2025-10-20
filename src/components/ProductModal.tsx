@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 import { useNavigate } from 'react-router-dom';
+import CallModal from '@/components/CallModal';
 
 interface Product {
   id: number;
@@ -21,6 +23,7 @@ interface ProductModalProps {
 
 const ProductModal = ({ product, open, onClose }: ProductModalProps) => {
   const navigate = useNavigate();
+  const [showCallModal, setShowCallModal] = useState(false);
 
   if (!product) return null;
 
@@ -157,7 +160,7 @@ const ProductModal = ({ product, open, onClose }: ProductModalProps) => {
               Свяжитесь с нами для консультации
             </p>
             <div className="flex gap-3 justify-center flex-wrap">
-              <Button>
+              <Button onClick={() => setShowCallModal(true)}>
                 <Icon name="Phone" size={18} className="mr-2" />
                 Позвонить
               </Button>
@@ -169,6 +172,7 @@ const ProductModal = ({ product, open, onClose }: ProductModalProps) => {
           </CardContent>
         </Card>
       </DialogContent>
+      {showCallModal && <CallModal onClose={() => setShowCallModal(false)} />}
     </Dialog>
   );
 };
