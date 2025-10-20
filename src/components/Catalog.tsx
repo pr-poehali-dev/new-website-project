@@ -131,7 +131,7 @@ const Catalog = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {sortedProducts.map((product) => (
                 <Card key={product.id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300">
-                  <div className="relative h-80 overflow-hidden">
+                  <div className="relative aspect-square overflow-hidden">
                     <img
                       src={product.image_url}
                       alt={product.name}
