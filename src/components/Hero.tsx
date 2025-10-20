@@ -58,19 +58,6 @@ const Hero = () => {
               </p>
             </div>
 
-            <div className="md:hidden flex flex-col gap-3 px-4 mb-4">
-              <div className="flex flex-col gap-3">
-                <Button size="lg" className="text-sm md:text-base" onClick={() => setShowOrderModal(true)}>
-                  <Icon name="Sparkles" size={18} className="mr-2" />
-                  Заказать награду
-                </Button>
-                <Button size="lg" variant="outline" className="text-sm bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-foreground" onClick={scrollToCatalog}>
-                  <Icon name="BookOpen" size={18} className="mr-2" />
-                  Смотреть каталог
-                </Button>
-              </div>
-            </div>
-
             <div className="hidden md:flex flex-col sm:flex-row gap-3 md:gap-4">
               <Button size="lg" className="text-sm md:text-base" onClick={() => setShowOrderModal(true)}>
                 <Icon name="Sparkles" size={18} className="mr-2" />
@@ -120,18 +107,31 @@ const Hero = () => {
               </div>
             </div>
             
-            <div className="md:hidden grid grid-cols-3 gap-3 bg-white/10 backdrop-blur-sm rounded-2xl p-4 mx-4">
-              <div>
-                <div className="text-2xl font-bold text-white mb-1">300+</div>
-                <div className="text-xs text-white/70">Проектов</div>
+            <div className="md:hidden flex flex-col gap-3 mt-auto">
+              <div className="flex flex-col gap-3">
+                <Button size="lg" className="text-sm" onClick={() => setShowOrderModal(true)}>
+                  <Icon name="Sparkles" size={18} className="mr-2" />
+                  Заказать награду
+                </Button>
+                <Button size="lg" variant="outline" className="text-sm bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-foreground" onClick={scrollToCatalog}>
+                  <Icon name="BookOpen" size={18} className="mr-2" />
+                  Смотреть каталог
+                </Button>
               </div>
-              <div>
-                <div className="text-2xl font-bold text-white mb-1">55</div>
-                <div className="text-xs text-white/70">Клиентов</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-white mb-1">21</div>
-                <div className="text-xs text-white/70">Лет опыта</div>
+              
+              <div className="grid grid-cols-3 gap-3 bg-white/10 backdrop-blur-sm rounded-2xl p-4">
+                <div>
+                  <div className="text-2xl font-bold text-white mb-1">300+</div>
+                  <div className="text-xs text-white/70">Проектов</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-white mb-1">55</div>
+                  <div className="text-xs text-white/70">Клиентов</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-white mb-1">21</div>
+                  <div className="text-xs text-white/70">Лет опыта</div>
+                </div>
               </div>
             </div>
           </div>
