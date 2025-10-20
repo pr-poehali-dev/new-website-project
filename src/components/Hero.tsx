@@ -1,10 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import OrderModal from './OrderModal';
 
 const Hero = () => {
   const [showOrderModal, setShowOrderModal] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const backgroundImages = [
+    'https://cdn.poehali.dev/files/b727a4d1-1de7-4329-b51e-da31b890a78a.jpg',
+    'https://cdn.poehali.dev/files/80689892-235b-4658-b43e-3472831b4963.jpg',
+    'https://cdn.poehali.dev/files/50b8927e-dc23-43f5-8fa3-ddd0030bcd6d.jpg',
+    'https://cdn.poehali.dev/files/5bb5f235-7f66-4ff5-88db-84f11ef85be8.jpg',
+    'https://cdn.poehali.dev/files/01dfaf74-930c-4bd6-9297-7dfc62847be9.JPG'
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const scrollToCatalog = () => {
     const catalogSection = document.getElementById('catalog');
@@ -17,11 +34,16 @@ const Hero = () => {
     <section className="relative pt-20 pb-12">
       <div className="container mx-auto px-6">
         <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
-          <img
-            src="https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/1a8fc33a-c8f9-4cfb-a621-77668cdf7095.jpg"
-            alt="Интерьер с наградами"
-            className="w-full h-full object-cover absolute inset-0"
-          />
+          {backgroundImages.map((img, index) => (
+            <img
+              key={img}
+              src={img}
+              alt={`Награды ${index + 1}`}
+              className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-1000 ${
+                index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+          ))}
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
 
           <div className="relative z-10 h-full flex flex-col justify-between p-6 md:p-8 lg:p-12">
