@@ -150,7 +150,7 @@ const Catalog = () => {
                   return 0;
                 }).map((item) => (
                   <Card key={item.id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300">
-                    <div className="relative h-80 overflow-hidden">
+                    <div className="relative aspect-square overflow-hidden">
                       <img
                         src={item.image_url}
                         alt={item.name}
