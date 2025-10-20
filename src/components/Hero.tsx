@@ -57,7 +57,7 @@ const Hero = () => {
                 Бесплатная доставка по России при заказе от 50 000 ₽
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-8 md:mb-12">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                 <Button size="lg" className="text-sm md:text-base" onClick={() => setShowOrderModal(true)}>
                   <Icon name="Sparkles" size={18} className="mr-2" />
                   Заказать награду
@@ -69,7 +69,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="hidden md:flex items-end justify-between gap-8 flex-wrap mb-2">
+            <div className="hidden md:flex items-end justify-between gap-8 flex-wrap">
               <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-5 max-w-sm">
                 <div className="flex items-start gap-4">
                   <div className="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0">
