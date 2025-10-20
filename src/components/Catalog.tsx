@@ -74,29 +74,29 @@ const Catalog = () => {
   return (
     <section id="catalog" className="py-12 md:py-24 bg-background">
       <div className="container mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-          <div className="inline-flex items-center gap-2 bg-muted rounded-full px-4 py-2 mb-4 md:mb-6">
-            <Icon name="Grid3x3" size={18} />
-            <span className="text-sm font-medium">Портфолио</span>
+        <div className="text-center max-w-3xl mx-auto mb-8">
+          <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-3 py-1.5 mb-4">
+            <Icon name="Grid3x3" size={16} className="text-primary" />
+            <span className="text-xs font-medium text-primary">Портфолио</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3">
             Каталог наших работ
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground">
+          <p className="text-sm md:text-base text-muted-foreground">
             Используйте фильтры для поиска идеального решения
           </p>
         </div>
 
-        <div className="mb-8 md:mb-12">
-          <div className="flex flex-wrap gap-3 justify-center mb-6">
+        <div className="mb-6">
+          <div className="flex flex-wrap gap-2 justify-center">
             {categories.map((category) => (
               <button
                 key={category.value}
                 onClick={() => setSelectedCategory(category.value)}
-                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
                   selectedCategory === category.value
-                    ? 'bg-foreground text-background shadow-lg scale-105'
-                    : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105'
+                    ? 'bg-primary text-primary-foreground shadow-md'
+                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
                 }`}
               >
                 {category.label}
@@ -107,11 +107,11 @@ const Catalog = () => {
 
         <div className="flex justify-end mb-6">
           <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Сортировка:</span>
+            <span className="text-xs text-muted-foreground">Сортировка:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 rounded-full text-sm font-medium bg-muted text-foreground border-0 focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
+              className="px-3 py-1.5 rounded-full text-xs font-medium bg-muted text-foreground border-0 focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
             >
               <option value="default">По умолчанию</option>
               <option value="price-asc">Цена: по возрастанию</option>
