@@ -9,6 +9,7 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [catalogOpen, setCatalogOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
   const [user, setUser] = useState<any>(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showCallModal, setShowCallModal] = useState(false);
