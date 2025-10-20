@@ -31,9 +31,9 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative pt-20 pb-12 md:pb-12">
-      <div className="container mx-auto px-0 md:px-6">
-        <div className="relative rounded-none md:rounded-[2.5rem] overflow-hidden min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
+    <section className="relative pt-20 pb-12">
+      <div className="container mx-auto px-6">
+        <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
           {backgroundImages.map((img, index) => (
             <img
               key={img}
