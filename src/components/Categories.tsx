@@ -30,8 +30,8 @@ const Categories = () => {
   ];
 
   return (
-    <section className="bg-muted/30">
-      <div className="container mx-auto px-6 py-8 md:py-12">
+    <section className="bg-background">
+      <div className="container mx-auto px-6 pb-8 md:pb-12">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category, idx) => (
             <Card 
@@ -46,11 +46,16 @@ const Categories = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <h3 className="text-lg font-bold text-white">
+                  <h3 className="text-lg font-bold text-white mb-1">
                     {category.title}
                   </h3>
                 </div>
               </div>
+              <CardContent className="p-5">
+                <p className="text-sm text-muted-foreground">
+                  {category.description}
+                </p>
+              </CardContent>
             </Card>
           ))}
         </div>
