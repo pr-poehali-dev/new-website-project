@@ -151,7 +151,7 @@ const Catalog = () => {
                 <p className="text-muted-foreground">В этой категории пока нет товаров</p>
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mb-12">
                 {catalogItems.sort((a, b) => {
                   if (sortBy === 'price-asc') return a.price - b.price;
                   if (sortBy === 'price-desc') return b.price - a.price;
