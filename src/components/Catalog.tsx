@@ -137,9 +137,9 @@ const Catalog = () => {
         ) : (
           <>
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-              {sortedProducts.map((product) => (
+              {sortedProducts.map((product, index) => (
                 <Card 
-                  key={product.id} 
+                  key={`${product.id}-${index}`} 
                   className="group overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer"
                   onClick={() => handleProductClick(product)}
                 >
