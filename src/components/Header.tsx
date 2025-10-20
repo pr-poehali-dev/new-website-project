@@ -230,55 +230,58 @@ const Header = () => {
         onMouseEnter={() => handleMouseEnter('catalog')}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="container mx-auto px-6 py-8">
-          <div className="flex gap-8">
-            <div className="flex-1 grid grid-cols-4 gap-8">
-              {catalogCategories.map((category, index) => (
-                <div key={index} className="animate-in fade-in slide-in-from-top-4 duration-300" style={{ animationDelay: `${index * 50}ms` }}>
-                  <h3 className="font-bold text-sm mb-4 text-white/60 uppercase tracking-wide">
-                    {category.title}
-                  </h3>
-                  <ul className="space-y-3">
-                    {category.items.map((item, idx) => (
-                      <li key={idx}>
-                        <Link
-                          to={item.href || '#catalog'}
-                          className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors group"
-                          onClick={() => handleMouseLeave()}
-                          onMouseEnter={() => setHoveredCategory(item.name)}
-                        >
-                          <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                            <Icon name={item.icon} size={16} className="text-white/80 group-hover:text-white transition-colors" />
-                          </div>
-                          <span>{item.name}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-
-            {hoveredCategory && (
-              <div className="w-80 bg-white rounded-2xl p-6 animate-in fade-in slide-in-from-right-4 duration-200">
-                <h4 className="font-bold text-lg mb-4 text-foreground">{hoveredCategory}</h4>
-                <div className="grid grid-cols-2 gap-3">
-                  {catalogCategories
-                    .flatMap(cat => cat.items)
-                    .find(item => item.name === hoveredCategory)
-                    ?.images?.map((image, idx) => (
-                      <div key={idx} className="aspect-square rounded-xl overflow-hidden">
-                        <img
-                          src={image}
-                          alt={hoveredCategory}
-                          className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                        />
-                      </div>
-                    ))}
-                </div>
+        <div className="container mx-auto px-6 py-8 relative">
+          <div className="grid grid-cols-4 gap-8">
+            {catalogCategories.map((category, index) => (
+              <div key={index} className="animate-in fade-in slide-in-from-top-4 duration-300" style={{ animationDelay: `${index * 50}ms` }}>
+                <h3 className="font-bold text-sm mb-4 text-white/60 uppercase tracking-wide">
+                  {category.title}
+                </h3>
+                <ul className="space-y-3">
+                  {category.items.map((item, idx) => (
+                    <li key={idx}>
+                      <Link
+                        to={item.href || '#catalog'}
+                        className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors group"
+                        onClick={() => handleMouseLeave()}
+                        onMouseEnter={() => setHoveredCategory(item.name)}
+                        onMouseLeave={() => setHoveredCategory(null)}
+                      >
+                        <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                          <Icon name={item.icon} size={16} className="text-white/80 group-hover:text-white transition-colors" />
+                        </div>
+                        <span>{item.name}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            )}
+            ))}
           </div>
+
+          {hoveredCategory && (
+            <div 
+              className="absolute right-6 top-8 w-80 bg-white rounded-2xl p-6 shadow-2xl transition-opacity duration-300 opacity-100 z-50"
+              onMouseEnter={() => setHoveredCategory(hoveredCategory)}
+              onMouseLeave={() => setHoveredCategory(null)}
+            >
+              <h4 className="font-bold text-lg mb-4 text-foreground">{hoveredCategory}</h4>
+              <div className="grid grid-cols-2 gap-3">
+                {catalogCategories
+                  .flatMap(cat => cat.items)
+                  .find(item => item.name === hoveredCategory)
+                  ?.images?.map((image, idx) => (
+                    <div key={idx} className="aspect-square rounded-xl overflow-hidden">
+                      <img
+                        src={image}
+                        alt={hoveredCategory}
+                        className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
