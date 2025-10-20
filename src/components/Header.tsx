@@ -224,7 +224,7 @@ const Header = () => {
       </div>
 
       <div
-        className={`hidden lg:block absolute left-0 right-0 top-full bg-primary shadow-2xl transition-all duration-300 overflow-hidden ${
+        className={`hidden lg:block absolute left-0 right-0 top-full bg-primary shadow-2xl transition-all duration-300 overflow-hidden rounded-b-3xl ${
           catalogOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
         }`}
         onMouseEnter={() => handleMouseEnter('catalog')}
@@ -260,7 +260,7 @@ const Header = () => {
       </div>
 
       <div
-        className={`hidden lg:block absolute left-0 right-0 top-full bg-primary shadow-2xl transition-all duration-300 overflow-hidden ${
+        className={`hidden lg:block absolute left-0 right-0 top-full bg-primary shadow-2xl transition-all duration-300 overflow-hidden rounded-b-3xl ${
           aboutOpen ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
         }`}
         onMouseEnter={() => handleMouseEnter('about')}
