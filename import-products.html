@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка изделий</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: #333;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            white-space: pre-wrap;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Загрузка изделий в каталог</h1>
+        <p>Нажмите кнопку для загрузки всех изделий из смолы в базу данных</p>
+        <button onclick="importProducts()">Загрузить изделия</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function importProducts() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = 'Загрузка...';
+            resultDiv.className = 'result';
+
+            const products = [
+                {
+                    "категория": "predmety-v-smole",
+                    "название": "Награда \"Вечная\"",
+                    "описание": "Эксклюзивная награда в акриле с инкапсулированной двухдолларовой купюрой",
+                    "цена": "15000",
+                    "изображение_url": "https://cdn.poehali.dev/files/9cf6dc67-a2dc-4653-b3c7-1176f51bb5a0.JPG"
+                },
+                {
+                    "категория": "predmety-v-smole",
+                    "название": "Арт-объект \"Капли\"",
+                    "описание": "Изделие из эпоксидной смолы и древесины с подвешенными каплями",
+                    "цена": "25000",
+                    "изображение_url": "https://cdn.poehali.dev/files/661209e0-ce44-40d7-a454-491f9a2250a8.JPG"
+                },
+                {
+                    "категория": "predmety-v-smole",
+                    "название": "Награда Autokat",
+                    "описание": "Корпоративная награда на металлическом основании с акриловой вставкой",
+                    "цена": "12000",
+                    "изображение_url": "https://cdn.poehali.dev/files/c80ae518-02d3-4d1b-89ab-93c3e1dda358.JPG"
+                },
+                {
+                    "категория": "predmety-v-smole",
+                    "название": "Награда \"Картонтоль\"",
+                    "описание": "Премиум награда с многослойным дизайном к 150-летию компании",
+                    "цена": "18000",
+                    "изображение_url": "https://cdn.poehali.dev/files/bcb511cc-3530-41f5-b789-82deadacc8e5.JPG"
+                },
+                {
+                    "категория": "predmety-v-smole",
+                    "название": "Награда \"Бизнес года\"",
+                    "описание": "Статуэтка народной премии E1.RU на каменном основании",
+                    "цена": "22000",
+                    "изображение_url": "https://cdn.poehali.dev/files/9b32ef51-bf4a-4c1d-8ca6-a8df38062242.jpeg"
+                },
+                {
+                    "категория": "predmety-v-smole",
+                    "название": "Статуэтка \"Оскар\"",
+                    "описание": "Премиальная хрустальная статуэтка Best Screenplay",
+                    "цена": "28000",
+                    "изображение_url": "https://cdn.poehali.dev/files/c7254041-e6f0-44db-b90e-7eb929560b0e.jpeg"
+                },
+                {
+                    "категория": "predmety-v-smole",
+                    "название": "Лампочка сувенирная",
+                    "описание": "Декоративная лампочка из красного стекла",
+                    "цена": "8000",
+                    "изображение_url": "https://cdn.poehali.dev/files/1e954c39-9872-45ba-871c-b891053fd970.JPG"
+                },
+                {
+                    "категория": "predmety-v-smole",
+                    "название": "Арт-объект \"Горы\"",
+                    "описание": "Комбинированное изделие из эпоксидной смолы и древесины к 2023 году",
+                    "цена": "30000",
+                    "изображение_url": "https://cdn.poehali.dev/files/c6720275-a727-459b-be11-717f88addbf6.JPG"
+                },
+                {
+                    "категория": "predmety-v-smole",
+                    "название": "Награда ФГБУ РосНИИГТ",
+                    "описание": "Медицинская награда к 90-летию учреждения",
+                    "цена": "16000",
+                    "изображение_url": "https://cdn.poehali.dev/files/d57f79df-3afa-4184-93a8-8a2bf5abc5ee.JPG"
+                },
+                {
+                    "категория": "predmety-v-smole",
+                    "название": "Награда \"Ключ\"",
+                    "описание": "Символическая награда Газпром-детям с ключом в акриле",
+                    "цена": "20000",
+                    "изображение_url": "https://cdn.poehali.dev/files/0ea98853-7290-4582-88e7-6bbd7d501be2.JPG"
+                },
+                {
+                    "категория": "predmety-v-smole",
+                    "название": "Экокуб \"Весна\"",
+                    "описание": "Прозрачный куб с естественными элементами природы",
+                    "цена": "14000",
+                    "изображение_url": "https://cdn.poehali.dev/files/5d64ccc9-f208-409a-ad79-b4e40841d3e3.JPG"
+                },
+                {
+                    "категория": "predmety-v-smole",
+                    "название": "Герб России",
+                    "описание": "Объемный герб РФ на красной эпоксидной основе",
+                    "цена": "35000",
+                    "изображение_url": "https://cdn.poehali.dev/files/6142b5ec-d7c1-415f-b1e3-47a91cdf740c.JPG"
+                }
+            ];
+
+            try {
+                const response = await fetch('https://functions.poehali.dev/1df99542-a754-4d23-8930-05b014c081d6', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ items: products })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = `✓ Успешно загружено ${data.imported_count} изделий!\n\n${data.message}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = `✗ Ошибка: ${data.error}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `✗ Ошибка загрузки: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
