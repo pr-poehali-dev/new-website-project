@@ -160,26 +160,13 @@ const Catalog = () => {
                     <h3 className="text-xl font-bold mb-2">{product.name}</h3>
                     <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{product.description}</p>
                     <div className="text-2xl font-bold text-primary mb-4">{product.price.toLocaleString('ru-RU')} ₽</div>
-                    <div className="flex gap-2">
-                      <Button 
-                        variant="outline" 
-                        className="flex-1"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate('/constructor');
-                        }}
-                      >
-                        <Icon name="Sparkles" size={18} className="mr-2" />
-                        AI Макет
-                      </Button>
-                      <Button 
-                        className="flex-1"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <Icon name="Eye" size={18} className="mr-2" />
-                        Подробнее
-                      </Button>
-                    </div>
+                    <Button 
+                      className="w-full"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Icon name="Eye" size={18} className="mr-2" />
+                      Подробнее
+                    </Button>
                   </CardContent>
                 </Card>
               ))}

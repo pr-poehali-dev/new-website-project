@@ -78,24 +78,10 @@ const ProductModal = ({ product, open, onClose }: ProductModalProps) => {
               {product.description}
             </p>
 
-            <div className="flex gap-3 mb-6">
-              <Button size="lg" className="flex-1">
-                <Icon name="ShoppingCart" size={20} className="mr-2" />
-                Заказать
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="flex-1"
-                onClick={() => {
-                  onClose();
-                  navigate('/constructor');
-                }}
-              >
-                <Icon name="Sparkles" size={20} className="mr-2" />
-                AI Макет
-              </Button>
-            </div>
+            <Button size="lg" className="w-full mb-6">
+              <Icon name="ShoppingCart" size={20} className="mr-2" />
+              Заказать
+            </Button>
 
             <Card className="mb-6">
               <CardContent className="p-4">

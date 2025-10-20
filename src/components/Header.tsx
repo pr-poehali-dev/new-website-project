@@ -22,7 +22,6 @@ const Header = () => {
 
   const navigation = [
     { name: 'Каталог', href: '#catalog', hasMega: true, megaType: 'catalog' },
-    { name: 'AI Конструктор', href: '/constructor', isRoute: true },
     { name: 'О компании', href: '#about', hasMega: true, megaType: 'about' },
   ];
 
