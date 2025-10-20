@@ -31,9 +31,9 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative pt-20 pb-12">
-      <div className="container mx-auto px-6">
-        <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
+    <section className="relative pt-20 pb-12 md:pb-12">
+      <div className="container mx-auto px-0 md:px-6">
+        <div className="relative rounded-none md:rounded-[2.5rem] overflow-hidden min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
           {backgroundImages.map((img, index) => (
             <img
               key={img}
@@ -46,30 +46,43 @@ const Hero = () => {
           ))}
           <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
 
-          <div className="relative z-10 h-full flex flex-col justify-between p-6 md:p-8 lg:p-12">
+          <div className="relative z-10 h-full flex flex-col justify-between p-4 md:p-8 lg:p-12">
             <div className="max-w-2xl">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
                 Награды и подарки <span className="text-white/90">для первых</span>
               </h1>
 
-              <p className="text-base md:text-lg lg:text-xl text-white/90 mb-6 md:mb-8 leading-relaxed max-w-xl">
+              <p className="text-sm md:text-lg lg:text-xl text-white/90 mb-4 md:mb-8 leading-relaxed max-w-xl">
                 Производим эксклюзивные награды из стекла. 
                 Бесплатная доставка по России при заказе от 50 000 ₽
               </p>
+            </div>
 
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-8 md:mb-12">
+            <div className="md:hidden flex flex-col gap-3 px-4 mb-4">
+              <div className="flex flex-col gap-3">
                 <Button size="lg" className="text-sm md:text-base" onClick={() => setShowOrderModal(true)}>
                   <Icon name="Sparkles" size={18} className="mr-2" />
                   Заказать награду
                 </Button>
-                <Button size="lg" variant="outline" className="text-sm md:text-base bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-foreground" onClick={scrollToCatalog}>
+                <Button size="lg" variant="outline" className="text-sm bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-foreground" onClick={scrollToCatalog}>
                   <Icon name="BookOpen" size={18} className="mr-2" />
                   Смотреть каталог
                 </Button>
               </div>
             </div>
 
-            <div className="hidden md:flex items-end justify-between gap-8 flex-wrap" style={{ marginBottom: '50px' }}>
+            <div className="hidden md:flex flex-col sm:flex-row gap-3 md:gap-4">
+              <Button size="lg" className="text-sm md:text-base" onClick={() => setShowOrderModal(true)}>
+                <Icon name="Sparkles" size={18} className="mr-2" />
+                Заказать награду
+              </Button>
+              <Button size="lg" variant="outline" className="text-sm md:text-base bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-foreground" onClick={scrollToCatalog}>
+                <Icon name="BookOpen" size={18} className="mr-2" />
+                Смотреть каталог
+              </Button>
+            </div>
+
+            <div className="hidden md:flex items-end justify-between gap-8 flex-wrap mt-auto">
               <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-5 max-w-sm">
                 <div className="flex items-start gap-4">
                   <div className="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0">
@@ -107,7 +120,7 @@ const Hero = () => {
               </div>
             </div>
             
-            <div className="md:hidden grid grid-cols-3 gap-3 bg-white/10 backdrop-blur-sm rounded-2xl p-4">
+            <div className="md:hidden grid grid-cols-3 gap-3 bg-white/10 backdrop-blur-sm rounded-2xl p-4 mx-4">
               <div>
                 <div className="text-2xl font-bold text-white mb-1">300+</div>
                 <div className="text-xs text-white/70">Проектов</div>
