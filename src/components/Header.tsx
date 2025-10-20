@@ -22,48 +22,68 @@ const Header = () => {
 
   const navigation = [
     { name: 'Каталог', href: '#catalog', hasMega: true, megaType: 'catalog' },
+    { name: 'Подарки', href: '#gifts', hasMega: true, megaType: 'gifts' },
+    { name: 'Награды', href: '#awards', hasMega: true, megaType: 'awards' },
+    { name: 'Декор', href: '#decor', hasMega: true, megaType: 'decor' },
+    { name: 'Портфолио', href: '#portfolio', hasMega: true, megaType: 'portfolio' },
     { name: 'О компании', href: '#about', hasMega: true, megaType: 'about' },
   ];
 
   const catalogCategories = [
     {
-      title: 'По материалам',
+      title: 'Награды по материалам',
       items: [
-        { name: 'Каменная история', icon: 'Mountain', href: '/catalog/kamennaya-istoriya' },
-        { name: 'Стеклянные награды', icon: 'GlassWater', href: '/catalog/steklyannye-nagrady' },
-        { name: 'Акриловые изделия', icon: 'Box', href: '/catalog/akrilovye-izdeliya' },
-        { name: 'Предметы в смоле', icon: 'Droplet', href: '/catalog/predmety-v-smole' },
-        { name: 'Изделия из древесины', icon: 'Trees', href: '/catalog/izdeliya-iz-drevesiny' },
-        { name: 'Изделия из металла', icon: 'Medal', href: '/catalog/izdeliya-iz-metalla' },
-        { name: 'Дипломы и плакетки', icon: 'Award', href: '/catalog/diplomy-i-plaketki' },
-        { name: 'Изделия с 3Д объектами', icon: 'Box', href: '/catalog/izdeliya-s-3d-obektami' },
+        { name: 'Каменная история', icon: 'Mountain', href: '/catalog/kamennaya-istoriya', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg', 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/b00aafce-33eb-48cc-a06a-06a38c77e9cd.jpg'] },
+        { name: 'Стеклянные награды', icon: 'GlassWater', href: '/catalog/steklyannye-nagrady', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg', 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/b00aafce-33eb-48cc-a06a-06a38c77e9cd.jpg'] },
+        { name: 'Акриловые изделия', icon: 'Box', href: '/catalog/akrilovye-izdeliya', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg'] },
+        { name: 'Предметы в смоле', icon: 'Droplet', href: '/catalog/predmety-v-smole', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/b00aafce-33eb-48cc-a06a-06a38c77e9cd.jpg'] },
+        { name: 'Изделия из древесины', icon: 'Trees', href: '/catalog/izdeliya-iz-drevesiny', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg'] },
+        { name: 'Изделия из металла', icon: 'Medal', href: '/catalog/izdeliya-iz-metalla', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/b00aafce-33eb-48cc-a06a-06a38c77e9cd.jpg'] },
       ],
     },
+  ];
+
+  const giftsCategories = [
     {
-      title: 'По мероприятиям',
+      title: 'Подарки',
       items: [
-        { name: 'Корпоративные награды', icon: 'Building2' },
-        { name: 'Спортивные кубки', icon: 'Trophy' },
-        { name: 'Государственные награды', icon: 'Shield' },
-        { name: 'Культурные мероприятия', icon: 'Music' },
+        { name: 'Протокольные подарки', icon: 'Award', href: '#gifts', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg'] },
+        { name: 'Подарки для первых лиц', icon: 'Crown', href: '#gifts', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/b00aafce-33eb-48cc-a06a-06a38c77e9cd.jpg'] },
+        { name: 'Корпоративные подарки', icon: 'Building2', href: '#gifts', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg'] },
+        { name: 'Корпоративные сувениры', icon: 'Gift', href: '#gifts', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/b00aafce-33eb-48cc-a06a-06a38c77e9cd.jpg'] },
       ],
     },
+  ];
+
+  const awardsCategories = [
     {
-      title: 'По получателям',
+      title: 'Награды',
       items: [
-        { name: 'Руководителям', icon: 'UserCog' },
-        { name: 'Партнёрам', icon: 'Handshake' },
-        { name: 'Сотрудникам', icon: 'Users' },
-        { name: 'VIP персонам', icon: 'Crown' },
+        { name: 'Корпоративные награды', icon: 'Building2', href: '#awards', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg'] },
+        { name: 'Переходящие кубки', icon: 'Trophy', href: '#awards', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/b00aafce-33eb-48cc-a06a-06a38c77e9cd.jpg'] },
+        { name: 'Спортивные награды', icon: 'Medal', href: '#awards', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg'] },
+        { name: 'Медали', icon: 'Award', href: '#awards', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/b00aafce-33eb-48cc-a06a-06a38c77e9cd.jpg'] },
+        { name: 'Дипломы и панно', icon: 'FileText', href: '#awards', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg'] },
       ],
     },
+  ];
+
+  const decorCategories = [
     {
-      title: 'Особые категории',
+      title: 'Декор',
       items: [
-        { name: 'Авторские подарки', icon: 'Sparkles' },
-        { name: 'Корпоративные сувениры', icon: 'Gift' },
-        { name: 'Корпоративный декор', icon: 'Palette' },
-        { name: 'Награды и достижения', icon: 'Award' },
+        { name: 'Корпоративный декор', icon: 'Palette', href: '#decor', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg'] },
+        { name: 'Арт-объекты', icon: 'Sparkles', href: '#decor', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/b00aafce-33eb-48cc-a06a-06a38c77e9cd.jpg'] },
+        { name: 'Панно', icon: 'Frame', href: '#decor', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg'] },
+      ],
+    },
+  ];
+
+  const portfolioCategories = [
+    {
+      title: 'Портфолио',
+      items: [
+        { name: 'Все проекты', icon: 'Grid3x3', href: '#portfolio', images: ['https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg', 'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/b00aafce-33eb-48cc-a06a-06a38c77e9cd.jpg'] },
       ],
     },
   ];
@@ -76,19 +96,26 @@ const Header = () => {
     { name: 'Контакты', href: '#contact', icon: 'MapPin' },
   ];
 
+  const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
+
   const handleMouseEnter = (type: string) => {
+    setActiveMegaMenu(type);
     if (type === 'catalog') {
       setCatalogOpen(true);
       setAboutOpen(false);
     } else if (type === 'about') {
       setAboutOpen(true);
       setCatalogOpen(false);
+    } else {
+      setCatalogOpen(false);
+      setAboutOpen(false);
     }
   };
 
   const handleMouseLeave = () => {
     setCatalogOpen(false);
     setAboutOpen(false);
+    setActiveMegaMenu(null);
   };
 
   return (
@@ -224,47 +251,82 @@ const Header = () => {
 
       <div
         className={`hidden lg:block absolute left-0 right-0 top-full bg-primary shadow-2xl transition-all duration-300 overflow-hidden rounded-b-3xl ${
-          catalogOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+          activeMegaMenu ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
         }`}
-        onMouseEnter={() => handleMouseEnter('catalog')}
+        onMouseEnter={() => activeMegaMenu && handleMouseEnter(activeMegaMenu)}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="container mx-auto px-6 py-8">
-          <div className="grid grid-cols-4 gap-8">
-            {catalogCategories.map((category, index) => (
-              <div key={index} className="animate-in fade-in slide-in-from-top-4 duration-300" style={{ animationDelay: `${index * 50}ms` }}>
-                <h3 className="font-bold text-sm mb-4 text-white/60 uppercase tracking-wide">
-                  {category.title}
-                </h3>
-                <ul className="space-y-3">
-                  {category.items.map((item, idx) => (
-                    <li key={idx}>
-                      <Link
-                        to={item.href || '#catalog'}
-                        className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors group"
-                        onClick={() => handleMouseLeave()}
-                      >
-                        <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                          <Icon name={item.icon} size={16} className="text-white/80 group-hover:text-white transition-colors" />
+        <div className="container mx-auto px-6 py-8 relative">
+          <div className="flex gap-12">
+            <div className="grid grid-cols-3 gap-8 flex-1">
+              {(activeMegaMenu === 'catalog' ? catalogCategories :
+                activeMegaMenu === 'gifts' ? giftsCategories :
+                activeMegaMenu === 'awards' ? awardsCategories :
+                activeMegaMenu === 'decor' ? decorCategories :
+                activeMegaMenu === 'portfolio' ? portfolioCategories :
+                aboutLinks ? [{ title: 'О компании', items: aboutLinks }] : []
+              ).filter((_, index) => !hoveredCategory || index === 0).map((category, index) => (
+                <div key={index} className="animate-in fade-in slide-in-from-top-4 duration-300" style={{ animationDelay: `${index * 50}ms` }}>
+                  <h3 className="font-bold text-sm mb-4 text-white/60 uppercase tracking-wide">
+                    {category.title}
+                  </h3>
+                  <ul className="space-y-3">
+                    {category.items.map((item: any, idx: number) => (
+                      <li key={idx}>
+                        <Link
+                          to={item.href || '#catalog'}
+                          className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors group"
+                          onClick={() => handleMouseLeave()}
+                          onMouseEnter={() => setHoveredCategory(item.name)}
+                          onMouseLeave={() => setHoveredCategory(null)}
+                        >
+                          <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                            <Icon name={item.icon} size={16} className="text-white/80 group-hover:text-white transition-colors" />
+                          </div>
+                          <span>{item.name}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            <div className={`transition-all duration-300 ${hoveredCategory ? 'w-96 opacity-100' : 'w-0 opacity-0 overflow-hidden'}`}>
+              {hoveredCategory && (
+                <div 
+                  className="bg-white rounded-2xl p-6 shadow-2xl h-full"
+                  onMouseEnter={() => setHoveredCategory(hoveredCategory)}
+                  onMouseLeave={() => setHoveredCategory(null)}
+                >
+                  <h4 className="font-bold text-lg mb-4 text-foreground">{hoveredCategory}</h4>
+                  <div className="grid grid-cols-2 gap-3">
+                    {(activeMegaMenu === 'catalog' ? catalogCategories :
+                      activeMegaMenu === 'gifts' ? giftsCategories :
+                      activeMegaMenu === 'awards' ? awardsCategories :
+                      activeMegaMenu === 'decor' ? decorCategories :
+                      activeMegaMenu === 'portfolio' ? portfolioCategories : []
+                    )
+                      .flatMap(cat => cat.items)
+                      .find(item => item.name === hoveredCategory)
+                      ?.images?.map((image: string, idx: number) => (
+                        <div key={idx} className="aspect-square rounded-xl overflow-hidden">
+                          <img
+                            src={image}
+                            alt={hoveredCategory}
+                            className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                          />
                         </div>
-                        <span>{item.name}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+                      ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
 
-      <div
-        className={`hidden lg:block absolute left-0 right-0 top-full bg-primary shadow-2xl transition-all duration-300 overflow-hidden rounded-b-3xl ${
-          aboutOpen ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
-        }`}
-        onMouseEnter={() => handleMouseEnter('about')}
-        onMouseLeave={handleMouseLeave}
-      >
+      <div className="hidden">
         <div className="container mx-auto px-6 py-8">
           <div className="grid grid-cols-5 gap-6">
             {aboutLinks.map((link, index) => (
