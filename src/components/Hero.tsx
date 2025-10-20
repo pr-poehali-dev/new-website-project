@@ -121,21 +121,21 @@ const Hero = () => {
                 <div className="text-xs text-white/70">Лет опыта</div>
               </div>
             </div>
+          </div>
 
-            <div className="flex justify-center gap-2 mt-6">
-              {backgroundImages.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    index === currentImageIndex 
-                      ? 'w-8 bg-white' 
-                      : 'w-1.5 bg-white/40 hover:bg-white/60'
-                  }`}
-                  aria-label={`Перейти к слайду ${index + 1}`}
-                />
-              ))}
-            </div>
+          <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-20">
+            {backgroundImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentImageIndex(index)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  index === currentImageIndex 
+                    ? 'w-8 bg-white' 
+                    : 'w-1.5 bg-white/40 hover:bg-white/60'
+                }`}
+                aria-label={`Перейти к слайду ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>
