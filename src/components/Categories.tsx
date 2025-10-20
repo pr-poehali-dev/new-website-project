@@ -30,21 +30,8 @@ const Categories = () => {
   ];
 
   return (
-    <section className="py-12 md:py-24 bg-muted/30">
-      <div className="container mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-          <div className="inline-flex items-center gap-2 bg-background rounded-full px-4 py-2 mb-4 md:mb-6 shadow-sm">
-            <Icon name="LayoutGrid" size={18} />
-            <span className="text-sm font-medium">Категории</span>
-          </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
-            Ключевые направления
-          </h2>
-          <p className="text-base md:text-lg text-muted-foreground">
-            Выберите категорию для вашего проекта
-          </p>
-        </div>
-
+    <section className="bg-muted/30">
+      <div className="container mx-auto px-6 py-8 md:py-12">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category, idx) => (
             <Card 
@@ -59,19 +46,11 @@ const Categories = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/90 backdrop-blur-sm mb-3 group-hover:scale-110 transition-transform">
-                    <Icon name={category.icon} size={24} className="text-primary-foreground" />
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-1">
+                  <h3 className="text-lg font-bold text-white">
                     {category.title}
                   </h3>
                 </div>
               </div>
-              <CardContent className="p-5">
-                <p className="text-sm text-muted-foreground">
-                  {category.description}
-                </p>
-              </CardContent>
             </Card>
           ))}
         </div>
