@@ -69,7 +69,28 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="hidden md:flex items-end justify-end gap-8 flex-wrap mb-8">
+            <div className="hidden md:flex items-end justify-between gap-8 flex-wrap mb-8">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-5 max-w-sm">
+                <div className="flex items-start gap-4">
+                  <div className="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0">
+                    <img
+                      src="https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/556cdf38-baa0-489c-afe4-1ad9fcb5d03c.jpg"
+                      alt="Награда"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-bold text-sm mb-1">Награда "Триумф"</div>
+                    <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
+                      Эксклюзивная награда из стекла для корпоративных мероприятий
+                    </p>
+                    <Button size="sm" className="h-8 text-xs w-full">
+                      Узнать стоимость
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
               <div className="grid grid-cols-3 gap-6 bg-white/10 backdrop-blur-sm rounded-2xl p-6">
                 <div>
                   <div className="text-3xl font-bold text-white mb-1">300+</div>
