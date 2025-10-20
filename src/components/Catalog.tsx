@@ -162,7 +162,10 @@ const Catalog = () => {
                     <div className="text-2xl font-bold text-primary mb-4">{product.price.toLocaleString('ru-RU')} ₽</div>
                     <Button 
                       className="w-full"
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleProductClick(product);
+                      }}
                     >
                       <Icon name="Eye" size={18} className="mr-2" />
                       Подробнее
