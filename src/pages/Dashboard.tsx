@@ -5,12 +5,14 @@ import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import CatalogImport from '@/components/CatalogImport';
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<any>(null);
   const [concepts, setConcepts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<'concepts' | 'import'>('concepts');
 
   useEffect(() => {
     const userData = localStorage.getItem('user');
@@ -121,14 +123,33 @@ const Dashboard = () => {
           </div>
 
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold">Мои макеты</h2>
-            <Button onClick={() => navigate('/constructor')}>
-              <Icon name="Plus" size={18} className="mr-2" />
-              Создать новый
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                variant={activeTab === 'concepts' ? 'default' : 'outline'}
+                onClick={() => setActiveTab('concepts')}
+              >
+                <Icon name="ImageIcon" size={18} className="mr-2" />
+                Мои макеты
+              </Button>
+              <Button
+                variant={activeTab === 'import' ? 'default' : 'outline'}
+                onClick={() => setActiveTab('import')}
+              >
+                <Icon name="Upload" size={18} className="mr-2" />
+                Импорт каталога
+              </Button>
+            </div>
+            {activeTab === 'concepts' && (
+              <Button onClick={() => navigate('/constructor')}>
+                <Icon name="Plus" size={18} className="mr-2" />
+                Создать новый
+              </Button>
+            )}
           </div>
 
-          {concepts.length === 0 ? (
+          {activeTab === 'import' ? (
+            <CatalogImport />
+          ) : concepts.length === 0 ? (
             <Card>
               <CardContent className="p-12 text-center">
                 <Icon name="ImageIcon" size={64} className="mx-auto text-muted-foreground/50 mb-4" />
