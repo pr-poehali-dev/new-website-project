@@ -22,11 +22,9 @@ const Header = () => {
   }, []);
 
   const navigation = [
-    { name: 'Каталог', href: '#catalog', hasMega: true, megaType: 'catalog' },
-    { name: 'Подарки', href: '#gifts', hasMega: true, megaType: 'gifts' },
     { name: 'Награды', href: '#awards', hasMega: true, megaType: 'awards' },
+    { name: 'Подарки', href: '#gifts', hasMega: true, megaType: 'gifts' },
     { name: 'Декор', href: '#decor', hasMega: true, megaType: 'decor' },
-    { name: 'Портфолио', href: '#portfolio', hasMega: true, megaType: 'portfolio' },
     { name: 'О компании', href: '#about', hasMega: true, megaType: 'about' },
   ];
 
