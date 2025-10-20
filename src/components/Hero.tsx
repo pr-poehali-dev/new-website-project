@@ -44,7 +44,7 @@ const Hero = () => {
               }`}
             />
           ))}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
 
           <div className="relative z-10 h-full flex flex-col justify-between p-6 md:p-8 lg:p-12">
             <div className="max-w-2xl">
@@ -120,6 +120,21 @@ const Hero = () => {
                 <div className="text-2xl font-bold text-white mb-1">21</div>
                 <div className="text-xs text-white/70">Лет опыта</div>
               </div>
+            </div>
+
+            <div className="flex justify-center gap-2 mt-6">
+              {backgroundImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    index === currentImageIndex 
+                      ? 'w-8 bg-white' 
+                      : 'w-1.5 bg-white/40 hover:bg-white/60'
+                  }`}
+                  aria-label={`Перейти к слайду ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>
