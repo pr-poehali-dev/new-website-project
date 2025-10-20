@@ -132,35 +132,43 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'izdeliya-s-3d-obektami': 'izdeliya_s_3d_obektami'
         }
         
-        if not category or category not in category_tables:
-            return {
-                'statusCode': 400,
-                'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'body': json.dumps({'success': False, 'error': 'Invalid or missing category'}),
-                'isBase64Encoded': False
-            }
-        
         conn = psycopg2.connect(database_url)
         cursor = conn.cursor()
         
-        table_name = category_tables[category]
-        query = f"SELECT id, name, description, price, image_url, created_at FROM {table_name} ORDER BY created_at DESC"
-        cursor.execute(query)
-        
-        rows = cursor.fetchall()
         items = []
-        for row in rows:
-            items.append({
-                'id': row[0],
-                'name': row[1],
-                'description': row[2],
-                'price': row[3],
-                'image_url': row[4],
-                'created_at': row[5].isoformat() if row[5] else None
-            })
+        
+        if category and category in category_tables:
+            table_name = category_tables[category]
+            query = f"SELECT id, name, description, price, image_url, created_at FROM {table_name} ORDER BY created_at DESC"
+            cursor.execute(query)
+            
+            rows = cursor.fetchall()
+            for row in rows:
+                items.append({
+                    'id': row[0],
+                    'name': row[1],
+                    'description': row[2],
+                    'price': row[3],
+                    'image_url': row[4],
+                    'category': category,
+                    'created_at': row[5].isoformat() if row[5] else None
+                })
+        else:
+            for cat_key, table_name in category_tables.items():
+                query = f"SELECT id, name, description, price, image_url, created_at FROM {table_name} ORDER BY created_at DESC"
+                cursor.execute(query)
+                
+                rows = cursor.fetchall()
+                for row in rows:
+                    items.append({
+                        'id': row[0],
+                        'name': row[1],
+                        'description': row[2],
+                        'price': row[3],
+                        'image_url': row[4],
+                        'category': cat_key,
+                        'created_at': row[5].isoformat() if row[5] else None
+                    })
         
         cursor.close()
         conn.close()
