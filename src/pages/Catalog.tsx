@@ -60,10 +60,13 @@ const Catalog = () => {
 
   useEffect(() => {
     const loadCatalogItems = async () => {
+      if (!category) {
+        setLoading(false);
+        return;
+      }
+
       try {
-        const url = category 
-          ? `https://functions.poehali.dev/1df99542-a754-4d23-8930-05b014c081d6?category=${category}`
-          : 'https://functions.poehali.dev/1df99542-a754-4d23-8930-05b014c081d6';
+        const url = `https://functions.poehali.dev/1df99542-a754-4d23-8930-05b014c081d6?category=${category}`;
         
         const response = await fetch(url);
         const data = await response.json();
