@@ -69,7 +69,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="hidden md:flex items-end justify-between gap-8 flex-wrap" style={{ marginBottom: '50px' }}>
+            <div className="hidden md:flex items-end justify-between gap-8 flex-wrap" style={{ marginBottom: '20px' }}>
               <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-5 max-w-sm">
                 <div className="flex items-start gap-4">
                   <div className="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0">
