@@ -7,7 +7,6 @@ interface CatalogItem {
   название: string;
   описание: string;
   цена: string;
-  категория: string;
   изображение_url: string;
 }
 
@@ -15,7 +14,19 @@ const CatalogImport = () => {
   const [items, setItems] = useState<CatalogItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const categories = [
+    { value: 'kamennaya-istoriya', label: 'Каменная история' },
+    { value: 'steklyannye-nagrady', label: 'Стеклянные награды' },
+    { value: 'akrilovye-izdeliya', label: 'Акриловые изделия' },
+    { value: 'predmety-v-smole', label: 'Предметы в смоле' },
+    { value: 'izdeliya-iz-drevesiny', label: 'Изделия из древесины' },
+    { value: 'izdeliya-iz-metalla', label: 'Изделия из металла' },
+    { value: 'diplomy-i-plaketki', label: 'Дипломы и плакетки' },
+    { value: 'izdeliya-s-3d-obektami', label: 'Изделия с 3D объектами' },
+  ];
 
   const parseCSV = (text: string): CatalogItem[] => {
     const lines = text.trim().split('\n');
@@ -53,23 +64,34 @@ const CatalogImport = () => {
   };
 
   const handleImport = async () => {
+    if (!selectedCategory) {
+      setError('Пожалуйста, выберите категорию для импорта');
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
     try {
+      const itemsWithCategory = items.map(item => ({
+        ...item,
+        категория: selectedCategory
+      }));
+
       const response = await fetch('https://functions.poehali.dev/1df99542-a754-4d23-8930-05b014c081d6', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ items }),
+        body: JSON.stringify({ items: itemsWithCategory }),
       });
 
       const data = await response.json();
 
       if (data.success) {
-        alert(`Готово! Импортировано ${data.imported_count} товаров в базу данных.`);
+        alert(`Готово! Импортировано ${data.imported_count} товаров в категорию "${categories.find(c => c.value === selectedCategory)?.label}".`);
         setItems([]);
+        setSelectedCategory('');
         if (fileInputRef.current) {
           fileInputRef.current.value = '';
         }
@@ -85,10 +107,10 @@ const CatalogImport = () => {
   };
 
   const downloadTemplate = () => {
-    const template = `название,описание,цена,категория,изображение_url
-Награда Триумф,Эксклюзивная награда из стекла для корпоративных мероприятий,15000,steklyannye-nagrady,https://example.com/image1.jpg
-Кубок Победы,Стеклянный кубок для спортивных церемоний,12000,steklyannye-nagrady,https://example.com/image2.jpg
-Диплом Премиум,Премиальный диплом с гравировкой,8000,diplomy-i-plaketki,https://example.com/image3.jpg`;
+    const template = `название,описание,цена,изображение_url
+Награда Триумф,Эксклюзивная награда из стекла для корпоративных мероприятий,15000,https://example.com/image1.jpg
+Кубок Победы,Стеклянный кубок для спортивных церемоний,12000,https://example.com/image2.jpg
+Диплом Премиум,Премиальный диплом с гравировкой,8000,https://example.com/image3.jpg`;
 
     const blob = new Blob([template], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
@@ -115,6 +137,20 @@ const CatalogImport = () => {
           </div>
 
           <div className="space-y-4">
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-2">Выберите категорию для импорта</label>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                <option value="">-- Выберите категорию --</option>
+                {categories.map((cat) => (
+                  <option key={cat.value} value={cat.value}>{cat.label}</option>
+                ))}
+              </select>
+            </div>
+
             <div className="border-2 border-dashed border-muted rounded-xl p-8 text-center hover:border-primary/50 transition-colors">
               <input
                 ref={fileInputRef}

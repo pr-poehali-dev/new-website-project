@@ -22,17 +22,7 @@
       },
       "bodyMatcher": "partial"
     },
-    {
-      "name": "Get all catalog items",
-      "method": "GET",
-      "path": "/",
-      "expectedStatus": 200,
-      "expectedBody": {
-        "success": true,
-        "items": "array"
-      },
-      "bodyMatcher": "partial"
-    },
+
     {
       "name": "Get items by category",
       "method": "GET",

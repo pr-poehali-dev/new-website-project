@@ -56,24 +56,39 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         conn = psycopg2.connect(database_url)
         cursor = conn.cursor()
         
-        insert_query = """
-            INSERT INTO catalog_items (name, description, price, category, image_url)
-            VALUES (%s, %s, %s, %s, %s)
-        """
+        category_tables = {
+            'kamennaya-istoriya': 'kamennaya_istoriya',
+            'steklyannye-nagrady': 'steklyannye_nagrady',
+            'akrilovye-izdeliya': 'akrilovye_izdeliya',
+            'predmety-v-smole': 'predmety_v_smole',
+            'izdeliya-iz-drevesiny': 'izdeliya_iz_drevesiny',
+            'izdeliya-iz-metalla': 'izdeliya_iz_metalla',
+            'diplomy-i-plaketki': 'diplomy_i_plaketki',
+            'izdeliya-s-3d-obektami': 'izdeliya_s_3d_obektami'
+        }
         
-        rows = []
+        imported_count = 0
         for item in items:
-            rows.append((
+            category = item.get('категория', '')
+            table_name = category_tables.get(category)
+            
+            if not table_name:
+                continue
+            
+            insert_query = f"""
+                INSERT INTO {table_name} (name, description, price, image_url)
+                VALUES (%s, %s, %s, %s)
+            """
+            
+            cursor.execute(insert_query, (
                 item.get('название', ''),
                 item.get('описание', ''),
                 int(item.get('цена', 0)),
-                item.get('категория', ''),
                 item.get('изображение_url', '')
             ))
+            imported_count += 1
         
-        execute_batch(cursor, insert_query, rows)
         conn.commit()
-        
         cursor.close()
         conn.close()
         
@@ -85,8 +100,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             },
             'body': json.dumps({
                 'success': True,
-                'imported_count': len(items),
-                'message': f'Successfully imported {len(items)} items'
+                'imported_count': imported_count,
+                'message': f'Successfully imported {imported_count} items'
             }),
             'isBase64Encoded': False
         }
@@ -106,18 +121,34 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'isBase64Encoded': False
             }
         
+        category_tables = {
+            'kamennaya-istoriya': 'kamennaya_istoriya',
+            'steklyannye-nagrady': 'steklyannye_nagrady',
+            'akrilovye-izdeliya': 'akrilovye_izdeliya',
+            'predmety-v-smole': 'predmety_v_smole',
+            'izdeliya-iz-drevesiny': 'izdeliya_iz_drevesiny',
+            'izdeliya-iz-metalla': 'izdeliya_iz_metalla',
+            'diplomy-i-plaketki': 'diplomy_i_plaketki',
+            'izdeliya-s-3d-obektami': 'izdeliya_s_3d_obektami'
+        }
+        
+        if not category or category not in category_tables:
+            return {
+                'statusCode': 400,
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                'body': json.dumps({'success': False, 'error': 'Invalid or missing category'}),
+                'isBase64Encoded': False
+            }
+        
         conn = psycopg2.connect(database_url)
         cursor = conn.cursor()
         
-        if category:
-            cursor.execute(
-                "SELECT id, name, description, price, category, image_url, created_at FROM catalog_items WHERE category = %s ORDER BY created_at DESC",
-                (category,)
-            )
-        else:
-            cursor.execute(
-                "SELECT id, name, description, price, category, image_url, created_at FROM catalog_items ORDER BY created_at DESC"
-            )
+        table_name = category_tables[category]
+        query = f"SELECT id, name, description, price, image_url, created_at FROM {table_name} ORDER BY created_at DESC"
+        cursor.execute(query)
         
         rows = cursor.fetchall()
         items = []
@@ -127,9 +158,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'name': row[1],
                 'description': row[2],
                 'price': row[3],
-                'category': row[4],
-                'image_url': row[5],
-                'created_at': row[6].isoformat() if row[6] else None
+                'image_url': row[4],
+                'created_at': row[5].isoformat() if row[5] else None
             })
         
         cursor.close()
