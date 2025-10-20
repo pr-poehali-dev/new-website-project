@@ -106,6 +106,14 @@ const ProductModal = ({ product, open, onClose }: ProductModalProps) => {
                     <span className="font-medium">#{product.id.toString().padStart(6, '0')}</span>
                   </div>
                   <div className="flex justify-between">
+                    <span className="text-muted-foreground">Габариты изделия:</span>
+                    <span className="font-medium">200 × 150 × 50 мм</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Вес изделия:</span>
+                    <span className="font-medium">850 г</span>
+                  </div>
+                  <div className="flex justify-between">
                     <span className="text-muted-foreground">Срок изготовления:</span>
                     <span className="font-medium">10-14 дней</span>
                   </div>
