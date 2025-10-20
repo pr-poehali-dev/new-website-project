@@ -65,7 +65,6 @@ const Catalog = () => {
     setSelectedProduct(item);
     setIsModalOpen(true);
   };
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const loadCatalogItems = async () => {
