@@ -29,24 +29,41 @@ const CatalogImport = () => {
   ];
 
   const parseCSV = (text: string): CatalogItem[] => {
-    const lines = text.trim().split('\n');
-    const headers = lines[0].split(',').map(h => h.trim());
+    const lines = text.trim().split('\n').filter(line => line.trim());
     
-    return lines.slice(1).map(line => {
-      const values = line.split(',').map(v => v.trim());
+    if (lines.length === 0) {
+      throw new Error('CSV файл пустой');
+    }
+    
+    const headers = lines[0].split(',').map(h => h.trim().replace(/["\uFEFF]/g, ''));
+    
+    const items = lines.slice(1).map((line, lineIndex) => {
+      const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
       const item: any = {};
       
       headers.forEach((header, index) => {
-        item[header] = values[index];
+        item[header] = values[index] || '';
       });
+      
+      if (!item['название'] || !item['цена']) {
+        throw new Error(`Строка ${lineIndex + 2}: отсутствуют обязательные поля (название или цена)`);
+      }
       
       return item as CatalogItem;
     });
+    
+    return items;
   };
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
+
+    if (!file.name.endsWith('.csv')) {
+      setError('Пожалуйста, загрузите файл в формате CSV');
+      if (fileInputRef.current) fileInputRef.current.value = '';
+      return;
+    }
 
     setLoading(true);
     setError(null);
@@ -54,10 +71,19 @@ const CatalogImport = () => {
     try {
       const text = await file.text();
       const parsedItems = parseCSV(text);
+      
+      if (parsedItems.length === 0) {
+        setError('CSV файл не содержит товаров');
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+      
       setItems(parsedItems);
-    } catch (err) {
-      setError('Ошибка при чтении файла. Проверьте формат CSV.');
-      console.error(err);
+    } catch (err: any) {
+      const errorMessage = err.message || 'Ошибка при чтении файла. Проверьте формат CSV.';
+      setError(errorMessage);
+      console.error('CSV parsing error:', err);
+      if (fileInputRef.current) fileInputRef.current.value = '';
     } finally {
       setLoading(false);
     }
@@ -123,17 +149,34 @@ const CatalogImport = () => {
     <div className="space-y-6">
       <Card>
         <CardContent className="p-6">
-          <div className="flex items-start justify-between mb-6">
-            <div>
-              <h2 className="text-2xl font-bold mb-2">Импорт каталога</h2>
-              <p className="text-muted-foreground">
-                Загрузите CSV файл с товарами для массового добавления в каталог
-              </p>
+          <div className="mb-6">
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <h2 className="text-2xl font-bold mb-2">Импорт каталога</h2>
+                <p className="text-muted-foreground">
+                  Загрузите CSV файл с товарами для массового добавления в каталог
+                </p>
+              </div>
+              <Button variant="outline" onClick={downloadTemplate}>
+                <Icon name="Download" size={18} className="mr-2" />
+                Скачать шаблон
+              </Button>
             </div>
-            <Button variant="outline" onClick={downloadTemplate}>
-              <Icon name="Download" size={18} className="mr-2" />
-              Скачать шаблон
-            </Button>
+            
+            <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-lg p-4">
+              <div className="flex gap-2">
+                <Icon name="Info" size={20} className="text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                <div className="text-sm text-blue-800 dark:text-blue-300">
+                  <p className="font-medium mb-1">Требования к CSV файлу:</p>
+                  <ul className="list-disc list-inside space-y-1 ml-2">
+                    <li>Кодировка: <strong>UTF-8</strong></li>
+                    <li>Разделитель: запятая (,)</li>
+                    <li>Обязательные колонки: название, описание, цена, изображение_url</li>
+                    <li>Категория выбирается отдельно перед загрузкой файла</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="space-y-4">
