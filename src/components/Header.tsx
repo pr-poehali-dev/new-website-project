@@ -99,16 +99,8 @@ const Header = () => {
 
   const handleMouseEnter = (type: string) => {
     setActiveMegaMenu(type);
-    if (type === 'catalog') {
-      setCatalogOpen(true);
-      setAboutOpen(false);
-    } else if (type === 'about') {
-      setAboutOpen(true);
-      setCatalogOpen(false);
-    } else {
-      setCatalogOpen(false);
-      setAboutOpen(false);
-    }
+    setCatalogOpen(true);
+    setAboutOpen(false);
   };
 
   const handleMouseLeave = () => {
@@ -120,7 +112,7 @@ const Header = () => {
   return (
     <>
     <header className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b transition-colors duration-300 ${
-      catalogOpen || aboutOpen ? 'bg-primary border-primary' : 'bg-white/95 border-border'
+      catalogOpen ? 'bg-primary border-primary' : 'bg-white/95 border-border'
     }`}>
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
@@ -141,13 +133,13 @@ const Header = () => {
                 {item.hasMega ? (
                   <button
                     className={`text-sm font-medium transition-colors flex items-center gap-1 py-2 ${
-                      catalogOpen || aboutOpen ? 'text-white hover:text-white/80' : 'text-foreground/80 hover:text-foreground'
+                      catalogOpen ? 'text-white hover:text-white/80' : 'text-foreground/80 hover:text-foreground'
                     }`}
                     onMouseEnter={() => handleMouseEnter(item.megaType || '')}
                   >
                     {item.name}
                     <Icon name="ChevronDown" size={16} className={`transition-transform duration-300 ${
-                      (item.megaType === 'catalog' && catalogOpen) || (item.megaType === 'about' && aboutOpen) ? 'rotate-180' : ''
+                      catalogOpen && activeMegaMenu === item.megaType ? 'rotate-180' : ''
                     }`} />
                   </button>
                 ) : item.isRoute ? (
@@ -163,7 +155,7 @@ const Header = () => {
                   <a
                     href={item.href}
                     className={`text-sm font-medium transition-colors ${
-                      catalogOpen || aboutOpen ? 'text-white/80 hover:text-white' : 'text-foreground/80 hover:text-foreground'
+                      catalogOpen ? 'text-white/80 hover:text-white' : 'text-foreground/80 hover:text-foreground'
                     }`}
                   >
                     {item.name}
@@ -174,13 +166,13 @@ const Header = () => {
           </nav>
 
           <div className="hidden lg:flex items-center gap-4">
-            <Button variant="ghost" size="sm" className={catalogOpen || aboutOpen ? 'text-white hover:text-white hover:bg-white/10' : ''} onClick={() => alert('Поиск в разработке')}>
+            <Button variant="ghost" size="sm" className={catalogOpen ? 'text-white hover:text-white hover:bg-white/10' : ''} onClick={() => alert('Поиск в разработке')}>
               <Icon name="Search" fallback="CircleHelp" size={18} />
             </Button>
             <Button 
-              variant={catalogOpen || aboutOpen ? "ghost" : "outline"} 
+              variant={catalogOpen ? "ghost" : "outline"} 
               size="sm"
-              className={catalogOpen || aboutOpen ? 'text-white border-white/20 hover:bg-white/10' : ''}
+              className={catalogOpen ? 'text-white border-white/20 hover:bg-white/10' : ''}
               onClick={() => setShowCallModal(true)}
             >
               <Icon name="Phone" fallback="PhoneCall" size={16} className="mr-2" />
@@ -188,7 +180,7 @@ const Header = () => {
             </Button>
             {user ? (
               <Link to="/dashboard">
-                <Button size="sm" className={catalogOpen || aboutOpen ? 'bg-white text-primary hover:bg-white/90' : ''}>
+                <Button size="sm" className={catalogOpen ? 'bg-white text-primary hover:bg-white/90' : ''}>
                   <Icon name="User" size={16} className="mr-2" />
                   Кабинет
                 </Button>
@@ -196,7 +188,7 @@ const Header = () => {
             ) : (
               <Button 
                 size="sm" 
-                className={catalogOpen || aboutOpen ? 'bg-white text-primary hover:bg-white/90' : ''}
+                className={catalogOpen ? 'bg-white text-primary hover:bg-white/90' : ''}
                 onClick={() => setShowAuthModal(true)}
               >
                 Войти
@@ -208,7 +200,7 @@ const Header = () => {
             className="lg:hidden p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} className={catalogOpen || aboutOpen ? 'text-white' : ''} />
+            <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} className={catalogOpen ? 'text-white' : ''} />
           </button>
         </div>
 
