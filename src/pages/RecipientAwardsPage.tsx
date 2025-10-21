@@ -604,52 +604,75 @@ const RecipientAwardsPage = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `url(${recipient.heroImages[0]})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        >
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
-
-        <div className="absolute top-24 left-6 z-20">
-          <Link 
-            to="/"
-            className="inline-flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"
-          >
-            <Icon name="ArrowLeft" size={16} />
-            Назад
-          </Link>
-        </div>
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="relative inline-block mb-12">
-              <div className="absolute -inset-4 border-2 border-white/30 rounded-3xl"></div>
-              <div className="relative bg-black/20 backdrop-blur-sm px-12 py-16 rounded-2xl">
+      <section className="pt-24 pb-16">
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-8">
+              <Link 
+                to="/"
+                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Icon name="ArrowLeft" size={16} />
+                Назад
+              </Link>
+            </div>
+            
+            <div 
+              className="relative min-h-[600px] rounded-3xl overflow-hidden p-12 md:p-16 flex flex-col justify-between"
+              style={{
+                backgroundImage: `url(${recipient.heroImages[0]})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/60"></div>
+              
+              <div className="relative z-10 max-w-3xl">
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
                   {recipient.heroTitle}
                 </h1>
-                <p className="text-2xl text-white/90 mb-4 font-light">
+                <p className="text-xl md:text-2xl text-white/90 mb-4 font-light">
                   {recipient.heroSubtitle}
                 </p>
-                <p className="text-lg text-white/80 leading-relaxed">
+                <p className="text-lg text-white/80 mb-8 leading-relaxed max-w-2xl">
                   {recipient.heroDescription}
                 </p>
+                
+                <button
+                  onClick={() => setShowCallModal(true)}
+                  className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-lg font-medium hover:bg-white/20 transition-all inline-flex items-center gap-2"
+                >
+                  Обсудить проект
+                  <Icon name="ArrowRight" size={20} />
+                </button>
+              </div>
+              
+              <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6">
+                  <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-4">
+                    <Icon name="Award" size={24} className="text-white" />
+                  </div>
+                  <h3 className="text-white font-semibold mb-2">Индивидуальный подход</h3>
+                  <p className="text-white/70 text-sm">Персональный дизайнер для вашего проекта</p>
+                </div>
+                
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6">
+                  <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-4">
+                    <Icon name="Gem" size={24} className="text-white" />
+                  </div>
+                  <h3 className="text-white font-semibold mb-2">Премиум материалы</h3>
+                  <p className="text-white/70 text-sm">Только благородные материалы высшего качества</p>
+                </div>
+                
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6">
+                  <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-4">
+                    <Icon name="Clock" size={24} className="text-white" />
+                  </div>
+                  <h3 className="text-white font-semibold mb-2">Срок изготовления</h3>
+                  <p className="text-white/70 text-sm">Готовы к вашему важному событию</p>
+                </div>
               </div>
             </div>
-            
-            <button
-              onClick={() => setShowCallModal(true)}
-              className="px-10 py-4 bg-white text-foreground rounded-lg font-semibold hover:bg-white/90 transition-all inline-flex items-center gap-2 shadow-2xl"
-            >
-              Обсудить проект
-              <Icon name="ArrowRight" size={20} />
-            </button>
           </div>
         </div>
       </section>
