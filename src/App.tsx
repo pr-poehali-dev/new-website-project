@@ -8,8 +8,6 @@ import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import Catalog from "./pages/Catalog";
 import CatalogAll from "./pages/CatalogAll";
-import Events from "./pages/Events";
-import Recipients from "./pages/Recipients";
 import AboutPage from "./pages/AboutPage";
 import ServicePage from "./pages/ServicePage";
 import Sitemap from "./pages/Sitemap";
@@ -28,8 +26,6 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/catalog" element={<CatalogAll />} />
           <Route path="/catalog/:category" element={<Catalog />} />
-          <Route path="/events/:event" element={<Events />} />
-          <Route path="/recipients/:recipient" element={<Recipients />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/service/:serviceId" element={<ServicePage />} />
           <Route path="/sitemap" element={<Sitemap />} />
