@@ -24,9 +24,6 @@ const Header = () => {
 
   const navigation = [
     { name: 'Каталог', href: '/catalog', hasMega: true, megaType: 'catalog' },
-    { name: 'Награды', href: '#awards', hasMega: true, megaType: 'awards' },
-    { name: 'Подарки', href: '#gifts', hasMega: true, megaType: 'gifts' },
-    { name: 'Декор', href: '#decor', hasMega: true, megaType: 'decor' },
     { name: 'О компании', href: '#about', hasMega: true, megaType: 'about' },
   ];
 
