@@ -12,6 +12,7 @@ import AboutPage from "./pages/AboutPage";
 import ServicePage from "./pages/ServicePage";
 import Sitemap from "./pages/Sitemap";
 import EventAwardsPage from "./pages/EventAwardsPage";
+import RecipientAwardsPage from "./pages/RecipientAwardsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/service/:serviceId" element={<ServicePage />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/events/:eventId" element={<EventAwardsPage />} />
+          <Route path="/recipient/:recipientId" element={<RecipientAwardsPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

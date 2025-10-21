@@ -29,7 +29,14 @@ const Header = () => {
         { name: 'Культурное мероприятие', href: '/events/cultural' },
         { name: 'Образовательное мероприятие', href: '/events/education' }
       ],
-      recipients: ['Руководителю', 'Основателю', 'Акционеру', 'Инвестору', 'Партнерам', 'Сотрудникам']
+      recipients: [
+        { name: 'Руководителю', href: '/recipient/director' },
+        { name: 'Основателю', href: '/recipient/founder' },
+        { name: 'Акционеру', href: '/recipient/shareholder' },
+        { name: 'Инвестору', href: '/recipient/investor' },
+        { name: 'Партнерам', href: '/recipient/partner' },
+        { name: 'Сотрудникам', href: '/recipient/employee' }
+      ]
     },
     { 
       name: 'Спортивные награды', 
@@ -396,9 +403,19 @@ const Header = () => {
                     <ul className="space-y-2">
                       {mainCategories.find(c => c.key === selectedMainCategory)?.recipients.map((recipient, idx) => (
                         <li key={idx}>
-                          <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
-                            {recipient}
-                          </a>
+                          {typeof recipient === 'string' ? (
+                            <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
+                              {recipient}
+                            </a>
+                          ) : (
+                            <Link 
+                              to={recipient.href} 
+                              className="text-sm text-white/80 hover:text-white transition-colors"
+                              onClick={handleMouseLeave}
+                            >
+                              {recipient.name}
+                            </Link>
+                          )}
                         </li>
                       ))}
                     </ul>
