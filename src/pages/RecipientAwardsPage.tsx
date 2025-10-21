@@ -8,588 +8,573 @@ import CallModal from '@/components/CallModal';
 interface RecipientType {
   id: string;
   title: string;
-  painTitle: string;
-  painDescription: string;
   heroTitle: string;
   heroSubtitle: string;
-  heroImage: string;
-  challenges: Array<{
-    icon: string;
+  heroDescription: string;
+  heroImages: string[];
+  gallery: Array<{
     title: string;
-    description: string;
+    category: string;
+    image: string;
+    materials: string[];
   }>;
-  solutions: Array<{
-    icon: string;
-    title: string;
-    description: string;
-  }>;
-  examples: Array<{
+  occasions: Array<{
     title: string;
     description: string;
     image: string;
-    occasion: string;
+    examples: string[];
+  }>;
+  showcase: Array<{
+    image: string;
+    title: string;
     price: string;
   }>;
-  why: Array<{
+  advantages: Array<{
     title: string;
     description: string;
   }>;
-  ctaTitle: string;
-  ctaDescription: string;
 }
 
 const recipientTypes: Record<string, RecipientType> = {
   director: {
     id: 'director',
     title: 'Награды руководителю',
-    painTitle: 'Что подарить руководителю?',
-    painDescription: 'Выбор награды для руководителя — это всегда вопрос статуса и вкуса. Стандартные подарки не подходят, а ошибка может испортить впечатление о всей команде.',
-    heroTitle: 'Награды достойные руководителя',
-    heroSubtitle: 'Эксклюзивные решения для тех, кто ценит качество и престиж',
-    heroImage: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=1200',
-    challenges: [
-      {
-        icon: 'AlertCircle',
-        title: 'У руководителя уже всё есть',
-        description: 'Сложно удивить человека, который может позволить себе любую вещь'
-      },
-      {
-        icon: 'ThumbsDown',
-        title: 'Боязнь выглядеть дешево',
-        description: 'Недорогой подарок может показаться неуважением к статусу'
-      },
-      {
-        icon: 'HelpCircle',
-        title: 'Неизвестны предпочтения',
-        description: 'Личные вкусы руководителя часто остаются загадкой для команды'
-      },
-      {
-        icon: 'Clock',
-        title: 'Нет времени на поиски',
-        description: 'Нужно быстро найти достойный вариант без долгих раздумий'
-      }
+    heroTitle: 'Награды для первых лиц компании',
+    heroSubtitle: 'Эксклюзивные решения подчеркивающие статус',
+    heroDescription: 'Создаем уникальные награды из благородных материалов для тех, кто ценит качество, индивидуальность и безупречный вкус.',
+    heroImages: [
+      'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800',
+      'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800',
+      'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=800',
     ],
-    solutions: [
+    gallery: [
       {
-        icon: 'Award',
-        title: 'Статусные материалы',
-        description: 'Мрамор, бронза, хрусталь — материалы, подчеркивающие уровень'
-      },
-      {
-        icon: 'Palette',
-        title: 'Индивидуальный дизайн',
-        description: 'Уникальная награда, которой больше ни у кого не будет'
-      },
-      {
-        icon: 'Briefcase',
-        title: 'Корпоративная символика',
-        description: 'Связь с компанией делает подарок особенно ценным'
-      },
-      {
-        icon: 'Package',
-        title: 'Премиум упаковка',
-        description: 'Презентация на уровне подарка — в футляре с логотипом'
-      }
-    ],
-    examples: [
-      {
-        title: 'Статуэтка "Лидер года"',
-        description: 'Бронзовая фигура на мраморном постаменте с гравировкой достижений',
-        image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600',
-        occasion: 'День рождения, годовщина в должности',
-        price: 'от 45 000 ₽'
-      },
-      {
-        title: 'Награда "Вклад в развитие"',
-        description: 'Стеклянная стела с портретом и историей достижений компании',
-        image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=600',
-        occasion: 'Юбилей компании, выход на пенсию',
-        price: 'от 65 000 ₽'
-      },
-      {
-        title: 'Настольная композиция премиум',
-        description: 'Авторская работа из камня и металла для рабочего кабинета',
+        title: 'Каменная история',
+        category: 'Мрамор и гранит',
         image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600',
-        occasion: 'Благодарность, знак уважения',
-        price: 'от 85 000 ₽'
-      }
-    ],
-    why: [
-      {
-        title: 'Опыт с VIP-клиентами',
-        description: 'Работаем с крупнейшими корпорациями России более 15 лет'
+        materials: ['Мрамор', 'Гранит', 'Оникс', 'Бронза']
       },
       {
-        title: 'Конфиденциальность',
-        description: 'Полная секретность проекта до момента вручения'
+        title: 'Стеклянные шедевры',
+        category: 'Хрусталь и стекло',
+        image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600',
+        materials: ['Хрусталь', 'Оптическое стекло', 'Гравировка']
       },
       {
-        title: 'Персональный менеджер',
-        description: 'Один контакт для решения всех вопросов'
+        title: 'Металлические композиции',
+        category: 'Бронза и латунь',
+        image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=600',
+        materials: ['Бронза', 'Латунь', 'Патинирование', 'Позолота']
+      },
+      {
+        title: 'Деревянная классика',
+        category: 'Ценные породы',
+        image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600',
+        materials: ['Дуб', 'Орех', 'Венге', 'Инкрустация']
+      },
+      {
+        title: 'Авторские работы',
+        category: 'Смешанные техники',
+        image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600',
+        materials: ['Камень', 'Металл', 'Стекло', 'Дерево']
+      },
+      {
+        title: 'Настольные сувениры',
+        category: 'Для рабочего кабинета',
+        image: 'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=600',
+        materials: ['Мрамор', 'Кожа', 'Металл', 'Позолота']
       }
     ],
-    ctaTitle: 'Получить варианты наград для руководителя',
-    ctaDescription: 'Подберем 3-5 решений под ваш бюджет и повод. Бесплатная консультация за 30 минут.'
+    occasions: [
+      {
+        title: 'День рождения',
+        description: 'Персональный подарок с гравировкой имени и пожеланий',
+        image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800',
+        examples: ['Статуэтка с датой рождения', 'Памятная плакетка', 'Авторская композиция']
+      },
+      {
+        title: 'Юбилей компании',
+        description: 'Награда отражающая историю и достижения бизнеса',
+        image: 'https://images.unsplash.com/photo-1511578194003-00c80e42dc9b?w=800',
+        examples: ['Стела с хронологией', 'Кубок с логотипом', 'Панно с фотографиями']
+      },
+      {
+        title: 'Годовщина в должности',
+        description: 'Признание вклада руководителя в развитие компании',
+        image: 'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?w=800',
+        examples: ['Награда "Лидер"', 'Памятный знак', 'Бронзовая статуэтка']
+      },
+      {
+        title: 'Благодарность',
+        description: 'Знак уважения и признательности от команды',
+        image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800',
+        examples: ['Плакетка с подписями', 'Стеклянная награда', 'Сувенир ручной работы']
+      }
+    ],
+    showcase: [
+      { image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400', title: 'Стела "Лидер"', price: 'от 65 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=400', title: 'Кубок премиум', price: 'от 85 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400', title: 'Статуэтка', price: 'от 120 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=400', title: 'Плакетка', price: 'от 45 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=400', title: 'Композиция', price: 'от 95 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=400', title: 'Настольный', price: 'от 55 000 ₽' },
+    ],
+    advantages: [
+      { title: 'Индивидуальный подход', description: 'Персональный дизайнер для каждого проекта' },
+      { title: 'Премиум материалы', description: 'Работаем только с благородными материалами' },
+      { title: 'Конфиденциальность', description: 'Полная секретность до момента вручения' },
+      { title: 'Опыт 15 лет', description: 'Работаем с крупнейшими компаниями России' }
+    ]
   },
   founder: {
     id: 'founder',
     title: 'Награды основателю',
-    painTitle: 'Что подарить основателю компании?',
-    painDescription: 'Основатель — это человек, создавший всё с нуля. Подарок должен отражать масштаб его вклада и быть символом благодарности на годы вперед.',
-    heroTitle: 'Награды для основателей бизнеса',
-    heroSubtitle: 'Признание вклада тех, кто создал компанию',
-    heroImage: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1200',
-    challenges: [
-      {
-        icon: 'Scale',
-        title: 'Как оценить масштаб вклада?',
-        description: 'Основатель вложил годы жизни — подарок должен это отражать'
-      },
-      {
-        icon: 'Heart',
-        title: 'Нужна эмоциональная связь',
-        description: 'Важно показать благодарность и признание, а не просто дать вещь'
-      },
-      {
-        icon: 'TrendingUp',
-        title: 'Символ пути компании',
-        description: 'Награда должна отражать историю развития бизнеса'
-      },
-      {
-        icon: 'Users',
-        title: 'От всей команды',
-        description: 'Подарок представляет благодарность от всех сотрудников'
-      }
+    heroTitle: 'Награды для основателей компании',
+    heroSubtitle: 'Признание вклада создателя бизнеса',
+    heroDescription: 'Награда основателю — это не просто подарок, это символ благодарности за годы труда, веру в идею и создание компании с нуля.',
+    heroImages: [
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800',
+      'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800',
+      'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800',
     ],
-    solutions: [
+    gallery: [
       {
-        icon: 'BookOpen',
-        title: 'История в подарке',
-        description: 'Визуализируем путь компании от идеи до успеха'
-      },
-      {
-        icon: 'Gem',
-        title: 'Драгоценные материалы',
-        description: 'Серебро, золото, натуральный камень — ценность на века'
-      },
-      {
-        icon: 'FileText',
-        title: 'Персональная гравировка',
-        description: 'Слова благодарности от команды и партнеров'
-      },
-      {
-        icon: 'Home',
-        title: 'Для дома или офиса',
-        description: 'Награда, которая станет семейной реликвией'
-      }
-    ],
-    examples: [
-      {
-        title: 'Памятная стела "Основатель"',
-        description: 'Мраморная композиция с историей компании и портретом',
-        image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600',
-        occasion: 'Юбилей компании, выход из бизнеса',
-        price: 'от 120 000 ₽'
-      },
-      {
-        title: 'Скульптура "Путь лидера"',
-        description: 'Авторская бронзовая работа с символикой компании',
-        image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=600',
-        occasion: 'Круглая дата, продажа доли',
-        price: 'от 250 000 ₽'
-      },
-      {
-        title: 'Хрустальная награда "Визионер"',
-        description: 'Ручная работа с инкрустацией и подсветкой',
+        title: 'Памятные стелы',
+        category: 'История компании',
         image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600',
-        occasion: 'Достижение целей, признание',
-        price: 'от 95 000 ₽'
-      }
-    ],
-    why: [
-      {
-        title: 'Уникальные проекты',
-        description: 'Каждая награда разрабатывается индивидуально'
+        materials: ['Мрамор', 'Бронза', 'Гравировка портрета']
       },
       {
-        title: 'Работа с историей',
-        description: 'Интервью с командой для создания концепции'
+        title: 'Авторские скульптуры',
+        category: 'Уникальные работы',
+        image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600',
+        materials: ['Бронза', 'Гранит', 'Патина', 'Позолота']
       },
       {
-        title: 'Сертификат подлинности',
-        description: 'Документ о материалах и авторстве работы'
+        title: 'Хрустальные награды',
+        category: 'Премиум класс',
+        image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=600',
+        materials: ['Хрусталь ручной работы', 'Инкрустация', 'LED подсветка']
+      },
+      {
+        title: 'Настенные панно',
+        category: 'Для офиса или дома',
+        image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600',
+        materials: ['Дерево ценных пород', 'Металл', 'Кожа']
+      },
+      {
+        title: 'Книги истории',
+        category: 'Путь компании',
+        image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600',
+        materials: ['Кожаный переплет', 'Металлические вставки', 'Футляр']
+      },
+      {
+        title: 'Коллекционные издания',
+        category: 'На память',
+        image: 'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=600',
+        materials: ['Камень', 'Дерево', 'Стекло', 'Фотографии']
       }
     ],
-    ctaTitle: 'Создать уникальную награду основателю',
-    ctaDescription: 'Встретимся, обсудим историю компании и создадим концепцию награды'
+    occasions: [
+      {
+        title: 'Юбилей компании',
+        description: 'Награда символизирующая путь от идеи до успешного бизнеса',
+        image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800',
+        examples: ['Стела с историей', 'Хронология в камне', 'Книга компании']
+      },
+      {
+        title: 'Выход на пенсию',
+        description: 'Благодарность за годы руководства и созданное наследие',
+        image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800',
+        examples: ['Памятная награда', 'Портрет в бронзе', 'Семейная реликвия']
+      },
+      {
+        title: 'Продажа доли бизнеса',
+        description: 'Символ завершения важного этапа в жизни компании',
+        image: 'https://images.unsplash.com/photo-1559526324-593bc073d938?w=800',
+        examples: ['Эксклюзивная статуэтка', 'Награда "Визионер"', 'Памятный знак']
+      },
+      {
+        title: 'Достижение целей',
+        description: 'Признание реализации мечты и создания успешного дела',
+        image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800',
+        examples: ['Кубок достижений', 'Стела успеха', 'Авторская работа']
+      }
+    ],
+    showcase: [
+      { image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400', title: 'Стела история', price: 'от 120 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=400', title: 'Скульптура', price: 'от 250 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400', title: 'Хрусталь VIP', price: 'от 95 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=400', title: 'Панно', price: 'от 150 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=400', title: 'Книга истории', price: 'от 180 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=400', title: 'Коллекция', price: 'от 200 000 ₽' },
+    ],
+    advantages: [
+      { title: 'Уникальность', description: 'Каждая награда разрабатывается индивидуально' },
+      { title: 'Работа с историей', description: 'Интервью с командой для создания концепции' },
+      { title: 'Драгоценные материалы', description: 'Серебро, золото, натуральный камень' },
+      { title: 'Сертификат подлинности', description: 'Документ о материалах и авторстве' }
+    ]
   },
   shareholder: {
     id: 'shareholder',
     title: 'Награды акционеру',
-    painTitle: 'Что подарить акционеру?',
-    painDescription: 'Акционер — это партнер и инвестор. Подарок должен подчеркивать взаимное уважение и ценность долгосрочных отношений.',
     heroTitle: 'Награды для акционеров',
-    heroSubtitle: 'Благодарность за доверие и инвестиции в общее дело',
-    heroImage: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200',
-    challenges: [
-      {
-        icon: 'Handshake',
-        title: 'Протокольные требования',
-        description: 'Подарок должен соответствовать деловой этике и статусу'
-      },
-      {
-        icon: 'DollarSign',
-        title: 'Ценность vs бюджет',
-        description: 'Важна не цена, а символическая значимость подарка'
-      },
-      {
-        icon: 'Building2',
-        title: 'Официальность события',
-        description: 'Награда для вручения на собрании акционеров или партнеров'
-      },
-      {
-        icon: 'Globe',
-        title: 'Международные партнеры',
-        description: 'Подарок должен быть понятен представителям разных культур'
-      }
+    heroSubtitle: 'Благодарность за доверие и инвестиции',
+    heroDescription: 'Награда акционеру подчеркивает взаимное уважение и ценность долгосрочного партнерства в бизнесе.',
+    heroImages: [
+      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800',
+      'https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=800',
+      'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800',
     ],
-    solutions: [
+    gallery: [
       {
-        icon: 'Shield',
-        title: 'Корпоративная символика',
-        description: 'Логотип и фирменные цвета компании в дизайне'
-      },
-      {
-        icon: 'BarChart',
-        title: 'Визуализация успеха',
-        description: 'Отражение роста компании и вклада акционера'
-      },
-      {
-        icon: 'Star',
-        title: 'Статусный дизайн',
-        description: 'Строгие формы и благородные материалы'
-      },
-      {
-        icon: 'FileCheck',
-        title: 'Сертификация',
-        description: 'Документы на материалы для протокола'
-      }
-    ],
-    examples: [
-      {
-        title: 'Плакетка "Стратегический партнер"',
-        description: 'Стекло и латунь с гравировкой лет партнерства',
-        image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600',
-        occasion: 'Годовое собрание акционеров',
-        price: 'от 35 000 ₽'
-      },
-      {
-        title: 'Награда "За вклад в развитие"',
-        description: 'Мраморная стела с металлической вставкой',
-        image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=600',
-        occasion: 'Достижение финансовых целей',
-        price: 'от 55 000 ₽'
-      },
-      {
-        title: 'Настольный сувенир премиум',
-        description: 'Каменная композиция для рабочего стола',
+        title: 'Корпоративные плакетки',
+        category: 'С символикой компании',
         image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600',
-        occasion: 'Благодарность за инвестиции',
-        price: 'от 45 000 ₽'
-      }
-    ],
-    why: [
-      {
-        title: 'Опыт с корпорациями',
-        description: 'Знаем протокол и требования крупного бизнеса'
+        materials: ['Стекло', 'Латунь', 'Гравировка логотипа']
       },
       {
-        title: 'Оптовые заказы',
-        description: 'Награды для всех акционеров в едином стиле'
+        title: 'Памятные стелы',
+        category: 'Годы партнерства',
+        image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600',
+        materials: ['Мрамор', 'Металл', 'Даты сотрудничества']
       },
       {
-        title: 'Срочное изготовление',
-        description: 'Готовы к дате собрания акционеров'
+        title: 'Настольные композиции',
+        category: 'Для кабинета',
+        image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=600',
+        materials: ['Камень', 'Бронза', 'Дерево']
+      },
+      {
+        title: 'Протокольные подарки',
+        category: 'Для собраний',
+        image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600',
+        materials: ['Хрусталь', 'Серебро', 'Футляр с логотипом']
+      },
+      {
+        title: 'Инвестиционные награды',
+        category: 'За вклад',
+        image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600',
+        materials: ['Стекло', 'Металл', 'Инфографика']
+      },
+      {
+        title: 'Серийные награды',
+        category: 'Для всех акционеров',
+        image: 'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=600',
+        materials: ['Единый дизайн', 'Персонализация', 'Упаковка']
       }
     ],
-    ctaTitle: 'Заказать награды для акционеров',
-    ctaDescription: 'Рассчитаем стоимость тиража и подготовим образцы'
+    occasions: [
+      {
+        title: 'Годовое собрание',
+        description: 'Награждение партнеров по итогам финансового года',
+        image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800',
+        examples: ['Плакетка года', 'Стеклянная награда', 'Памятный сувенир']
+      },
+      {
+        title: 'Достижение целей',
+        description: 'Празднование финансовых успехов и роста компании',
+        image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800',
+        examples: ['Кубок успеха', 'Награда роста', 'Инфографика достижений']
+      },
+      {
+        title: 'Годовщина партнерства',
+        description: 'Признание долгосрочного сотрудничества',
+        image: 'https://images.unsplash.com/photo-1559526324-593bc073d938?w=800',
+        examples: ['Стела с датами', 'Памятная награда', 'Сувенир премиум']
+      },
+      {
+        title: 'Благодарность за инвестиции',
+        description: 'Признательность за вклад в развитие бизнеса',
+        image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800',
+        examples: ['Награда инвестору', 'Плакетка вклада', 'Памятный знак']
+      }
+    ],
+    showcase: [
+      { image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400', title: 'Плакетка', price: 'от 35 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=400', title: 'Стела', price: 'от 55 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400', title: 'Настольный', price: 'от 45 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=400', title: 'Протокольный', price: 'от 65 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=400', title: 'Инвестору', price: 'от 75 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=400', title: 'Серия', price: 'от 30 000 ₽' },
+    ],
+    advantages: [
+      { title: 'Протокольность', description: 'Соответствие деловой этике и стандартам' },
+      { title: 'Оптовые заказы', description: 'Награды для всех акционеров в едином стиле' },
+      { title: 'Сертификация', description: 'Документы на материалы для протокола' },
+      { title: 'Срочное изготовление', description: 'Готовы к дате собрания' }
+    ]
   },
   investor: {
     id: 'investor',
     title: 'Награды инвестору',
-    painTitle: 'Что подарить инвестору?',
-    painDescription: 'Инвестор дал не просто деньги, но и веру в ваш проект. Подарок — это знак признательности за риск и доверие на старте пути.',
     heroTitle: 'Награды для инвесторов',
-    heroSubtitle: 'Благодарность за веру в проект и поддержку',
-    heroImage: 'https://images.unsplash.com/photo-1559526324-593bc073d938?w=1200',
-    challenges: [
-      {
-        icon: 'Rocket',
-        title: 'Этап стартапа',
-        description: 'Бюджет ограничен, но благодарность должна быть весомой'
-      },
-      {
-        icon: 'Target',
-        title: 'Отметить важную веху',
-        description: 'Раунд инвестиций, выход на IPO, первая прибыль'
-      },
-      {
-        icon: 'TrendingUp',
-        title: 'Показать рост',
-        description: 'Инвестор хочет видеть результаты своих вложений'
-      },
-      {
-        icon: 'Award',
-        title: 'Профессиональная ценность',
-        description: 'Награда для портфолио и репутации инвестора'
-      }
+    heroSubtitle: 'Благодарность за веру в проект',
+    heroDescription: 'Инвестор дал не просто деньги, но и веру в ваш проект. Награда — это знак признательности за риск и поддержку.',
+    heroImages: [
+      'https://images.unsplash.com/photo-1559526324-593bc073d938?w=800',
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
+      'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800',
     ],
-    solutions: [
+    gallery: [
       {
-        icon: 'LineChart',
-        title: 'Метрики роста',
-        description: 'Визуализация достижений с момента инвестиций'
-      },
-      {
-        icon: 'Lightbulb',
-        title: 'История успеха',
-        description: 'Памятный знак начала пути компании'
-      },
-      {
-        icon: 'Camera',
-        title: 'Для соцсетей',
-        description: 'Эффектный дизайн для публикаций в LinkedIn'
-      },
-      {
-        icon: 'Percent',
-        title: 'Умная экономия',
-        description: 'Дорого выглядящие решения по разумной цене'
-      }
-    ],
-    examples: [
-      {
-        title: 'Награда "Первый инвестор"',
-        description: 'Стеклянный куб с логотипом и датой раунда',
-        image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600',
-        occasion: 'Закрытие раунда инвестиций',
-        price: 'от 18 000 ₽'
-      },
-      {
-        title: 'Плакетка "Партнер роста"',
-        description: 'Акрил с инфографикой достижений компании',
-        image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=600',
-        occasion: 'Достижение KPI, exit',
-        price: 'от 25 000 ₽'
-      },
-      {
-        title: 'Статуэтка "Визионер"',
-        description: 'Смола и дерево, авторский дизайн',
+        title: 'Награды стартапам',
+        category: 'Для молодых компаний',
         image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600',
-        occasion: 'Благодарность за веру в проект',
-        price: 'от 32 000 ₽'
-      }
-    ],
-    why: [
-      {
-        title: 'Работаем со стартапами',
-        description: 'Понимаем специфику молодых компаний'
+        materials: ['Стекло', 'Акрил', 'Современный дизайн']
       },
       {
-        title: 'Гибкие условия',
-        description: 'Отсрочка платежа до получения инвестиций'
+        title: 'Первый раунд',
+        category: 'Памятный знак',
+        image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600',
+        materials: ['Стеклянный куб', 'Гравировка даты', 'Логотип']
       },
       {
-        title: 'Быстрая реализация',
-        description: 'Готовы к дате демо-дня или презентации'
+        title: 'Визионер',
+        category: 'За веру в идею',
+        image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=600',
+        materials: ['Смола', 'Дерево', 'Авторский дизайн']
+      },
+      {
+        title: 'Партнер роста',
+        category: 'Инфографика',
+        image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600',
+        materials: ['Акрил', 'Печать метрик', 'Цветная подложка']
+      },
+      {
+        title: 'Exit награды',
+        category: 'Успешный выход',
+        image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600',
+        materials: ['Премиум материалы', 'Эксклюзив', 'Футляр']
+      },
+      {
+        title: 'Серия для фонда',
+        category: 'Портфолио',
+        image: 'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=600',
+        materials: ['Единый стиль', 'Персонализация', 'Брендинг']
       }
     ],
-    ctaTitle: 'Заказать награду для инвестора',
-    ctaDescription: 'Поможем выбрать достойный вариант в рамках бюджета'
+    occasions: [
+      {
+        title: 'Закрытие раунда',
+        description: 'Благодарность за инвестиции на старте пути',
+        image: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800',
+        examples: ['Награда первому', 'Памятный куб', 'Стеклянная стела']
+      },
+      {
+        title: 'Достижение KPI',
+        description: 'Празднование промежуточных успехов проекта',
+        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
+        examples: ['Плакетка роста', 'Награда метрик', 'Инфографика']
+      },
+      {
+        title: 'Exit событие',
+        description: 'Успешный выход и возврат инвестиций',
+        image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800',
+        examples: ['Премиум награда', 'Статуэтка успеха', 'Памятный знак']
+      },
+      {
+        title: 'Благодарность',
+        description: 'Признательность за веру в команду и продукт',
+        image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800',
+        examples: ['Награда визионеру', 'Сувенир премиум', 'Авторская работа']
+      }
+    ],
+    showcase: [
+      { image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400', title: 'Первый инвестор', price: 'от 18 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=400', title: 'Партнер роста', price: 'от 25 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400', title: 'Визионер', price: 'от 32 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=400', title: 'Exit награда', price: 'от 55 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=400', title: 'Фонду', price: 'от 45 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=400', title: 'Серия', price: 'от 15 000 ₽' },
+    ],
+    advantages: [
+      { title: 'Работаем со стартапами', description: 'Понимаем специфику молодых компаний' },
+      { title: 'Гибкие условия', description: 'Отсрочка платежа до получения инвестиций' },
+      { title: 'Современный дизайн', description: 'Награды для tech компаний и фондов' },
+      { title: 'Быстрая реализация', description: 'Готовы к дате демо-дня' }
+    ]
   },
   partner: {
     id: 'partner',
     title: 'Награды партнерам',
-    painTitle: 'Что подарить партнеру?',
-    painDescription: 'Партнерские отношения строятся на взаимном доверии. Подарок должен укреплять связь и показывать ценность долгосрочного сотрудничества.',
     heroTitle: 'Награды для деловых партнеров',
-    heroSubtitle: 'Укрепляем партнерские отношения через признание вклада',
-    heroImage: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200',
-    challenges: [
-      {
-        icon: 'Network',
-        title: 'Множество партнеров',
-        description: 'Нужны награды для партнерской программы или конференции'
-      },
-      {
-        icon: 'Calendar',
-        title: 'Регулярные награждения',
-        description: 'Ежегодные встречи и церемонии для партнеров'
-      },
-      {
-        icon: 'Zap',
-        title: 'Разные уровни партнерства',
-        description: 'Золотые, серебряные, бронзовые партнеры — разный статус'
-      },
-      {
-        icon: 'Gift',
-        title: 'Приятный сюрприз',
-        description: 'Подарок должен удивить и запомниться'
-      }
+    heroSubtitle: 'Укрепляем партнерские отношения',
+    heroDescription: 'Партнерские отношения строятся на доверии. Награда показывает ценность долгосрочного сотрудничества.',
+    heroImages: [
+      'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800',
+      'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800',
+      'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800',
     ],
-    solutions: [
+    gallery: [
       {
-        icon: 'Layers',
-        title: 'Линейка наград',
-        description: 'Единый дизайн для разных уровней партнерства'
-      },
-      {
-        icon: 'Stamp',
-        title: 'Брендирование',
-        description: 'Логотипы обеих компаний на награде'
-      },
-      {
-        icon: 'Package',
-        title: 'Массовое производство',
-        description: 'Выгодные условия при заказе от 10 штук'
-      },
-      {
-        icon: 'Truck',
-        title: 'Доставка на мероприятие',
-        description: 'Привезем награды к дате партнерской конференции'
-      }
-    ],
-    examples: [
-      {
-        title: 'Награда "Золотой партнер"',
-        description: 'Стекло с позолотой и гравировкой статуса',
-        image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600',
-        occasion: 'Партнерская конференция',
-        price: 'от 12 000 ₽'
-      },
-      {
-        title: 'Плакетка "5 лет партнерства"',
-        description: 'Дерево и металл с памятными датами',
-        image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=600',
-        occasion: 'Годовщина сотрудничества',
-        price: 'от 15 000 ₽'
-      },
-      {
-        title: 'Настольный сувенир',
-        description: 'Камень с логотипами компаний-партнеров',
+        title: 'Золотые партнеры',
+        category: 'Высший статус',
         image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600',
-        occasion: 'Благодарность за проект',
-        price: 'от 18 000 ₽'
-      }
-    ],
-    why: [
-      {
-        title: 'Опыт с программами лояльности',
-        description: 'Разработаем систему наград для партнерской программы'
+        materials: ['Стекло с позолотой', 'Гравировка', 'Премиум']
       },
       {
-        title: 'Склад готовых решений',
-        description: 'Быстрая отгрузка наград для срочных мероприятий'
+        title: 'Серебряные партнеры',
+        category: 'Средний уровень',
+        image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600',
+        materials: ['Металл', 'Стекло', 'Серебрение']
       },
       {
-        title: 'Накопительные скидки',
-        description: 'Чем больше заказ, тем выгоднее цена'
+        title: 'Бронзовые партнеры',
+        category: 'Начальный уровень',
+        image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=600',
+        materials: ['Акрил', 'Дерево', 'Бронза']
+      },
+      {
+        title: 'Годовщина сотрудничества',
+        category: '5, 10, 15 лет',
+        image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600',
+        materials: ['Дерево', 'Металл', 'Памятные даты']
+      },
+      {
+        title: 'За проект',
+        category: 'Благодарность',
+        image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600',
+        materials: ['Камень', 'Логотипы компаний', 'Сувенир']
+      },
+      {
+        title: 'Партнерская программа',
+        category: 'Массовые награды',
+        image: 'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=600',
+        materials: ['Единый дизайн', 'Тираж', 'Упаковка']
       }
     ],
-    ctaTitle: 'Заказать награды для партнеров',
-    ctaDescription: 'Разработаем линейку наград под вашу партнерскую программу'
+    occasions: [
+      {
+        title: 'Партнерская конференция',
+        description: 'Награждение лучших партнеров года',
+        image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800',
+        examples: ['Кубки по уровням', 'Плакетки', 'Сертификаты']
+      },
+      {
+        title: 'Годовщина сотрудничества',
+        description: 'Празднование долгосрочных отношений',
+        image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800',
+        examples: ['Памятная награда', 'Плакетка с датами', 'Сувенир премиум']
+      },
+      {
+        title: 'Благодарность за проект',
+        description: 'Признание вклада в совместную работу',
+        image: 'https://images.unsplash.com/photo-1559526324-593bc073d938?w=800',
+        examples: ['Награда проекта', 'Настольный сувенир', 'Памятный знак']
+      },
+      {
+        title: 'Партнерская программа',
+        description: 'Регулярные награждения активных партнеров',
+        image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800',
+        examples: ['Линейка наград', 'Статусные награды', 'Система мотивации']
+      }
+    ],
+    showcase: [
+      { image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400', title: 'Золотой', price: 'от 12 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=400', title: 'Серебряный', price: 'от 15 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400', title: 'Бронзовый', price: 'от 18 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=400', title: 'Годовщина', price: 'от 22 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=400', title: 'За проект', price: 'от 25 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=400', title: 'Программа', price: 'от 8 000 ₽' },
+    ],
+    advantages: [
+      { title: 'Линейка наград', description: 'Единый дизайн для разных уровней' },
+      { title: 'Массовое производство', description: 'Выгодные условия при заказе от 10 штук' },
+      { title: 'Склад готовых решений', description: 'Быстрая отгрузка для срочных мероприятий' },
+      { title: 'Накопительные скидки', description: 'Чем больше заказ, тем выгоднее' }
+    ]
   },
   employee: {
     id: 'employee',
     title: 'Награды сотрудникам',
-    painTitle: 'Что подарить сотруднику?',
-    painDescription: 'Сотрудники — основа компании. Награда должна мотивировать, показывать признание и создавать культуру достижений в коллективе.',
     heroTitle: 'Награды для сотрудников',
-    heroSubtitle: 'Мотивируем команду через признание заслуг',
-    heroImage: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200',
-    challenges: [
-      {
-        icon: 'Users',
-        title: 'Много сотрудников',
-        description: 'Нужны награды для всей команды или отделов'
-      },
-      {
-        icon: 'Wallet',
-        title: 'Ограниченный бюджет',
-        description: 'Хочется достойную награду по доступной цене'
-      },
-      {
-        icon: 'Heart',
-        title: 'Мотивация и признание',
-        description: 'Награда должна вдохновлять на новые достижения'
-      },
-      {
-        icon: 'Home',
-        title: 'Захочет ли хранить?',
-        description: 'Боязнь, что награда останется в офисе, а не дома'
-      }
+    heroSubtitle: 'Мотивация через признание заслуг',
+    heroDescription: 'Сотрудники — основа компании. Награда мотивирует, показывает признание и создает культуру достижений.',
+    heroImages: [
+      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800',
+      'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800',
+      'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800',
     ],
-    solutions: [
+    gallery: [
       {
-        icon: 'BadgeCheck',
-        title: 'Персонализация',
-        description: 'Имя, должность, достижение на каждой награде'
-      },
-      {
-        icon: 'TrendingUp',
-        title: 'Система мотивации',
-        description: 'Награды за разные достижения и KPI'
-      },
-      {
-        icon: 'DollarSign',
-        title: 'Доступные цены',
-        description: 'Качественные награды от 3 000 рублей'
-      },
-      {
-        icon: 'Camera',
-        title: 'Красиво для фото',
-        description: 'Сотрудники с гордостью делятся в соцсетях'
-      }
-    ],
-    examples: [
-      {
-        title: 'Награда "Сотрудник месяца"',
-        description: 'Акриловая плакетка с индивидуальной гравировкой',
-        image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600',
-        occasion: 'Ежемесячное награждение',
-        price: 'от 3 500 ₽'
-      },
-      {
-        title: 'Диплом "За выслугу лет"',
-        description: 'Деревянная рамка с металлической табличкой',
-        image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=600',
-        occasion: '5, 10, 15 лет работы',
-        price: 'от 5 500 ₽'
-      },
-      {
-        title: 'Статуэтка "Лучший по профессии"',
-        description: 'Стекло с цветной подложкой и гравировкой',
+        title: 'Сотрудник месяца',
+        category: 'Регулярные награды',
         image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600',
-        occasion: 'Профессиональные конкурсы',
-        price: 'от 7 500 ₽'
-      }
-    ],
-    why: [
-      {
-        title: 'Массовое производство',
-        description: 'Изготовим награды для всего коллектива'
+        materials: ['Акрил', 'Гравировка имени', 'Месяц и год']
       },
       {
-        title: 'База готовых дизайнов',
-        description: 'Быстрый старт без долгой разработки'
+        title: 'За выслугу лет',
+        category: '5, 10, 15 лет работы',
+        image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600',
+        materials: ['Дерево', 'Металлическая табличка', 'Рамка']
       },
       {
-        title: 'Именная гравировка',
-        description: 'Персонализируем каждую награду бесплатно'
+        title: 'Лучший по профессии',
+        category: 'Профессиональные конкурсы',
+        image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=600',
+        materials: ['Стекло', 'Цветная подложка', 'Гравировка']
+      },
+      {
+        title: 'За достижения',
+        category: 'KPI и результаты',
+        image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600',
+        materials: ['Акрил', 'Металл', 'Персонализация']
+      },
+      {
+        title: 'Команда года',
+        category: 'Командные награды',
+        image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600',
+        materials: ['Стекло', 'Подставка', 'Названия участников']
+      },
+      {
+        title: 'Массовые награды',
+        category: 'Для всего коллектива',
+        image: 'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=600',
+        materials: ['Доступная цена', 'Персонализация', 'Тираж']
       }
     ],
-    ctaTitle: 'Заказать награды для сотрудников',
-    ctaDescription: 'Создадим систему наград для вашей корпоративной культуры'
+    occasions: [
+      {
+        title: 'Ежемесячное награждение',
+        description: 'Система мотивации лучших сотрудников',
+        image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800',
+        examples: ['Сотрудник месяца', 'Лучший в отделе', 'За результаты']
+      },
+      {
+        title: 'Годовщина работы',
+        description: 'Признание преданности компании',
+        image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800',
+        examples: ['5 лет', '10 лет', '15 лет службы']
+      },
+      {
+        title: 'Профессиональные конкурсы',
+        description: 'Соревнования внутри компании',
+        image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800',
+        examples: ['Лучший продавец', 'Мастер года', 'Инноватор']
+      },
+      {
+        title: 'Корпоративные мероприятия',
+        description: 'Награждения на общих собраниях',
+        image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800',
+        examples: ['За вклад', 'За преданность', 'Благодарность']
+      }
+    ],
+    showcase: [
+      { image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400', title: 'Месяца', price: 'от 3 500 ₽' },
+      { image: 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=400', title: 'За выслугу', price: 'от 5 500 ₽' },
+      { image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400', title: 'Лучший', price: 'от 7 500 ₽' },
+      { image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=400', title: 'За достижения', price: 'от 6 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=400', title: 'Команде', price: 'от 12 000 ₽' },
+      { image: 'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=400', title: 'Массовые', price: 'от 2 500 ₽' },
+    ],
+    advantages: [
+      { title: 'Доступные цены', description: 'Качественные награды от 2 500 рублей' },
+      { title: 'Массовое производство', description: 'Изготовим для всего коллектива' },
+      { title: 'Именная гравировка', description: 'Персонализация каждой награды бесплатно' },
+      { title: 'База дизайнов', description: 'Быстрый старт без долгой разработки' }
+    ]
   }
 };
 
@@ -618,220 +603,223 @@ const RecipientAwardsPage = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Hero Section with Pain Point */}
-      <section className="relative min-h-[700px] flex items-center pt-20">
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `url(${recipient.heroImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
-        </div>
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
+      {/* Hero Section */}
+      <section className="pt-32 pb-16">
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
             <div className="mb-8">
               <Link 
                 to="/"
-                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Icon name="ArrowLeft" size={16} />
-                На главную
+                Назад
               </Link>
             </div>
             
-            {/* Pain Point */}
-            <div className="mb-12 p-8 bg-destructive/10 border-2 border-destructive/30 rounded-2xl backdrop-blur-sm">
-              <Icon name="HelpCircle" size={48} className="text-destructive mx-auto mb-4" />
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-destructive">
-                {recipient.painTitle}
-              </h2>
-              <p className="text-lg text-foreground/90 leading-relaxed">
-                {recipient.painDescription}
-              </p>
+            <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+              <div>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                  {recipient.heroTitle}
+                </h1>
+                <p className="text-2xl text-muted-foreground mb-4 font-light">
+                  {recipient.heroSubtitle}
+                </p>
+                <p className="text-lg text-muted-foreground/80 mb-8 leading-relaxed">
+                  {recipient.heroDescription}
+                </p>
+                
+                <button
+                  onClick={() => setShowCallModal(true)}
+                  className="px-8 py-4 bg-foreground text-background rounded-lg font-medium hover:bg-foreground/90 transition-all inline-flex items-center gap-2"
+                >
+                  Обсудить проект
+                  <Icon name="ArrowRight" size={20} />
+                </button>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                {recipient.heroImages.map((img, idx) => (
+                  <div 
+                    key={idx}
+                    className={`rounded-2xl overflow-hidden ${idx === 0 ? 'col-span-2 aspect-[16/9]' : 'aspect-square'}`}
+                  >
+                    <img 
+                      src={img}
+                      alt={`${recipient.title} ${idx + 1}`}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
-            
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              {recipient.heroTitle}
-            </h1>
-            <p className="text-2xl text-muted-foreground mb-10 leading-relaxed">
-              {recipient.heroSubtitle}
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {recipient.gallery.map((item, index) => (
+                <div 
+                  key={index}
+                  className="bg-background rounded-2xl overflow-hidden group hover:shadow-xl transition-all"
+                >
+                  <div className="aspect-square overflow-hidden">
+                    <img 
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider mb-2">
+                      {item.category}
+                    </div>
+                    <h3 className="text-xl font-bold mb-4">{item.title}</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {item.materials.map((material, idx) => (
+                        <span 
+                          key={idx}
+                          className="px-3 py-1 bg-muted text-muted-foreground text-xs rounded-full"
+                        >
+                          {material}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Occasions Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center">Для каких поводов</h2>
+            <p className="text-xl text-muted-foreground text-center mb-16 max-w-3xl mx-auto">
+              Подбираем награду под конкретное событие
             </p>
             
-            <button
-              onClick={() => setShowCallModal(true)}
-              className="px-10 py-5 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-3"
-            >
-              Подобрать награду
-              <Icon name="ArrowRight" size={20} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Challenges Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold mb-4 text-center">Знакомые сложности?</h2>
-          <p className="text-xl text-muted-foreground mb-12 text-center max-w-3xl mx-auto">
-            Мы понимаем эти проблемы и знаем, как их решить
-          </p>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {recipient.challenges.map((challenge, index) => (
-              <div 
-                key={index}
-                className="bg-background border-2 border-destructive/20 rounded-2xl p-6 hover:border-destructive/40 transition-all"
-              >
-                <div className="w-14 h-14 bg-destructive/10 rounded-xl flex items-center justify-center mb-4">
-                  <Icon name={challenge.icon as any} size={28} className="text-destructive" />
-                </div>
-                <h3 className="text-lg font-bold mb-3">{challenge.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {challenge.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Solutions Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold mb-4 text-center">Наши решения</h2>
-          <p className="text-xl text-muted-foreground mb-12 text-center max-w-3xl mx-auto">
-            Так мы помогаем сделать правильный выбор
-          </p>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {recipient.solutions.map((solution, index) => (
-              <div 
-                key={index}
-                className="bg-card border border-border rounded-2xl p-6 hover:border-primary transition-all group"
-              >
-                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-all">
-                  <Icon name={solution.icon as any} size={28} className="text-primary" />
-                </div>
-                <h3 className="text-lg font-bold mb-3">{solution.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {solution.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Examples Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold mb-4 text-center">Готовые решения</h2>
-          <p className="text-xl text-muted-foreground mb-12 text-center max-w-3xl mx-auto">
-            Примеры наград, которые мы создали для подобных случаев
-          </p>
-          
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {recipient.examples.map((example, index) => (
-              <div 
-                key={index}
-                className="bg-background border border-border rounded-2xl overflow-hidden hover:border-primary transition-all group"
-              >
-                <div className="aspect-square overflow-hidden">
-                  <img 
-                    src={example.image}
-                    alt={example.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
-                      {example.price}
-                    </span>
+            <div className="grid md:grid-cols-2 gap-8">
+              {recipient.occasions.map((occasion, index) => (
+                <div 
+                  key={index}
+                  className="group"
+                >
+                  <div className="aspect-[16/9] rounded-2xl overflow-hidden mb-6">
+                    <img 
+                      src={occasion.image}
+                      alt={occasion.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
-                  <h3 className="text-xl font-bold mb-2">{example.title}</h3>
-                  <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                    {example.description}
+                  <h3 className="text-2xl font-bold mb-3">{occasion.title}</h3>
+                  <p className="text-muted-foreground mb-4 leading-relaxed">
+                    {occasion.description}
                   </p>
-                  
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <Icon name="Calendar" size={14} />
-                    {example.occasion}
+                  <div className="flex flex-wrap gap-2">
+                    {occasion.examples.map((example, idx) => (
+                      <span 
+                        key={idx}
+                        className="text-sm text-muted-foreground"
+                      >
+                        {example}{idx < occasion.examples.length - 1 ? ' •' : ''}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <button
-              onClick={() => setShowCallModal(true)}
-              className="px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-2"
-            >
-              Обсудить свой вариант
-              <Icon name="MessageCircle" size={18} />
-            </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Why Us Section */}
+      {/* Showcase Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center">Примеры работ</h2>
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+              {recipient.showcase.map((item, index) => (
+                <div 
+                  key={index}
+                  className="group cursor-pointer"
+                >
+                  <div className="aspect-square rounded-xl overflow-hidden mb-3">
+                    <img 
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="text-sm font-medium mb-1">{item.title}</div>
+                  <div className="text-xs text-muted-foreground">{item.price}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Advantages Section */}
       <section className="py-20">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold mb-12 text-center">Почему мы?</h2>
-          
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-16">
-            {recipient.why.map((item, index) => (
-              <div 
-                key={index}
-                className="text-center"
-              >
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Icon name="Check" size={32} className="text-primary" />
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {recipient.advantages.map((item, index) => (
+                <div key={index} className="text-center">
+                  <div className="w-12 h-12 bg-foreground/5 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon name="Check" size={24} />
+                  </div>
+                  <h3 className="font-bold mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                <p className="text-muted-foreground">{item.description}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary/5">
+      <section className="py-20 bg-foreground text-background">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              {recipient.ctaTitle}
+              Создадим уникальную награду
             </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              {recipient.ctaDescription}
+            <p className="text-xl mb-8 opacity-90">
+              Обсудим ваш проект, предложим варианты и подготовим макеты
             </p>
             
             <button
               onClick={() => setShowCallModal(true)}
-              className="px-12 py-6 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-3"
+              className="px-12 py-5 bg-background text-foreground rounded-lg font-semibold hover:bg-background/90 transition-all inline-flex items-center gap-2"
             >
               Получить консультацию
               <Icon name="Phone" size={20} />
             </button>
             
-            <div className="mt-12 grid md:grid-cols-3 gap-6">
-              <div className="bg-background border border-border rounded-xl p-6">
-                <div className="text-4xl font-bold text-primary mb-2">30 мин</div>
-                <div className="text-muted-foreground">Консультация</div>
+            <div className="mt-16 grid md:grid-cols-3 gap-8 text-center">
+              <div>
+                <div className="text-5xl font-bold mb-2">15 лет</div>
+                <div className="opacity-80">Опыт работы</div>
               </div>
-              <div className="bg-background border border-border rounded-xl p-6">
-                <div className="text-4xl font-bold text-primary mb-2">3-5</div>
-                <div className="text-muted-foreground">Варианта на выбор</div>
+              <div>
+                <div className="text-5xl font-bold mb-2">500+</div>
+                <div className="opacity-80">Довольных клиентов</div>
               </div>
-              <div className="bg-background border border-border rounded-xl p-6">
-                <div className="text-4xl font-bold text-primary mb-2">100%</div>
-                <div className="text-muted-foreground">Найдем решение</div>
+              <div>
+                <div className="text-5xl font-bold mb-2">100%</div>
+                <div className="opacity-80">Найдем решение</div>
               </div>
             </div>
           </div>
