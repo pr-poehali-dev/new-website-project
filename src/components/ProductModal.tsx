@@ -158,7 +158,7 @@ const ProductModal = ({ product, open, onClose }: ProductModalProps) => {
           </CardContent>
         </Card>
       </DialogContent>
-      {showCallModal && <CallModal onClose={() => setShowCallModal(false)} />}
+      {showCallModal && <CallModal isOpen={showCallModal} onClose={() => setShowCallModal(false)} />}
     </Dialog>
   );
 };

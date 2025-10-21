@@ -568,6 +568,7 @@ const EventAwardsPage = () => {
       
       {showCallModal && (
         <CallModal 
+          isOpen={showCallModal}
           onClose={() => setShowCallModal(false)}
           source={`event-${event.id}`}
         />

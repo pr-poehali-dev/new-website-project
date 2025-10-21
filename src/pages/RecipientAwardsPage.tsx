@@ -850,6 +850,7 @@ const RecipientAwardsPage = () => {
       
       {showCallModal && (
         <CallModal 
+          isOpen={showCallModal}
           onClose={() => setShowCallModal(false)}
           source={`recipient-${recipient.id}`}
         />

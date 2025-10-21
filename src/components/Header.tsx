@@ -545,6 +545,7 @@ const Header = () => {
       
       {showCallModal && (
         <CallModal 
+          isOpen={showCallModal}
           onClose={() => {
             setShowCallModal(false);
             setCallModalSource('default');
