@@ -428,6 +428,23 @@ const Header = () => {
                 </div>
               )}
             </div>
+          ) : activeMegaMenu === 'about' ? (
+            <div className="flex gap-8">
+              <div>
+                <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-3">
+                  О компании
+                </h3>
+                <ul className="space-y-2">
+                  {aboutLinks.map((link, idx) => (
+                    <li key={idx}>
+                      <a href={link.href} className="text-sm text-white/80 hover:text-white transition-colors">
+                        {link.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           ) : (
             <div className="flex gap-0">
               <div className="flex-1 pr-8 border-r border-white/10">
@@ -436,7 +453,7 @@ const Header = () => {
                     activeMegaMenu === 'awards' ? awardsCategories :
                     activeMegaMenu === 'decor' ? decorCategories :
                     activeMegaMenu === 'portfolio' ? portfolioCategories :
-                    aboutLinks ? [{ title: 'О компании', items: aboutLinks }] : []
+                    []
                   ).map((category, index) => (
                     <div key={index} className="animate-in fade-in slide-in-from-top-4 duration-300" style={{ animationDelay: `${index * 50}ms` }}>
                       <h3 className="font-bold text-sm mb-4 text-white/60 uppercase tracking-wide">
