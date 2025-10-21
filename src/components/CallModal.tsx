@@ -5,13 +5,11 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
 interface CallModalProps {
-  isOpen: boolean;
   onClose: () => void;
   source?: 'menu' | 'default';
 }
 
-const CallModal = ({ isOpen, onClose, source = 'default' }: CallModalProps) => {
-  if (!isOpen) return null;
+const CallModal = ({ onClose, source = 'default' }: CallModalProps) => {
   const [showForm, setShowForm] = useState(source === 'menu');
   const [formData, setFormData] = useState({
     name: '',
