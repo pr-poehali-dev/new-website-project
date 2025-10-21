@@ -46,7 +46,7 @@ const Hero = () => {
           ))}
           <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
 
-          <div className="relative z-10 h-full flex flex-col justify-center p-4 md:p-8 lg:p-12">
+          <div className="relative z-10 h-full flex flex-col justify-end pb-8 md:pb-12 lg:pb-16 p-4 md:p-8 lg:p-12">
             <div className="max-w-2xl mb-8 md:mb-12">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
                 Награды и подарки <span className="text-white/90">для первых</span>
@@ -70,20 +70,15 @@ const Hero = () => {
                 </Button>
               </div>
 
-              <div className="flex items-end justify-between gap-8 flex-wrap">
-                <div className="grid grid-cols-3 gap-6 bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                  <div>
-                    <div className="text-3xl font-bold text-white mb-1">300+</div>
-                    <div className="text-xs text-white/70">Проектов</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-white mb-1">55</div>
-                    <div className="text-xs text-white/70">Клиентов</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-white mb-1">21</div>
-                    <div className="text-xs text-white/70">Лет опыта</div>
-                  </div>
+              <div className="grid grid-cols-3 gap-4 mt-4">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <p className="text-sm text-white font-medium">Индивидуальное сопровождение</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <p className="text-sm text-white font-medium">Помощь с разработкой идей и концептов</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <p className="text-sm text-white font-medium">Решение задач под ключ</p>
                 </div>
               </div>
             </div>
@@ -100,18 +95,15 @@ const Hero = () => {
                 </Button>
               </div>
               
-              <div className="grid grid-cols-3 gap-3 bg-white/10 backdrop-blur-sm rounded-2xl p-4">
-                <div>
-                  <div className="text-2xl font-bold text-white mb-1">300+</div>
-                  <div className="text-xs text-white/70">Проектов</div>
+              <div className="grid grid-cols-1 gap-2 mt-2">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20">
+                  <p className="text-xs text-white font-medium">Индивидуальное сопровождение</p>
                 </div>
-                <div>
-                  <div className="text-2xl font-bold text-white mb-1">55</div>
-                  <div className="text-xs text-white/70">Клиентов</div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20">
+                  <p className="text-xs text-white font-medium">Помощь с разработкой идей и концептов</p>
                 </div>
-                <div>
-                  <div className="text-2xl font-bold text-white mb-1">21</div>
-                  <div className="text-xs text-white/70">Лет опыта</div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20">
+                  <p className="text-xs text-white font-medium">Решение задач под ключ</p>
                 </div>
               </div>
             </div>
