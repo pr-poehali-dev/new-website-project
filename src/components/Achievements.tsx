@@ -29,11 +29,10 @@ const Achievements = () => {
   return (
     <>
       <div className="absolute top-24 md:top-28 right-4 md:right-8 z-20 flex flex-row gap-3">
-        {achievements.map((achievement, index) => (
+        {achievements.map((achievement) => (
           <div 
             key={achievement.id}
-            className="w-24 h-24 md:w-32 md:h-32 cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-lg animate-pulse-slow"
-            style={{ animationDelay: `${index * 200}ms` }}
+            className="w-24 h-24 md:w-32 md:h-32 cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-lg"
             onClick={() => setSelectedAchievement(achievement)}
           >
             <img
