@@ -13,6 +13,7 @@ const Header = () => {
   const [user, setUser] = useState<any>(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showCallModal, setShowCallModal] = useState(false);
+  const [callModalSource, setCallModalSource] = useState<'menu' | 'default'>('default');
 
   useEffect(() => {
     const userData = localStorage.getItem('user');
@@ -366,6 +367,16 @@ const Header = () => {
                       </li>
                     ))}
                   </ul>
+                  <Button 
+                    className="mt-6 bg-white text-primary hover:bg-white/90 w-full"
+                    onClick={() => {
+                      setCallModalSource('menu');
+                      setShowCallModal(true);
+                      handleMouseLeave();
+                    }}
+                  >
+                    Оставить заявку
+                  </Button>
                 </div>
 
                 <div>
@@ -498,7 +509,13 @@ const Header = () => {
       />
       
       {showCallModal && (
-        <CallModal onClose={() => setShowCallModal(false)} />
+        <CallModal 
+          onClose={() => {
+            setShowCallModal(false);
+            setCallModalSource('default');
+          }} 
+          source={callModalSource}
+        />
       )}
     </>
   );
