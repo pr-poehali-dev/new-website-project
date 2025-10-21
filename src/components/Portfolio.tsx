@@ -179,7 +179,7 @@ const Portfolio = () => {
               </div>
             </div>
 
-            <div className="flex justify-center gap-2 mb-12">
+            <div className="flex justify-center gap-2">
               {filteredProducts.map((_, index) => (
                 <button
                   key={index}
@@ -195,25 +195,6 @@ const Portfolio = () => {
             </div>
           </>
         )}
-
-        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-          <div className="text-center p-6 bg-muted/30 rounded-xl">
-            <div className="text-4xl font-bold text-primary mb-2">500+</div>
-            <div className="text-sm text-muted-foreground">Проектов</div>
-          </div>
-          <div className="text-center p-6 bg-muted/30 rounded-xl">
-            <div className="text-4xl font-bold text-primary mb-2">10+</div>
-            <div className="text-sm text-muted-foreground">Лет опыта</div>
-          </div>
-          <div className="text-center p-6 bg-muted/30 rounded-xl">
-            <div className="text-4xl font-bold text-primary mb-2">300+</div>
-            <div className="text-sm text-muted-foreground">Клиентов</div>
-          </div>
-          <div className="text-center p-6 bg-muted/30 rounded-xl">
-            <div className="text-4xl font-bold text-primary mb-2">100%</div>
-            <div className="text-sm text-muted-foreground">Качество</div>
-          </div>
-        </div>
       </div>
     </section>
   );
