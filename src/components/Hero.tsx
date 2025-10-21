@@ -70,15 +70,33 @@ const Hero = () => {
                 </Button>
               </div>
 
-              <div className="grid grid-cols-3 gap-4 mt-4">
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
-                  <p className="text-sm text-white font-medium">Индивидуальное сопровождение</p>
+              <div className="flex flex-col gap-3 mt-4 max-w-md">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 flex items-start gap-3">
+                  <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon name="UserCheck" size={20} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-white font-semibold mb-1">Индивидуальное сопровождение</p>
+                    <p className="text-xs text-white/70">Персональный менеджер на всех этапах проекта</p>
+                  </div>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
-                  <p className="text-sm text-white font-medium">Помощь с разработкой идей и концептов</p>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 flex items-start gap-3">
+                  <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon name="Lightbulb" size={20} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-white font-semibold mb-1">Помощь с разработкой идей и концептов</p>
+                    <p className="text-xs text-white/70">Креативная команда для воплощения ваших идей</p>
+                  </div>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
-                  <p className="text-sm text-white font-medium">Решение задач под ключ</p>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 flex items-start gap-3">
+                  <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon name="CheckCircle" size={20} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-white font-semibold mb-1">Решение задач под ключ</p>
+                    <p className="text-xs text-white/70">Полный цикл от идеи до готового продукта</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -95,15 +113,33 @@ const Hero = () => {
                 </Button>
               </div>
               
-              <div className="grid grid-cols-1 gap-2 mt-2">
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20">
-                  <p className="text-xs text-white font-medium">Индивидуальное сопровождение</p>
+              <div className="flex flex-col gap-2 mt-2">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20 flex items-start gap-2">
+                  <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon name="UserCheck" size={16} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-white font-semibold mb-0.5">Индивидуальное сопровождение</p>
+                    <p className="text-xs text-white/60">Персональный менеджер на всех этапах</p>
+                  </div>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20">
-                  <p className="text-xs text-white font-medium">Помощь с разработкой идей и концептов</p>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20 flex items-start gap-2">
+                  <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon name="Lightbulb" size={16} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-white font-semibold mb-0.5">Помощь с разработкой идей и концептов</p>
+                    <p className="text-xs text-white/60">Креативная команда для воплощения идей</p>
+                  </div>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20">
-                  <p className="text-xs text-white font-medium">Решение задач под ключ</p>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20 flex items-start gap-2">
+                  <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon name="CheckCircle" size={16} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-white font-semibold mb-0.5">Решение задач под ключ</p>
+                    <p className="text-xs text-white/60">Полный цикл от идеи до продукта</p>
+                  </div>
                 </div>
               </div>
             </div>
