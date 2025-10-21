@@ -27,7 +27,7 @@ export const sportsCategories: Record<string, SportsCategory> = {
     heroSubtitle: 'Символ победы и спортивных достижений',
     heroDescription: 'Создаем эксклюзивные кубки с чашами для спортивных соревнований любого уровня. От местных турниров до международных чемпионатов.',
     heroImages: [
-      'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/96596fb8-0738-4157-b684-72a05db139bf.jpg',
+      'https://cdn.poehali.dev/files/1ffe9c3a-40d2-498d-ade1-8f2fafabdb5c.png',
       'https://cdn.poehali.dev/projects/a7feed0c-8052-42f4-853e-4b4eebf26e01/files/64fe7e7d-6e4e-4043-a4dd-c75ff619a585.jpg',
     ],
     gallery: [
