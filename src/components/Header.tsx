@@ -41,11 +41,8 @@ const Header = () => {
     { 
       name: 'Спортивные награды', 
       key: 'sport',
-      subcategories: ['Переходящие кубки', 'Дипломы и грамоты', 'Подарки', 'Сувениры', 'Декор'],
-      materials: ['Стекло', 'Металл', 'Дерево', 'Камень', 'Смола', 'Акрил', '3Д Печать'],
-      occasions: ['Корпоративные мероприятия', 'Спортивные мероприятия', 'Государственные мероприятия', 'Культурные мероприятия', 'Открытие объекта', 'Завершение проекта', 'Юбилей'],
-      recipients: ['Руководителю', 'Основателю', 'Акционеру', 'Инвестору', 'Партнерам', 'Сотрудникам'],
-      relatedCategories: [
+      sportCategories: [
+        { name: 'Спортивные награды', items: ['Переходящие кубки', 'Дипломы и грамоты', 'Подарки', 'Сувениры', 'Декор'] },
         { name: 'Кубки с чашами', items: ['Переходящие кубки', 'Киберспорт'] }
       ]
     },
@@ -357,104 +354,83 @@ const Header = () => {
                 </ul>
               </div>
 
-              <div className="flex-1 grid grid-cols-3 gap-8">
-                <div>
-                  {mainCategories.find(c => c.key === selectedMainCategory)?.subcategories ? (
-                    <>
+              {mainCategories.find(c => c.key === selectedMainCategory)?.sportCategories ? (
+                <div className="flex-1 grid grid-cols-2 gap-8">
+                  {mainCategories.find(c => c.key === selectedMainCategory)?.sportCategories?.map((sportCat, idx) => (
+                    <div key={idx}>
                       <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-3">
-                        {mainCategories.find(c => c.key === selectedMainCategory)?.name}
+                        {sportCat.name}
                       </h3>
                       <ul className="space-y-2">
-                        {mainCategories.find(c => c.key === selectedMainCategory)?.subcategories?.map((subcat, idx) => (
-                          <li key={idx}>
+                        {sportCat.items.map((item, itemIdx) => (
+                          <li key={itemIdx}>
                             <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
-                              {subcat}
+                              {item}
                             </a>
                           </li>
                         ))}
                       </ul>
-                    </>
-                  ) : (
-                    <>
-                      <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-3">
-                        По материалам
-                      </h3>
-                      <ul className="space-y-2">
-                        {mainCategories.find(c => c.key === selectedMainCategory)?.materials.map((material, idx) => (
-                          <li key={idx}>
-                            <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
-                              {material}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                  <Button 
-                    className="mt-6 bg-white text-primary hover:bg-white/90 w-full"
-                    onClick={() => {
-                      setCallModalSource('menu');
-                      setShowCallModal(true);
-                      handleMouseLeave();
-                    }}
-                  >
-                    Оставить заявку
-                  </Button>
+                    </div>
+                  ))}
                 </div>
-
-                <div>
-                  {mainCategories.find(c => c.key === selectedMainCategory)?.relatedCategories ? (
-                    <>
-                      {mainCategories.find(c => c.key === selectedMainCategory)?.relatedCategories?.map((relCat, idx) => (
-                        <div key={idx}>
-                          <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-3">
-                            {relCat.name}
-                          </h3>
-                          <ul className="space-y-2">
-                            {relCat.items.map((item, itemIdx) => (
-                              <li key={itemIdx}>
-                                <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
-                                  {item}
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+              ) : (
+                <div className="flex-1 grid grid-cols-3 gap-8">
+                  <div>
+                    <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-3">
+                      По материалам
+                    </h3>
+                    <ul className="space-y-2">
+                      {mainCategories.find(c => c.key === selectedMainCategory)?.materials.map((material, idx) => (
+                        <li key={idx}>
+                          <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
+                            {material}
+                          </a>
+                        </li>
                       ))}
-                    </>
-                  ) : (
-                    <>
-                      <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-3">
-                        Мероприятия
-                      </h3>
-                      <ul className="space-y-2">
-                        {mainCategories.find(c => c.key === selectedMainCategory)?.occasions.map((occasion, idx) => (
-                          <li key={idx}>
-                            <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
-                              {occasion}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                </div>
+                    </ul>
+                    <Button 
+                      className="mt-6 bg-white text-primary hover:bg-white/90 w-full"
+                      onClick={() => {
+                        setCallModalSource('menu');
+                        setShowCallModal(true);
+                        handleMouseLeave();
+                      }}
+                    >
+                      Оставить заявку
+                    </Button>
+                  </div>
 
-                <div>
-                  <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-3">
-                    Кому подарить
-                  </h3>
-                  <ul className="space-y-2">
-                    {mainCategories.find(c => c.key === selectedMainCategory)?.recipients.map((recipient, idx) => (
-                      <li key={idx}>
-                        <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
-                          {recipient}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                  <div>
+                    <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-3">
+                      Мероприятия
+                    </h3>
+                    <ul className="space-y-2">
+                      {mainCategories.find(c => c.key === selectedMainCategory)?.occasions.map((occasion, idx) => (
+                        <li key={idx}>
+                          <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
+                            {occasion}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-3">
+                      Кому подарить
+                    </h3>
+                    <ul className="space-y-2">
+                      {mainCategories.find(c => c.key === selectedMainCategory)?.recipients.map((recipient, idx) => (
+                        <li key={idx}>
+                          <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
+                            {recipient}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           ) : (
             <div className="flex gap-0">
