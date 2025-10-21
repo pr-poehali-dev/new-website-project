@@ -32,7 +32,14 @@ const Header = () => {
       name: 'Корпоративные награды', 
       key: 'corporate',
       materials: [{ name: 'Стекло', href: '/catalog/steklo' }, { name: 'Металл', href: '/catalog/metall' }, { name: 'Дерево', href: '/catalog/derevo' }, { name: 'Камень', href: '/catalog/kamen' }, { name: 'Смола', href: '/catalog/smola' }, { name: 'Акрил', href: '/catalog/akril' }],
-      occasions: ['Корпоративные мероприятия', 'Спортивные мероприятия', 'Государственные мероприятия', 'Культурные мероприятия', 'Открытие объекта', 'Завершение проекта', 'Юбилей'],
+      occasions: [
+        { name: 'Корпоративные мероприятия', href: '/events/korporativnye' },
+        { name: 'Государственные мероприятия', href: '/events/gosudarstvennye' },
+        { name: 'Культурные мероприятия', href: '/events/kulturnye' },
+        { name: 'Открытие объекта', href: '/events/otkrytie-obekta' },
+        { name: 'Завершение проекта', href: '/events/zavershenie-proekta' },
+        { name: 'Юбилей', href: '/events/yubiley' }
+      ],
       recipients: ['Руководителю', 'Основателю', 'Акционеру', 'Инвестору', 'Партнерам', 'Сотрудникам']
     },
     { 
