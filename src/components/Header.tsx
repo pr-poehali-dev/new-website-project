@@ -31,7 +31,7 @@ const Header = () => {
     { 
       name: 'Корпоративные награды', 
       key: 'corporate',
-      materials: ['Стекло', 'Металл', 'Дерево', 'Камень', 'Смола', 'Акрил', '3Д Печать'],
+      materials: [{ name: 'Стекло', href: '/catalog/steklo' }, { name: 'Металл', href: '/catalog/metall' }, { name: 'Дерево', href: '/catalog/derevo' }, { name: 'Камень', href: '/catalog/kamen' }, { name: 'Смола', href: '/catalog/smola' }, { name: 'Акрил', href: '/catalog/akril' }],
       occasions: ['Корпоративные мероприятия', 'Спортивные мероприятия', 'Государственные мероприятия', 'Культурные мероприятия', 'Открытие объекта', 'Завершение проекта', 'Юбилей'],
       recipients: ['Руководителю', 'Основателю', 'Акционеру', 'Инвестору', 'Партнерам', 'Сотрудникам']
     },
@@ -39,42 +39,42 @@ const Header = () => {
       name: 'Спортивные награды', 
       key: 'sport',
       sportCategories: [
-        { name: 'Кубки с чашами', items: ['Переходящие кубки', 'Киберспорт'] }
+        { name: 'Кубки с чашами', items: [{ name: 'Переходящие кубки', href: '#' }, { name: 'Киберспорт', href: '#' }] }
       ]
     },
     { 
       name: 'Переходящие кубки', 
       key: 'cups',
       sportCategories: [
-        { name: 'Переходящие кубки', items: ['Корпоративные переходящие кубки', 'Спортивные переходящие кубки'] }
+        { name: 'Переходящие кубки', items: [{ name: 'Корпоративные переходящие кубки', href: '#' }, { name: 'Спортивные переходящие кубки', href: '#' }] }
       ]
     },
     { 
       name: 'Дипломы и грамоты', 
       key: 'diplomas',
       sportCategories: [
-        { name: 'Дипломы и грамоты', items: ['Плакетки и дипломы', 'Подарочное панно'] }
+        { name: 'Дипломы и грамоты', items: [{ name: 'Плакетки и дипломы', href: '#' }, { name: 'Подарочное панно', href: '#' }] }
       ]
     },
     { 
       name: 'Подарки', 
       key: 'gifts',
       sportCategories: [
-        { name: 'Подарки', items: ['Для первых лиц', 'Подарочные наборы', 'Протокольные подарки', 'Корпоративные подарки'] }
+        { name: 'Подарки', items: [{ name: 'Для первых лиц', href: '#' }, { name: 'Подарочные наборы', href: '#' }, { name: 'Протокольные подарки', href: '#' }, { name: 'Корпоративные подарки', href: '#' }] }
       ]
     },
     { 
       name: 'Сувениры', 
       key: 'souvenirs',
       sportCategories: [
-        { name: 'Сувениры', items: ['Корпоративные сувениры', 'Сувениры к профессиональным праздникам', 'Настольные сувениры'] }
+        { name: 'Сувениры', items: [{ name: 'Корпоративные сувениры', href: '#' }, { name: 'Сувениры к профессиональным праздникам', href: '#' }, { name: 'Настольные сувениры', href: '#' }] }
       ]
     },
     { 
       name: 'Декор', 
       key: 'decor',
       sportCategories: [
-        { name: 'Декор', items: ['Корпоративный декор', 'Авторские арт-объекты', 'Панно'] }
+        { name: 'Декор', items: [{ name: 'Корпоративный декор', href: '#' }, { name: 'Авторские арт-объекты', href: '#' }, { name: 'Панно', href: '#' }] }
       ]
     },
   ];
@@ -138,12 +138,12 @@ const Header = () => {
     {
       title: 'Награды по материалам',
       items: [
-        { name: 'Каменная история', icon: 'Mountain', href: '/catalog/kamennaya-istoriya' },
-        { name: 'Стеклянные награды', icon: 'GlassWater', href: '/catalog/steklyannye-nagrady' },
-        { name: 'Акриловые изделия', icon: 'Box', href: '/catalog/akrilovye-izdeliya' },
-        { name: 'Предметы в смоле', icon: 'Droplet', href: '/catalog/predmety-v-smole' },
-        { name: 'Изделия из древесины', icon: 'Trees', href: '/catalog/izdeliya-iz-drevesiny' },
-        { name: 'Изделия из металла', icon: 'Medal', href: '/catalog/izdeliya-iz-metalla' },
+        { name: 'Камень', icon: 'Mountain', href: '/catalog/kamen' },
+        { name: 'Стекло', icon: 'GlassWater', href: '/catalog/steklo' },
+        { name: 'Акрил', icon: 'Box', href: '/catalog/akril' },
+        { name: 'Смола', icon: 'Droplet', href: '/catalog/smola' },
+        { name: 'Дерево', icon: 'Trees', href: '/catalog/derevo' },
+        { name: 'Металл', icon: 'Medal', href: '/catalog/metall' },
       ],
     },
   ];
@@ -360,8 +360,8 @@ const Header = () => {
                       <ul className="space-y-2">
                         {sportCat.items.map((item, itemIdx) => (
                           <li key={itemIdx}>
-                            <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
-                              {item}
+                            <a href={typeof item === 'string' ? '#' : item.href} className="text-sm text-white/80 hover:text-white transition-colors">
+                              {typeof item === 'string' ? item : item.name}
                             </a>
                           </li>
                         ))}
@@ -376,10 +376,10 @@ const Header = () => {
                       По материалам
                     </h3>
                     <ul className="space-y-2">
-                      {mainCategories.find(c => c.key === selectedMainCategory)?.materials.map((material, idx) => (
+                      {mainCategories.find(c => c.key === selectedMainCategory)?.materials?.map((material, idx) => (
                         <li key={idx}>
-                          <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
-                            {material}
+                          <a href={material.href} className="text-sm text-white/80 hover:text-white transition-colors">
+                            {material.name}
                           </a>
                         </li>
                       ))}

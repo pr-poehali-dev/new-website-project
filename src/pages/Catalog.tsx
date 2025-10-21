@@ -8,45 +8,70 @@ import Icon from '@/components/ui/icon';
 import ProductModal from '@/components/ProductModal';
 
 const catalogData = {
-  'kamennaya-istoriya': {
-    title: 'Каменная история',
+  'kamen': {
+    title: 'Камень',
     description: 'Элегантные награды из натурального камня для особых случаев',
     icon: 'Mountain',
   },
-  'steklyannye-nagrady': {
-    title: 'Стеклянные награды',
+  'steklo': {
+    title: 'Стекло',
     description: 'Изысканные награды из хрусталя и стекла',
     icon: 'GlassWater',
   },
-  'akrilovye-izdeliya': {
-    title: 'Акриловые изделия',
+  'akril': {
+    title: 'Акрил',
     description: 'Современные награды из акрила',
     icon: 'Box',
   },
-  'predmety-v-smole': {
-    title: 'Предметы в смоле',
+  'smola': {
+    title: 'Смола',
     description: 'Уникальные изделия с инкапсуляцией в эпоксидной смоле',
     icon: 'Droplet',
   },
-  'izdeliya-iz-drevesiny': {
-    title: 'Изделия из древесины',
+  'derevo': {
+    title: 'Дерево',
     description: 'Награды и сувениры из натурального дерева',
     icon: 'Trees',
   },
-  'izdeliya-iz-metalla': {
-    title: 'Изделия из металла',
+  'metall': {
+    title: 'Металл',
     description: 'Престижные металлические награды',
     icon: 'Medal',
   },
-  'diplomy-i-plaketki': {
-    title: 'Дипломы и плакетки',
-    description: 'Официальные награды и благодарности',
+  'korporativnye-nagrady': {
+    title: 'Корпоративные награды',
+    description: 'Награды для бизнеса и корпоративных мероприятий',
+    icon: 'Building2',
+  },
+  'sportivnye-nagrady': {
+    title: 'Спортивные награды',
+    description: 'Кубки и награды для спортивных мероприятий',
+    icon: 'Trophy',
+  },
+  'perehodyashchie-kubki': {
+    title: 'Переходящие кубки',
+    description: 'Кубки для регулярных соревнований и турниров',
+    icon: 'Trophy',
+  },
+  'diplomy-i-gramoty': {
+    title: 'Дипломы и грамоты',
+    description: 'Плакетки, дипломы и подарочные панно',
     icon: 'Award',
   },
-  'izdeliya-s-3d-obektami': {
-    title: 'Изделия с 3Д объектами',
-    description: 'Награды с объёмными элементами',
-    icon: 'Box',
+  'podarki': {
+    title: 'Подарки',
+    description: 'Эксклюзивные подарки для первых лиц и партнеров',
+    icon: 'Gift',
+  },
+  'suveniry': {
+    title: 'Сувениры',
+    description: 'Корпоративные и настольные сувениры',
+    icon: 'Package',
+  },
+  'dekor': {
+    title: 'Декор',
+    description: 'Корпоративный декор и авторские арт-объекты',
+    icon: 'Palette',
   },
 };
 

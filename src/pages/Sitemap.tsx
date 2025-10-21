@@ -69,12 +69,12 @@ const Sitemap = () => {
     {
       title: 'Награды по материалам',
       links: [
-        { name: 'Каменная история', href: '/catalog/kamennaya-istoriya' },
-        { name: 'Стеклянные награды', href: '/catalog/steklyannye-nagrady' },
-        { name: 'Акриловые изделия', href: '/catalog/akrilovye-izdeliya' },
-        { name: 'Предметы в смоле', href: '/catalog/predmety-v-smole' },
-        { name: 'Изделия из древесины', href: '/catalog/izdeliya-iz-drevesiny' },
-        { name: 'Изделия из металла', href: '/catalog/izdeliya-iz-metalla' },
+        { name: 'Камень', href: '/catalog/kamen' },
+        { name: 'Стекло', href: '/catalog/steklo' },
+        { name: 'Акрил', href: '/catalog/akril' },
+        { name: 'Смола', href: '/catalog/smola' },
+        { name: 'Дерево', href: '/catalog/derevo' },
+        { name: 'Металл', href: '/catalog/metall' },
       ]
     },
     {
