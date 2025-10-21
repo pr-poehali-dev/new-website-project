@@ -3,7 +3,6 @@ import Hero from '@/components/Hero';
 import Achievements from '@/components/Achievements';
 import Categories from '@/components/Categories';
 import About from '@/components/About';
-import Portfolio from '@/components/Portfolio';
 import Catalog from '@/components/Catalog';
 import Production from '@/components/Production';
 import Reviews from '@/components/Reviews';
@@ -21,7 +20,6 @@ const Index = () => {
       </div>
       <Categories />
       <About />
-      <Portfolio />
       <Catalog />
       <Production />
       <Reviews />
