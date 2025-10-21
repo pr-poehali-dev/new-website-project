@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
-import AuthModal from './AuthModal';
 import CallModal from './CallModal';
 
 const Header = () => {
@@ -10,17 +9,8 @@ const Header = () => {
   const [catalogOpen, setCatalogOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
-  const [user, setUser] = useState<any>(null);
-  const [showAuthModal, setShowAuthModal] = useState(false);
   const [showCallModal, setShowCallModal] = useState(false);
   const [callModalSource, setCallModalSource] = useState<'menu' | 'default'>('default');
-
-  useEffect(() => {
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      setUser(JSON.parse(userData));
-    }
-  }, []);
 
   const navigation = [
     { name: 'Каталог', href: '/catalog', hasMega: true, megaType: 'catalog' },
@@ -259,22 +249,6 @@ const Header = () => {
               <Icon name="Phone" fallback="PhoneCall" size={16} className="mr-2" />
               Позвонить
             </Button>
-            {user ? (
-              <Link to="/dashboard">
-                <Button size="sm" className={catalogOpen ? 'bg-white text-primary hover:bg-white/90' : ''}>
-                  <Icon name="User" size={16} className="mr-2" />
-                  Кабинет
-                </Button>
-              </Link>
-            ) : (
-              <Button 
-                size="sm" 
-                className={catalogOpen ? 'bg-white text-primary hover:bg-white/90' : ''}
-                onClick={() => setShowAuthModal(true)}
-              >
-                Войти
-              </Button>
-            )}
           </div>
 
           <button
@@ -304,18 +278,6 @@ const Header = () => {
                 <Icon name="Phone" size={16} className="mr-2" />
                 Позвонить
               </Button>
-              {user ? (
-                <Link to="/dashboard">
-                  <Button size="sm" className="w-full">
-                    <Icon name="User" size={16} className="mr-2" />
-                    Кабинет
-                  </Button>
-                </Link>
-              ) : (
-                <Button size="sm" onClick={() => setShowAuthModal(true)}>
-                  Войти
-                </Button>
-              )}
             </div>
           </div>
         )}
@@ -537,11 +499,6 @@ const Header = () => {
         </div>
       </div>
     </header>
-      <AuthModal 
-        open={showAuthModal} 
-        onOpenChange={setShowAuthModal} 
-        onSuccess={(userData) => setUser(userData)} 
-      />
       
       {showCallModal && (
         <CallModal 

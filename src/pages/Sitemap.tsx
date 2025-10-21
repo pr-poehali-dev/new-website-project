@@ -90,7 +90,6 @@ const Sitemap = () => {
     {
       title: 'Информация',
       links: [
-        { name: 'Награды и достижения', href: '#' },
         { name: 'Отзывы', href: '#reviews' },
         { name: 'Доставка', href: '#' },
         { name: 'Оплата', href: '#' },
