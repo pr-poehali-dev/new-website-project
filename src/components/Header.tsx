@@ -42,7 +42,7 @@ const Header = () => {
       name: 'Спортивные награды', 
       key: 'sport',
       sportCategories: [
-        { name: 'Кубки с чашами', items: [{ name: 'Переходящие кубки', href: '#' }, { name: 'Киберспорт', href: '#' }] }
+        { name: 'Кубки с чашами', items: [{ name: 'Кубки с чашами', href: '/sports/trophy-cups' }, { name: 'Переходящие кубки', href: '/sports/transitional-cups' }, { name: 'Киберспорт', href: '/sports/cybersport' }] }
       ]
     },
     { 
