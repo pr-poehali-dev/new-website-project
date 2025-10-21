@@ -22,12 +22,66 @@ const Header = () => {
   }, []);
 
   const navigation = [
-    { name: 'Каталог', href: '/catalog', isRoute: true },
+    { name: 'Каталог', href: '/catalog', hasMega: true, megaType: 'catalog' },
     { name: 'Награды', href: '#awards', hasMega: true, megaType: 'awards' },
     { name: 'Подарки', href: '#gifts', hasMega: true, megaType: 'gifts' },
     { name: 'Декор', href: '#decor', hasMega: true, megaType: 'decor' },
     { name: 'О компании', href: '#about', hasMega: true, megaType: 'about' },
   ];
+
+  const mainCategories = [
+    { 
+      name: 'Корпоративные награды', 
+      key: 'corporate',
+      materials: ['Стекло', 'Металл', 'Дерево', 'Камень', 'Смола', 'Акрил', '3Д Печать'],
+      occasions: ['Корпоративные мероприятия', 'Спортивные мероприятия', 'Государственные мероприятия', 'Культурные мероприятия', 'Открытие объекта', 'Завершение проекта', 'Юбилей'],
+      recipients: ['Руководителю', 'Основателю', 'Акционеру', 'Инвестору', 'Партнерам', 'Сотрудникам']
+    },
+    { 
+      name: 'Спортивные награды', 
+      key: 'sport',
+      materials: ['Стекло', 'Металл', 'Дерево', 'Камень', 'Смола', 'Акрил', '3Д Печать'],
+      occasions: ['Корпоративные мероприятия', 'Спортивные мероприятия', 'Государственные мероприятия', 'Культурные мероприятия', 'Открытие объекта', 'Завершение проекта', 'Юбилей'],
+      recipients: ['Руководителю', 'Основателю', 'Акционеру', 'Инвестору', 'Партнерам', 'Сотрудникам']
+    },
+    { 
+      name: 'Переходящие кубки', 
+      key: 'cups',
+      materials: ['Стекло', 'Металл', 'Дерево', 'Камень', 'Смола', 'Акрил', '3Д Печать'],
+      occasions: ['Корпоративные мероприятия', 'Спортивные мероприятия', 'Государственные мероприятия', 'Культурные мероприятия', 'Открытие объекта', 'Завершение проекта', 'Юбилей'],
+      recipients: ['Руководителю', 'Основателю', 'Акционеру', 'Инвестору', 'Партнерам', 'Сотрудникам']
+    },
+    { 
+      name: 'Дипломы и грамоты', 
+      key: 'diplomas',
+      materials: ['Стекло', 'Металл', 'Дерево', 'Камень', 'Смола', 'Акрил', '3Д Печать'],
+      occasions: ['Корпоративные мероприятия', 'Спортивные мероприятия', 'Государственные мероприятия', 'Культурные мероприятия', 'Открытие объекта', 'Завершение проекта', 'Юбилей'],
+      recipients: ['Руководителю', 'Основателю', 'Акционеру', 'Инвестору', 'Партнерам', 'Сотрудникам']
+    },
+    { 
+      name: 'Подарки', 
+      key: 'gifts',
+      materials: ['Стекло', 'Металл', 'Дерево', 'Камень', 'Смола', 'Акрил', '3Д Печать'],
+      occasions: ['Корпоративные мероприятия', 'Спортивные мероприятия', 'Государственные мероприятия', 'Культурные мероприятия', 'Открытие объекта', 'Завершение проекта', 'Юбилей'],
+      recipients: ['Руководителю', 'Основателю', 'Акционеру', 'Инвестору', 'Партнерам', 'Сотрудникам']
+    },
+    { 
+      name: 'Сувениры', 
+      key: 'souvenirs',
+      materials: ['Стекло', 'Металл', 'Дерево', 'Камень', 'Смола', 'Акрил', '3Д Печать'],
+      occasions: ['Корпоративные мероприятия', 'Спортивные мероприятия', 'Государственные мероприятия', 'Культурные мероприятия', 'Открытие объекта', 'Завершение проекта', 'Юбилей'],
+      recipients: ['Руководителю', 'Основателю', 'Акционеру', 'Инвестору', 'Партнерам', 'Сотрудникам']
+    },
+    { 
+      name: 'Декор', 
+      key: 'decor',
+      materials: ['Стекло', 'Металл', 'Дерево', 'Камень', 'Смола', 'Акрил', '3Д Печать'],
+      occasions: ['Корпоративные мероприятия', 'Спортивные мероприятия', 'Государственные мероприятия', 'Культурные мероприятия', 'Открытие объекта', 'Завершение проекта', 'Юбилей'],
+      recipients: ['Руководителю', 'Основателю', 'Акционеру', 'Инвестору', 'Партнерам', 'Сотрудникам']
+    },
+  ];
+
+  const [selectedMainCategory, setSelectedMainCategory] = useState<string>('corporate');
 
   const catalogCategories = [
     {
@@ -277,73 +331,141 @@ const Header = () => {
         onMouseLeave={handleMouseLeave}
       >
         <div className="container mx-auto px-6 py-8 relative">
-          <div className="flex gap-0">
-            <div className="flex-1 pr-8 border-r border-white/10">
-              <div className="grid grid-cols-2 gap-8">
-                {(activeMegaMenu === 'catalog' ? catalogCategories :
-                  activeMegaMenu === 'gifts' ? giftsCategories :
-                  activeMegaMenu === 'awards' ? awardsCategories :
-                  activeMegaMenu === 'decor' ? decorCategories :
-                  activeMegaMenu === 'portfolio' ? portfolioCategories :
-                  aboutLinks ? [{ title: 'О компании', items: aboutLinks }] : []
-                ).map((category, index) => (
-                  <div key={index} className="animate-in fade-in slide-in-from-top-4 duration-300" style={{ animationDelay: `${index * 50}ms` }}>
-                    <h3 className="font-bold text-sm mb-4 text-white/60 uppercase tracking-wide">
-                      {category.title}
-                    </h3>
-                    <ul className="space-y-3">
-                      {category.items.map((item: any, idx: number) => (
-                        <li key={idx}>
-                          <div
-                            className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors group cursor-pointer"
-                            onMouseEnter={() => setHoveredCategory(item.name)}
-                            onMouseLeave={() => setHoveredCategory(null)}
-                          >
-                            <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                              <Icon name={item.icon} size={16} className="text-white/80 group-hover:text-white transition-colors" />
-                            </div>
-                            <span>{item.name}</span>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+          {activeMegaMenu === 'catalog' ? (
+            <div className="flex gap-8">
+              <div className="w-64 border-r border-white/20 pr-8">
+                <ul className="space-y-2">
+                  {mainCategories.map((category) => (
+                    <li key={category.key}>
+                      <button
+                        className={`w-full text-left px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                          selectedMainCategory === category.key
+                            ? 'bg-white/20 text-white'
+                            : 'text-white/70 hover:text-white hover:bg-white/10'
+                        }`}
+                        onMouseEnter={() => setSelectedMainCategory(category.key)}
+                      >
+                        {category.name}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
 
-            <div className={`transition-all duration-300 pl-8 ${hoveredCategory ? 'w-80 opacity-100' : 'w-0 opacity-0 overflow-hidden'}`}>
-              {hoveredCategory && (
-                <div 
-                  onMouseEnter={() => setHoveredCategory(hoveredCategory)}
-                  onMouseLeave={() => setHoveredCategory(null)}
-                >
-                  <h4 className="font-bold text-sm mb-4 text-white/60 uppercase tracking-wide">{hoveredCategory}</h4>
+              <div className="flex-1 grid grid-cols-3 gap-8">
+                <div>
+                  <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-3">
+                    По материалам
+                  </h3>
                   <ul className="space-y-2">
-                    {(activeMegaMenu === 'catalog' ? catalogCategories :
-                      activeMegaMenu === 'gifts' ? giftsCategories :
-                      activeMegaMenu === 'awards' ? awardsCategories :
-                      activeMegaMenu === 'decor' ? decorCategories :
-                      activeMegaMenu === 'portfolio' ? portfolioCategories : []
-                    )
-                      .flatMap(cat => cat.items)
-                      .find(item => item.name === hoveredCategory)
-                      ?.subcategories?.map((sub: any, idx: number) => (
-                        <li key={idx}>
-                          <Link
-                            to={sub.href}
-                            className="text-sm text-white/80 hover:text-white transition-colors block py-1"
-                            onClick={() => handleMouseLeave()}
-                          >
-                            {sub.name}
-                          </Link>
-                        </li>
-                      ))}
+                    {mainCategories.find(c => c.key === selectedMainCategory)?.materials.map((material, idx) => (
+                      <li key={idx}>
+                        <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
+                          {material}
+                        </a>
+                      </li>
+                    ))}
                   </ul>
                 </div>
-              )}
+
+                <div>
+                  <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-3">
+                    Мероприятия
+                  </h3>
+                  <ul className="space-y-2">
+                    {mainCategories.find(c => c.key === selectedMainCategory)?.occasions.map((occasion, idx) => (
+                      <li key={idx}>
+                        <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
+                          {occasion}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-3">
+                    Кому подарить
+                  </h3>
+                  <ul className="space-y-2">
+                    {mainCategories.find(c => c.key === selectedMainCategory)?.recipients.map((recipient, idx) => (
+                      <li key={idx}>
+                        <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
+                          {recipient}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="flex gap-0">
+              <div className="flex-1 pr-8 border-r border-white/10">
+                <div className="grid grid-cols-2 gap-8">
+                  {(activeMegaMenu === 'gifts' ? giftsCategories :
+                    activeMegaMenu === 'awards' ? awardsCategories :
+                    activeMegaMenu === 'decor' ? decorCategories :
+                    activeMegaMenu === 'portfolio' ? portfolioCategories :
+                    aboutLinks ? [{ title: 'О компании', items: aboutLinks }] : []
+                  ).map((category, index) => (
+                    <div key={index} className="animate-in fade-in slide-in-from-top-4 duration-300" style={{ animationDelay: `${index * 50}ms` }}>
+                      <h3 className="font-bold text-sm mb-4 text-white/60 uppercase tracking-wide">
+                        {category.title}
+                      </h3>
+                      <ul className="space-y-3">
+                        {category.items.map((item: any, idx: number) => (
+                          <li key={idx}>
+                            <div
+                              className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors group cursor-pointer"
+                              onMouseEnter={() => setHoveredCategory(item.name)}
+                              onMouseLeave={() => setHoveredCategory(null)}
+                            >
+                              <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                                <Icon name={item.icon} size={16} className="text-white/80 group-hover:text-white transition-colors" />
+                              </div>
+                              <span>{item.name}</span>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className={`transition-all duration-300 pl-8 ${hoveredCategory ? 'w-80 opacity-100' : 'w-0 opacity-0 overflow-hidden'}`}>
+                {hoveredCategory && (
+                  <div 
+                    onMouseEnter={() => setHoveredCategory(hoveredCategory)}
+                    onMouseLeave={() => setHoveredCategory(null)}
+                  >
+                    <h4 className="font-bold text-sm mb-4 text-white/60 uppercase tracking-wide">{hoveredCategory}</h4>
+                    <ul className="space-y-2">
+                      {(activeMegaMenu === 'gifts' ? giftsCategories :
+                        activeMegaMenu === 'awards' ? awardsCategories :
+                        activeMegaMenu === 'decor' ? decorCategories :
+                        activeMegaMenu === 'portfolio' ? portfolioCategories : []
+                      )
+                        .flatMap(cat => cat.items)
+                        .find(item => item.name === hoveredCategory)
+                        ?.subcategories?.map((sub: any, idx: number) => (
+                          <li key={idx}>
+                            <Link
+                              to={sub.href}
+                              className="text-sm text-white/80 hover:text-white transition-colors block py-1"
+                              onClick={() => handleMouseLeave()}
+                            >
+                              {sub.name}
+                            </Link>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
