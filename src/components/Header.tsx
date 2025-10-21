@@ -335,9 +335,19 @@ const Header = () => {
                       <ul className="space-y-2">
                         {sportCat.items.map((item, itemIdx) => (
                           <li key={itemIdx}>
-                            <a href={typeof item === 'string' ? '#' : item.href} className="text-sm text-white/80 hover:text-white transition-colors">
-                              {typeof item === 'string' ? item : item.name}
-                            </a>
+                            {typeof item === 'string' ? (
+                              <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
+                                {item}
+                              </a>
+                            ) : (
+                              <Link 
+                                to={item.href} 
+                                className="text-sm text-white/80 hover:text-white transition-colors"
+                                onClick={handleMouseLeave}
+                              >
+                                {item.name}
+                              </Link>
+                            )}
                           </li>
                         ))}
                       </ul>
