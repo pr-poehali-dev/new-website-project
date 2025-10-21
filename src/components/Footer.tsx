@@ -22,6 +22,7 @@ const Footer = () => {
       { name: 'Доставка', href: '#' },
       { name: 'Оплата', href: '#' },
       { name: 'Контакты', href: '#contact' },
+      { name: 'Карта сайта', href: '/sitemap' },
     ],
   };
 

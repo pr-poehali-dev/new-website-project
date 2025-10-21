@@ -10,6 +10,7 @@ import Catalog from "./pages/Catalog";
 import CatalogAll from "./pages/CatalogAll";
 import AboutPage from "./pages/AboutPage";
 import ServicePage from "./pages/ServicePage";
+import Sitemap from "./pages/Sitemap";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/catalog/:category" element={<Catalog />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/service/:serviceId" element={<ServicePage />} />
+          <Route path="/sitemap" element={<Sitemap />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
