@@ -28,11 +28,12 @@ const Achievements = () => {
 
   return (
     <>
-      <div className="absolute top-4 md:top-28 right-4 md:right-8 z-20 flex flex-row gap-3">
+      {/* Desktop version - absolute positioned */}
+      <div className="hidden md:flex absolute top-28 right-8 z-20 flex-row gap-3">
         {achievements.map((achievement) => (
           <div 
             key={achievement.id}
-            className="w-24 h-24 md:w-32 md:h-32 cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-lg"
+            className="w-32 h-32 cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-lg"
             onClick={() => setSelectedAchievement(achievement)}
           >
             <img
@@ -42,6 +43,27 @@ const Achievements = () => {
             />
           </div>
         ))}
+      </div>
+
+      {/* Mobile version - separate section */}
+      <div className="md:hidden bg-background py-4">
+        <div className="container mx-auto px-6">
+          <div className="flex justify-center gap-3">
+            {achievements.map((achievement) => (
+              <div 
+                key={achievement.id}
+                className="w-20 h-20 cursor-pointer hover:scale-105 transition-transform duration-300 drop-shadow-lg"
+                onClick={() => setSelectedAchievement(achievement)}
+              >
+                <img
+                  src={achievement.image}
+                  alt={achievement.title}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <Dialog open={!!selectedAchievement} onOpenChange={() => setSelectedAchievement(null)}>
