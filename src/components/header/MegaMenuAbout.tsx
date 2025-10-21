@@ -22,7 +22,7 @@ const MegaMenuAbout = ({
 
   return (
     <div 
-      className="absolute left-0 right-0 top-full mt-0 bg-[#1a1a1a] border-t border-white/10 shadow-2xl z-50"
+      className="absolute left-0 right-0 top-full mt-0 bg-[#0a0a0a]/95 backdrop-blur-sm border-t border-white/10 shadow-2xl z-50"
       onMouseLeave={() => setHoveredCategory(null)}
     >
       <div className="container mx-auto px-6 py-8">
