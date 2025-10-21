@@ -52,7 +52,7 @@ const Achievements = () => {
             {achievements.map((achievement) => (
               <div 
                 key={achievement.id}
-                className="w-20 h-20 cursor-pointer hover:scale-105 transition-transform duration-300 drop-shadow-lg"
+                className="w-26 h-26 cursor-pointer hover:scale-105 transition-transform duration-300 drop-shadow-lg"
                 onClick={() => setSelectedAchievement(achievement)}
               >
                 <img
