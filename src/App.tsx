@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import Catalog from "./pages/Catalog";
+import CatalogAll from "./pages/CatalogAll";
 import ServicePage from "./pages/ServicePage";
 import NotFound from "./pages/NotFound";
 
@@ -21,6 +22,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/catalog" element={<CatalogAll />} />
           <Route path="/catalog/:category" element={<Catalog />} />
           <Route path="/service/:serviceId" element={<ServicePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
