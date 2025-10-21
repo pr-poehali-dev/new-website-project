@@ -647,29 +647,29 @@ const RecipientAwardsPage = () => {
                 </button>
               </div>
               
-              <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6">
-                  <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-4">
-                    <Icon name="Award" size={24} className="text-white" />
+              <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4">
+                  <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center mb-3">
+                    <Icon name="Award" size={20} className="text-white" />
                   </div>
-                  <h3 className="text-white font-semibold mb-2">Индивидуальный подход</h3>
-                  <p className="text-white/70 text-sm">Персональный дизайнер для вашего проекта</p>
+                  <h3 className="text-white font-semibold mb-1 text-sm">Индивидуальный подход</h3>
+                  <p className="text-white/70 text-xs">Персональный дизайнер для вашего проекта</p>
                 </div>
                 
-                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6">
-                  <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-4">
-                    <Icon name="Gem" size={24} className="text-white" />
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4">
+                  <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center mb-3">
+                    <Icon name="Gem" size={20} className="text-white" />
                   </div>
-                  <h3 className="text-white font-semibold mb-2">Премиум материалы</h3>
-                  <p className="text-white/70 text-sm">Только благородные материалы высшего качества</p>
+                  <h3 className="text-white font-semibold mb-1 text-sm">Премиум материалы</h3>
+                  <p className="text-white/70 text-xs">Только благородные материалы высшего качества</p>
                 </div>
                 
-                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6">
-                  <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-4">
-                    <Icon name="Clock" size={24} className="text-white" />
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4">
+                  <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center mb-3">
+                    <Icon name="Clock" size={20} className="text-white" />
                   </div>
-                  <h3 className="text-white font-semibold mb-2">Срок изготовления</h3>
-                  <p className="text-white/70 text-sm">Готовы к вашему важному событию</p>
+                  <h3 className="text-white font-semibold mb-1 text-sm">Срок изготовления</h3>
+                  <p className="text-white/70 text-xs">Готовы к вашему важному событию</p>
                 </div>
               </div>
             </div>
