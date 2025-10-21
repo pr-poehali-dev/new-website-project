@@ -40,7 +40,14 @@ const Header = () => {
         { name: 'Завершение проекта', href: '/events/zavershenie-proekta' },
         { name: 'Юбилей', href: '/events/yubiley' }
       ],
-      recipients: ['Руководителю', 'Основателю', 'Акционеру', 'Инвестору', 'Партнерам', 'Сотрудникам']
+      recipients: [
+        { name: 'Руководителю', href: '/recipients/rukovoditelyu' },
+        { name: 'Основателю', href: '/recipients/osnovatelyu' },
+        { name: 'Акционеру', href: '/recipients/aktsioneru' },
+        { name: 'Инвестору', href: '/recipients/investoru' },
+        { name: 'Партнерам', href: '/recipients/partneram' },
+        { name: 'Сотрудникам', href: '/recipients/sotrudnikam' }
+      ]
     },
     { 
       name: 'Спортивные награды', 
@@ -423,10 +430,10 @@ const Header = () => {
                       Кому подарить
                     </h3>
                     <ul className="space-y-2">
-                      {mainCategories.find(c => c.key === selectedMainCategory)?.recipients.map((recipient, idx) => (
+                      {mainCategories.find(c => c.key === selectedMainCategory)?.recipients?.map((recipient, idx) => (
                         <li key={idx}>
-                          <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
-                            {recipient}
+                          <a href={recipient.href} className="text-sm text-white/80 hover:text-white transition-colors">
+                            {recipient.name}
                           </a>
                         </li>
                       ))}
