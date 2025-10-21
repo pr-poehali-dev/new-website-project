@@ -22,7 +22,16 @@ const Header = () => {
       name: 'Корпоративные награды', 
       key: 'corporate',
       materials: [{ name: 'Стекло', href: '/catalog/steklo' }, { name: 'Металл', href: '/catalog/metall' }, { name: 'Дерево', href: '/catalog/derevo' }, { name: 'Камень', href: '/catalog/kamen' }, { name: 'Смола', href: '/catalog/smola' }, { name: 'Акрил', href: '/catalog/akril' }],
-      occasions: ['Корпоративные мероприятия', 'Спортивные мероприятия', 'Государственные мероприятия', 'Культурные мероприятия', 'Открытие объекта', 'Завершение проекта', 'Юбилей'],
+      occasions: [
+        { name: 'Корпоративные мероприятия', href: '/events/corporate' },
+        { name: 'Спортивные мероприятия', href: '/events/sport' },
+        { name: 'Государственные мероприятия', href: '/events/government' },
+        { name: 'Культурные мероприятия', href: '/events/cultural' },
+        { name: 'Образовательные мероприятия', href: '/events/education' },
+        { name: 'Открытие объекта', href: '#' },
+        { name: 'Завершение проекта', href: '#' },
+        { name: 'Юбилей', href: '#' }
+      ],
       recipients: ['Руководителю', 'Основателю', 'Акционеру', 'Инвестору', 'Партнерам', 'Сотрудникам']
     },
     { 
@@ -365,9 +374,19 @@ const Header = () => {
                     <ul className="space-y-2">
                       {mainCategories.find(c => c.key === selectedMainCategory)?.occasions.map((occasion, idx) => (
                         <li key={idx}>
-                          <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
-                            {occasion}
-                          </a>
+                          {typeof occasion === 'string' ? (
+                            <a href="#" className="text-sm text-white/80 hover:text-white transition-colors">
+                              {occasion}
+                            </a>
+                          ) : (
+                            <Link 
+                              to={occasion.href} 
+                              className="text-sm text-white/80 hover:text-white transition-colors"
+                              onClick={handleMouseLeave}
+                            >
+                              {occasion.name}
+                            </Link>
+                          )}
                         </li>
                       ))}
                     </ul>
