@@ -49,12 +49,11 @@ const Hero = () => {
           <div className="relative z-10 h-full flex flex-col justify-end pb-8 md:pb-12 lg:pb-16 p-4 md:p-8 lg:p-12">
             <div className="max-w-2xl mb-8 md:mb-12">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-                Награды и подарки <span className="text-white/90">для первых</span>
+                Награды и подарки <span className="text-white/90">для первых лиц</span>
               </h1>
 
               <p className="text-sm md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl">
-                Производим эксклюзивные награды из стекла. 
-                Бесплатная доставка по России при заказе от 50 000 ₽
+                Создаём эксклюзивные награды из стекла, камня и металла. Разрабатываем дизайн и воплощаем уникальные концепции для корпоративных мероприятий
               </p>
             </div>
 
