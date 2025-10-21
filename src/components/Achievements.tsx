@@ -28,7 +28,7 @@ const Achievements = () => {
 
   return (
     <>
-      <div className="absolute top-24 md:top-28 right-4 md:right-8 z-20 flex flex-row gap-3">
+      <div className="absolute top-4 md:top-28 right-4 md:right-8 z-20 flex flex-row gap-3">
         {achievements.map((achievement) => (
           <div 
             key={achievement.id}
