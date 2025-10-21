@@ -23,14 +23,11 @@ const Header = () => {
       key: 'corporate',
       materials: [{ name: 'Стекло', href: '/catalog/steklo' }, { name: 'Металл', href: '/catalog/metall' }, { name: 'Дерево', href: '/catalog/derevo' }, { name: 'Камень', href: '/catalog/kamen' }, { name: 'Смола', href: '/catalog/smola' }, { name: 'Акрил', href: '/catalog/akril' }],
       occasions: [
-        { name: 'Корпоративные мероприятия', href: '/events/corporate' },
-        { name: 'Спортивные мероприятия', href: '/events/sport' },
-        { name: 'Государственные мероприятия', href: '/events/government' },
-        { name: 'Культурные мероприятия', href: '/events/cultural' },
-        { name: 'Образовательные мероприятия', href: '/events/education' },
-        { name: 'Открытие объекта', href: '#' },
-        { name: 'Завершение проекта', href: '#' },
-        { name: 'Юбилей', href: '#' }
+        { name: 'Корпоративное мероприятие', href: '/events/corporate' },
+        { name: 'Спортивное мероприятие', href: '/events/sport' },
+        { name: 'Государственное мероприятие', href: '/events/government' },
+        { name: 'Культурное мероприятие', href: '/events/cultural' },
+        { name: 'Образовательное мероприятие', href: '/events/education' }
       ],
       recipients: ['Руководителю', 'Основателю', 'Акционеру', 'Инвестору', 'Партнерам', 'Сотрудникам']
     },
