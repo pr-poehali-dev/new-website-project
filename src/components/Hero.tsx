@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import OrderModal from './OrderModal';
+import Achievements from './Achievements';
 
 const Hero = () => {
   const [showOrderModal, setShowOrderModal] = useState(false);
@@ -45,6 +46,11 @@ const Hero = () => {
             />
           ))}
           <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
+          
+          {/* Achievement badges - only on desktop, inside hero image */}
+          <div className="absolute top-4 right-4 z-20">
+            <Achievements />
+          </div>
 
           <div className="relative z-10 h-full flex flex-col justify-end pb-8 md:pb-12 lg:pb-16 p-4 md:p-8 lg:p-12">
             <div className="max-w-2xl mb-8 md:mb-12">

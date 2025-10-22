@@ -28,12 +28,12 @@ const Achievements = () => {
 
   return (
     <>
-      {/* Desktop version - absolute positioned */}
-      <div className="hidden md:flex absolute top-28 right-8 z-20 flex-row gap-3">
+      {/* Desktop version - inside hero image */}
+      <div className="hidden md:flex flex-row gap-3">
         {achievements.map((achievement) => (
           <div 
             key={achievement.id}
-            className="w-32 h-32 cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-lg"
+            className="w-24 h-24 lg:w-32 lg:h-32 cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-lg"
             onClick={() => setSelectedAchievement(achievement)}
           >
             <img
